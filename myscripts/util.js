@@ -11,10 +11,9 @@ function drawColorLegend() {
     var xx = 10;
     var yy = 267;
     var rr = 6;
-
     // number of input terms
     var text1 = "terms";
-    var text2 = "articles";
+    var text2 = "blogs";
     var textFile = "";
     if (fileName.indexOf("CardsFries")>=0){
         text1 = "proteins";
@@ -23,7 +22,7 @@ function drawColorLegend() {
     }
     else if (fileName.indexOf("CardsPC")>=0){
         text1 = "proteins";
-        text2 = "publicationw";
+        text2 = "publications";
         textFile = "Pathway Commons";
     }
     else if (fileName.indexOf("PopCha")>=0){
@@ -71,7 +70,7 @@ function drawColorLegend() {
         .attr("class", "nodeLegend")
         .attr("x", xx - 10)
         .attr("y", yy-17)
-        .text(termArray.length + " "+text1+" of " + data.length + " "+text2)
+        .text(numberWithCommas(termArray.length) + " "+text1+" of " + numberWithCommas(data.length) + " "+text2)
         .attr("dy", ".21em")
         .attr("font-family", "sans-serif")
         .attr("font-size", "13px")
@@ -93,7 +92,7 @@ function drawColorLegend() {
         .enter()
         .append("circle")
         .attr("class", "legends")
-        .attr("cx", xx)
+        .attr("cx", xx-3)
         .attr("cy", function (d, i) {
             return yy + i * 16;
         })
@@ -107,12 +106,12 @@ function drawColorLegend() {
         .enter()
         .append("text")
         .attr("class", "legendText")
-        .attr("x", xx + 10)
+        .attr("x", xx + 7)
         .attr("y", function (d, i) {
             return yy + i * 16+2;
         })
         .text(function (d) {
-            return d + " ("+countList[d]+" "+text1+")";
+            return d + " ("+numberWithCommas(countList[d])+" "+text1+")";
         })
         .attr("dy", ".21em")
         .attr("font-family", "sans-serif")
@@ -122,6 +121,158 @@ function drawColorLegend() {
             return getColor3(d);
         });
 
+
+ //*************Figure 4 ***********       
+    if (isForFigure4){
+        var yy = 500;
+        var xx = 0;
+        var sy = 24;
+        var fontSize = 20;
+
+        svg.append("text")
+            .attr("class", "nodeLegend")
+            .attr("x", xx)
+            .attr("y", yy-50)
+            .text(textFile)
+            .attr("dy", ".21em")
+            .attr("font-family", "Impact, Charcoal, sans-serif")
+            .attr("font-size", +(fontSize+6)+"px")
+            .style("text-anchor", "left")
+            .style("fill", "#000");    
+
+        svg.append("text")
+            .attr("class", "nodeLegend")
+            .attr("x", xx)
+            .attr("y", yy-sy+3)
+            .text("Data contains " + numberWithCommas(data.length) + " "+text2)
+            .attr("dy", ".21em")
+            .attr("font-family", "sans-serif")
+            .attr("font-size", fontSize+"px")
+            .style("text-anchor", "left")
+            .style("fill", "#000");
+    
+
+        svg.selectAll(".legendText2")
+        .data(categories)
+        .enter()
+        .append("text")
+        .attr("class", "legendText2")
+        .attr("x", xx)
+        .attr("y", function (d, i) {
+            return yy  + i * sy+17;
+        })
+        .text(function (d) {
+            return "Number of "+ d ;
+        })
+        .attr("dy", ".21em")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", fontSize+"px")
+        .style("text-anchor", "start")
+        .style("fill", function (d, i) {
+            return getColor3(d);
+        });
+
+        svg.selectAll(".legendText3")
+            .data(categories)
+            .enter()
+            .append("text")
+            .attr("class", "legendText3")
+            .style("text-anchor", "end")
+            .attr("x", xx+400)
+            .attr("y", function (d, i) {
+                return yy  + i * sy+17;
+            })
+            .text(function (d) {
+                return numberWithCommas(countList[d])+" "+text1+"";
+            })
+            .attr("dy", ".21em")
+            .attr("font-family", "sans-serif")
+            .attr("font-size", fontSize+"px")
+            .style("fill", function (d, i) {
+                return getColor3(d);
+            });
+        
+         svg.append("line")
+            .attr("class", "timeLegendLine3")
+            .style("stroke", "#000")
+            .style("stroke-opacity", 1)
+            .style("stroke-width", 1)
+            .attr("x1", function (d) {
+                return xx;
+            })
+            .attr("x2", function (d) {
+                return xx+400;
+            })
+            .attr("y1", function (d, i) {
+                return yy;
+            })
+            .attr("y2", function (d, i) {
+                return yy;
+            });   
+        svg.append("line")
+            .attr("class", "timeLegendLine4")
+            .style("stroke", "#000")
+            .style("stroke-opacity", 1)
+            .style("stroke-width", 1)
+            .attr("x1", function (d) {
+                return xx+260;
+            })
+            .attr("x2", function (d) {
+                return xx+260;
+            })
+            .attr("y1", function (d, i) {
+                return yy;
+            })
+            .attr("y2", function (d, i) {
+                return yy+sy*(categories.length+1);
+            });       
+
+        svg.selectAll(".textLegendLine2").data(categories)
+            .enter().append("line")
+            .attr("class", "timeLegendLine2")
+            .style("stroke", "#000")
+            .style("stroke-opacity", 1)
+            .style("stroke-width", 1)
+            .attr("x1", function (d) {
+                return xx;
+            })
+            .attr("x2", function (d) {
+                return xx+400;
+            })
+            .attr("y1", function (d, i) {
+                return yy  + i * sy+25;
+            })
+            .attr("y2", function (d, i) {
+                return yy  + i * sy+25;
+            });    
+
+            
+         
+        svg.append("text")
+            .attr("class", "nodeLegend5")
+            .attr("x", xx)
+            .attr("y", yy+sy*categories.length+17)
+            .text("Total ")
+            .attr("dy", ".21em")
+            .attr("font-family", "sans-serif")
+            .attr("font-size", fontSize+"px")
+            .style("text-anchor", "left")
+            .style("fill", "#000");
+        svg.append("text")
+            .attr("class", "nodeLegend5")
+            .attr("x", xx+400)
+            .attr("y", yy+sy*categories.length+17 )
+            .text(numberWithCommas(termArray.length) + " "+text1)
+            .attr("dy", ".21em")
+            .attr("font-family", "sans-serif")
+            .attr("font-size", fontSize+"px")
+            .style("text-anchor", "end")
+            .style("fill", "#000");    
+        
+    }   
+}
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 function removeColorLegend() {
@@ -154,7 +305,7 @@ function drawTimeLegend() {
     svg.selectAll(".timeLegendLine").data(listX)
         .enter().append("line")
         .attr("class", "timeLegendLine")
-        .style("stroke", "000")
+        .style("stroke", "#000")
         .style("stroke-opacity", 1)
         .style("stroke-width", 0.3)
         .attr("x1", function (d) {
@@ -168,9 +319,9 @@ function drawTimeLegend() {
     svg.selectAll(".timeLegendText").data(listX)
         .enter().append("text")
         .attr("class", "timeLegendText")
-        .style("fill", "#000000")
+        .style("fill", "#000")
         .style("text-anchor", "start")
-        .style("text-shadow", "1px 1px 0 rgba(255, 255, 255, 0.6")
+        .style("text-shadow", "0px 1px 1px rgba(255, 255, 255, 1")
         .attr("x", function (d) {
             return d.x;
         })
@@ -179,7 +330,7 @@ function drawTimeLegend() {
         })
         .attr("dy", ".21em")
         .attr("font-family", "sans-serif")
-        .attr("font-size", "13px")
+        .attr("font-size", "15px")
         .text(function (d, i) {
             if (fileName == "data2/VISpapers1990-2016.tsv" || fileName.indexOf("imdb")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
                 return d.year;
@@ -283,7 +434,7 @@ function updateTimeLegend() {
             var m = (i - minYear) * 12 + j;
             var view = "0 0 " + forceSize + " " + forceSize;
 
-            var scale = 0.12;
+            var scale = 0.16;
             if (lMonth - numLens <= m && m <= lMonth + numLens)
                 view = (forceSize * (1-scale)/2) + " " + (forceSize * (1-scale)/2) + " " + (forceSize * scale) + " " + (forceSize * scale);
             svg.selectAll(".force" + m).transition().duration(500)
@@ -333,6 +484,9 @@ function updateTimeBox() {
             }
         })*/
         .attr("y", function (d, i) {
+            // For figure 4
+            if (isForFigure4) return (i==0) ? 0 : 548;
+
             if (fileName == "data2/VISpapers1990-2016.tsv"  || fileName.indexOf("imdb")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
                 return yTimeBox + 20;
             }

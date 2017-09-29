@@ -61,8 +61,6 @@ function xScale(m) {
     }
 }
 
-
-
 var area = d3.svg.area()
     .interpolate("basic")
     .x(function (d) {
@@ -83,15 +81,18 @@ var categories = ["person","location","organization","miscellaneous"];
 var getColor3 = d3.scale.category10();  // Colors of categories
  
 
-//var fileName = "data/americablog.tsv";
+//*****************************************************************
+var isForFigure4 = false;
+
+//var fileName =  "data/wikinews.tsv";
+//var fileName = "data/huffington.tsv";
 //var fileName = "data/crooks_and_liars.tsv";
 // var fileName = "data/emptywheel.tsv";
-//var fileName = "data/esquire.tsv";
-//var fileName = "data/factcheck.tsv";
+//var fileName = "data/esquire.tsv"; 
+//var fileName = "data/factcheck.tsv"; // Combine with glengreen + americablog and probublica
 //var fileName = "data/glenngreenwald.tsv";
-//var fileName = "data/huffington.tsv";
+//var fileName = "data/americablog.tsv";
 //var fileName =  "data/propublica.tsv";
-//var fileName =  "data/wikinews.tsv";
 
 //var fileName = "data2/VISpapers1990-2016.tsv";
 //var fileName = "data2/imdb1.tsv";
@@ -194,8 +195,10 @@ d3.tsv(fileName, function (error, data_) {
             d.m = m;
             
         });
-//minYear = 2005;
-//maxYear = 2009;
+        //************************* Figure4 **********************
+        //if (isForFigure4)
+            minYear = 2005;
+            maxYear = 2009;
         // Update months
         numMonth = 12*(maxYear - minYear);
         XGAP_ = (width-xStep)/numMonth; // gap between months on xAxis
@@ -339,7 +342,7 @@ function readTermsAndRelationships() {
             termArray.push(e);
         }
         else{    
-            if (e.max > 2 && e.term.length>2)    // Only get terms with some increase ************** with TEXT
+           // if (e.max > 2 && e.term.length>2)    // Only get terms with some increase ************** with TEXT
                 termArray.push(e);
         }
     }
@@ -356,7 +359,7 @@ function readTermsAndRelationships() {
     // Compute relationship **********************************************************
     numNode = Math.min(topNumber, termArray.length);
     if (fileName == "data2/VISpapers1990-2016.tsv" || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
-        numNode = termArray.length;   
+      //  numNode = termArray.length;   
     }  
     else if (fileName.indexOf("imdb")>=0){  
         numNode = Math.min(5000, termArray.length);
@@ -388,7 +391,7 @@ function readTermsAndRelationships() {
             }
         }
     }
-    
+
     relationship ={};
     relationshipMax =0;
     data2.forEach(function(d) { 
@@ -418,7 +421,8 @@ function readTermsAndRelationships() {
             }
         }
     });
-
+    
+    //chart("data2/data.csv", "orange");
    
 }
 
@@ -448,6 +452,229 @@ $('#btnUpload').click(function () {
     }, 50);
 
 });
+
+
+
+
+
+function chart(csvpath, color) {
+    var datearray = [];
+    var colorrange = [];
+
+    if (color == "blue") {
+      colorrange = ["#045A8D", "#2B8CBE", "#74A9CF", "#A6BDDB", "#D0D1E6", "#F1EEF6"];
+    }
+    else if (color == "pink") {
+      colorrange = ["#980043", "#DD1C77", "#DF65B0", "#C994C7", "#D4B9DA", "#F1EEF6"];
+    }
+    else if (color == "orange") {
+      colorrange = ["#B30000", "#E34A33", "#FC8D59", "#FDBB84", "#FDD49E", "#FEF0D9"];
+    }
+    strokecolor = colorrange[0];
+
+    var format = d3.time.format("%m/%d/%y");
+
+    var width = document.body.clientWidth ;
+    var height = 700;
+
+    var tooltip = d3.select("body")
+        .append("div")
+        .attr("class", "remove")
+        .style("position", "absolute")
+        .style("z-index", "20")
+        .style("visibility", "hidden")
+        .style("top", "30px")
+        .style("left", "55px");
+
+    var x = d3.time.scale()
+        .range([xStep, width]);
+
+    var y = d3.scale.linear()
+        .range([height, 400]);
+
+    var z = d3.scale.ordinal()
+        .range(colorrange);
+
+    var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom");
+
+    var yAxis = d3.svg.axis()
+        .scale(y)
+        .ticks(4);
+
+    var yAxisr = d3.svg.axis()
+        .scale(y);
+
+    var stack = d3.layout.stack()
+        .offset("silhouette")
+        .values(function(d) { return d.values; })
+        .x(function(d) { return d.date; })
+        .y(function(d) { return d.value; });
+
+    var nest = d3.nest()
+        .key(function(d) { return d.key; });
+
+    var area = d3.svg.area()
+        .interpolate("cardinal")
+        .x(function(d) { return x(d.date); })
+        .y0(function(d) { return y(d.y0); })
+        .y1(function(d) { return y(d.y0 + d.y); });
+
+        var data2 = [];
+        var maxNet2 = 0;
+        for (var k in top200terms){
+            for (var m = 0; m < numMonth; m++) {
+                var obj = {};
+                obj.key = k;
+                obj.date = m;
+                //obj.category = top200terms[k].category;
+                if (terms[k][m]) {
+                    obj.value = terms[k][m];
+                }
+                else
+                    obj.value = 0;
+                if (terms[k].max>maxNet2)
+                    maxNet2 = terms[k].max;
+                data2.push(obj);
+            }    
+        }
+       //debugger;
+       data2.sort(function (a, b) {
+        if (getPosition(categories,top200terms[a.key].category) < getPosition(categories,top200terms[b.key].category)) {
+            return 1;
+        }
+        else if (getPosition(categories,top200terms[a.key].category) > getPosition(categories,top200terms[b.key].category) ) {
+            return -1;
+        }
+        else{
+            if (terms[a.key].max > terms[b.key].max) {
+                return 1;
+            }
+            else if (terms[a.key].max < terms[b.key].max) {
+                return -1;
+            }
+            else{    
+                if (a.date < b.date) {
+                    return 1;
+                }
+                else if (a.date > b.date) {
+                    return -1;
+                }
+
+                 return 0;
+            } 
+        }
+      });
+      
+
+        function getPosition(arrayName,arrayItem) {
+            for(var i=0;i<arrayName.length;i++){ 
+                if(arrayName[i]==arrayItem)
+                return i;
+        }
+      }   
+      var data = data2;
+        
+      var layers = stack(nest.entries(data));
+      x.domain(d3.extent(data, function(d) { return d.date; }));
+      y.domain([0, d3.max(data, function(d) { return d.y0 + d.y; })]);
+
+
+      svg.append("text")
+            .attr("class", "nodeLegend5")
+            .attr("x", 0)
+            .attr("y", 0)
+            .text("Frequency")
+            .attr("dy", ".21em")
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "15px")
+            .attr("transform", "translate("+(xStep+15)+",420) rotate(-90)")
+            .style("text-anchor", "end")
+            .style("fill", "#000");
+
+      svg.selectAll(".layer")
+          .data(layers)
+        .enter().append("path")
+          .attr("class", "layer")
+          .attr("d", function(d) { return area(d.values); })
+          .style("fill", function(d, i) { 
+            console.log(top200terms[d.key].category);
+           return getColor3(top200terms[d.key].category); })
+          .style("fill-opacity", function(d, i) { 
+            var count = terms[d.key].max;
+            var opac = Math.min(Math.sqrt(0.1+count/maxNet2),1);
+            return opac;
+          });
+      svg.append("g")
+          .attr("class", "y axis")
+          .attr("transform", "translate(" + xStep + ", 0)")
+          .attr("stroke-width",1)
+          .call(yAxis.orient("left"));
+
+      
+      svg.selectAll(".layer")
+        .attr("opacity", 1)
+        .on("mouseover", function(d, i) {
+          svg.selectAll(".layer").transition()
+          .duration(250)
+          .attr("opacity", function(d, j) {
+            return j != i ? 0.6 : 1;
+        })})
+
+        .on("mousemove", function(d, i) {
+          mousex = d3.mouse(this);
+          mousex = mousex[0];
+          var invertedx = x.invert(mousex);
+          invertedx = invertedx.getMonth() + invertedx.getDate();
+          var selected = (d.values);
+          for (var k = 0; k < selected.length; k++) {
+            datearray[k] = selected[k].date
+            datearray[k] = datearray[k].getMonth() + datearray[k].getDate();
+          }
+
+          mousedate = datearray.indexOf(invertedx);
+          pro = d.values[mousedate].value;
+
+          d3.select(this)
+          .classed("hover", true)
+          .attr("stroke", strokecolor)
+          .attr("stroke-width", "0.5px"), 
+          tooltip.html( "<p>" + d.key + "<br>" + pro + "</p>" ).style("visibility", "visible");
+          
+        })
+        .on("mouseout", function(d, i) {
+         svg.selectAll(".layer")
+          .transition()
+          .duration(250)
+          .attr("opacity", "1");
+          d3.select(this)
+          .classed("hover", false)
+          .attr("stroke-width", "0px"), tooltip.html( "<p>" + d.key + "<br>" + pro + "</p>" ).style("visibility", "hidden");
+      })
+        
+      var vertical = d3.select(".chart")
+            .append("div")
+            .attr("class", "remove")
+            .style("position", "absolute")
+            .style("z-index", "19")
+            .style("width", "1px")
+            .style("height", "380px")
+            .style("top", "10px")
+            .style("bottom", "30px")
+            .style("left", "0px")
+            .style("background", "#fff");
+
+      d3.select(".chart")
+          .on("mousemove", function(){  
+             mousex = d3.mouse(this);
+             mousex = mousex[0] + 5;
+             vertical.style("left", mousex + "px" )})
+          .on("mouseover", function(){  
+             mousex = d3.mouse(this);
+             mousex = mousex[0] + 5;
+             vertical.style("left", mousex + "px")});
+}
 
 
 function searchNode() {

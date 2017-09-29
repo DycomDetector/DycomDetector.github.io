@@ -137,7 +137,7 @@ function showTip(d,tipItem) {
   tip.direction('se');
   //tip.direction('n') 
 
-  tip.offset([-d3.event.pageY+210,-d3.event.pageX]) // d3.event.pageX is the mouse position in the main windown
+  tip.offset([-d3.event.pageY+350,-d3.event.pageX+4]) // d3.event.pageX is the mouse position in the main windown
       
   tip.show(d);   
 }    

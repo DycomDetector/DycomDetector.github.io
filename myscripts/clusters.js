@@ -102,7 +102,7 @@ function updateSubLayout(nodes, links, m) {
         .style("stroke-opacity", 0.6)
         .style("stroke", "#000")
         .style("stroke-width", function (d) {
-            return linkScale3(d.count)/8;
+            return linkScale3(d.count)/5;
         });
 
     var node = svg2.selectAll(".node5")
