@@ -14,7 +14,7 @@ var height = 50 - margin.top - margin.bottom;
 //Append a SVG to the body of the html page. Assign this SVG as an object to svg
 var svg = d3.select("body").append("svg")
     .attr("width", width)
-    .attr("height", 1400);
+    .attr("height", 1900);
 svg.call(tip);  
 
 var personTerms, locTerms, misTerms, orgTerms;
@@ -27,7 +27,7 @@ var numNode;
 
 var termArray, relationship, termMax=0;
 var terms;
-var xStep = 180;
+var xStep = 200;
 var searchTerm = "";
 
 var isLensing = false;
@@ -84,7 +84,7 @@ var getColor3 = d3.scale.category10();  // Colors of categories
 //*****************************************************************
 var isForFigure4 = false;
 
-//var fileName =  "data/wikinews.tsv";
+var fileName =  "data/wikinews.tsv";
 //var fileName = "data/huffington.tsv";
 //var fileName = "data/crooks_and_liars.tsv";
 // var fileName = "data/emptywheel.tsv";
@@ -96,7 +96,7 @@ var isForFigure4 = false;
 
 //var fileName = "data2/VISpapers1990-2016.tsv";
 //var fileName = "data2/imdb1.tsv";
-var fileName = "data2/PopCha2.tsv";
+//var fileName = "data2/PopCha2.tsv";
 //var fileName = "data2/CardsPC.tsv";
 //var fileName = "data2/CardsFries.tsv";
 
@@ -149,7 +149,7 @@ d3.tsv(fileName, function (error, data_) {
         }    
         // Update months
         numMonth = maxYear - minYear +1;
-        XGAP_ = (width-xStep)/numMonth; // gap between months on xAxis
+        XGAP_ = (width-xStep-150)/numMonth; // gap between months on xAxis
 
         data.forEach(function (d) {    
             d.m = d.m-minYear;
@@ -197,8 +197,8 @@ d3.tsv(fileName, function (error, data_) {
         });
         //************************* Figure4 **********************
         //if (isForFigure4)
-            minYear = 2005;
-            maxYear = 2009;
+           minYear = 2012;
+        //    maxYear = 2009;
         // Update months
         numMonth = 12*(maxYear - minYear);
         XGAP_ = (width-xStep)/numMonth; // gap between months on xAxis

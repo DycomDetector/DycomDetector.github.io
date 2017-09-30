@@ -428,13 +428,12 @@ function updateTimeLegend() {
             return d.x;
         });
 
-    // SCALE force layouts ************************************
+    // ************************************SCALE force layouts ************************************
     for (var i = minYear; i <= maxYear; i++) {
         for (var j = 0; j < 12; j++) {
             var m = (i - minYear) * 12 + j;
             var view = "0 0 " + forceSize + " " + forceSize;
-
-            var scale = 0.16;
+            var scale = 0.12;
             if (lMonth - numLens <= m && m <= lMonth + numLens)
                 view = (forceSize * (1-scale)/2) + " " + (forceSize * (1-scale)/2) + " " + (forceSize * scale) + " " + (forceSize * scale);
             svg.selectAll(".force" + m).transition().duration(500)

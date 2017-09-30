@@ -92,9 +92,10 @@ function updateSubLayout(nodes, links, m) {
         .style("stroke", groupFill)
         .style("stroke-width", 1)
         .style("stroke-linejoin", "round")
-        .style("opacity", .2);
+        .style("opacity", 0.2);
 
 
+// Link Scales ************************************************************
     var link = svg2.selectAll(".link5")
         .data(force.links())
         .enter().append("line")
@@ -102,7 +103,7 @@ function updateSubLayout(nodes, links, m) {
         .style("stroke-opacity", 0.6)
         .style("stroke", "#000")
         .style("stroke-width", function (d) {
-            return linkScale3(d.count)/5;
+            return linkScale3(d.count)/8;
         });
 
     var node = svg2.selectAll(".node5")

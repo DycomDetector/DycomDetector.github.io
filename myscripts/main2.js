@@ -15,13 +15,13 @@ var lNodes, lLinks;  // Nodes in the lensing month
 var numCut = 5;
 var cutOffvalue=[];
 
-var maxRel =  10;   // for scaling, if count > 6 the link will looks similar to 6
+var maxRel =  15;   // for scaling, if count > 6 the link will looks similar to 6
 if (fileName == "data2/VISpapers1990-2014.tsv"){
     maxRel=4;
 }    
 var linkScale3 = function (count) {
     var scale = d3.scale.linear()
-                    .range([0.1, 5])
+                    .range([0.1, 3])
                     .domain([0, maxRel]);
     var count2 = (count>maxRel) ? maxRel : count;  // for scaling, if count > maxRel the link will looks similar to 6                       
     return  scale(count2);   
@@ -66,7 +66,7 @@ function computeMonthlyGraphs() {
             return 0;
         });
         var arr2 = arr.filter(function (d, i) {
-            return i <= 14;
+            return i <= 20;
         });
 
         var cut = 1;
@@ -339,9 +339,12 @@ function drawgraph2() {
             max = lNodes[i].measurement;
     }
 
+// ********************************* Node scales *********************************************************************
     var rScale = d3.scale.linear()
-                    .range([0.05, 0.9])
+                    .range([0.1, 0.6])
                     .domain([0, Math.sqrt(max)]);    
+    
+
     for (var i=0; i<allSVG.length;i++){
         var svg2 = allSVG[i];
         svg2.selectAll(".node5")
@@ -369,7 +372,7 @@ function drawgraph2() {
 
 
     var yScale3 = d3.scale.linear()
-        .range([0, 14])
+        .range([0, 12])
         .domain([0, termMax]);
     
 
@@ -394,48 +397,6 @@ function drawgraph2() {
             })
         ;
 
-
-
-// *****************************
-/*
-    var stack = d3.layout.stack()
-        .offset("silhouette")
-        .values(function(d) { return d.values; })
-        .x(function(d) { return d.m; })
-        .y(function(d) { return d.value; });
-    var nest = d3.nest()
-        .key(function(d) { return d.key; });
-
-    var layers = stack(nest.entries(lNodes));
-
-     var area = d3.svg.area()
-        .interpolate("cardinal")
-        .x(function(d) { return x(d.m); })
-        .y0(function(d) { return y(d.y0); })
-        .y1(function(d) { return y(d.y0 + d.y); });
-
-
-      svg.selectAll(".layer")
-          .data(layers)
-        .enter().append("path")
-          .attr("class", "layer")
-          .attr("d", function(d) { return area(d.values); })
-          .style("fill", function(d, i) { return z(i); });
-
-    
-    var area3 = d3.svg.area()
-        .interpolate("cardinal")
-        .x(function (d) {
-            return xStep + xScale(d.monthId);
-        })
-        .y0(function (d) {
-            console.log(d.y0)
-            return 300 - yScale3(d.value);
-        })
-        .y1(function (d) {
-            return 300 + yScale3(d.value);
-        });*/
-        
 
 
     var enter_ = update_.enter();

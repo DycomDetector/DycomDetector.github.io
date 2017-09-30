@@ -124,16 +124,16 @@ function drawHistograms(yStartHistogram) {
             .attr("class", "histogram" + cut)
             .attr("id", cut)
             .style("stroke", "#000")
-            .style("stroke-width", 0.3)
+            .style("stroke-width", 1)
             .style("stroke-opacity", function () {
-                return cut == selectedCut ? 1 : 0.3;
+                return cut == selectedCut ? 0.6 : 0.6;
             })
             .style("fill", getColor3(cut))
             .style("fill-opacity", function () {
-                return cut == selectedCut ? 1 : 0;
+                return cut == selectedCut ? 1 : 1;
             })
             .attr("x", function (d, i) {
-                var w = XGAP_ / (numCut + 1);
+                var w = XGAP_ / (numCut + 4);
                 if (lMonth - numLens <= i && i <= lMonth + numLens)
                     w = w * lensingMul / 2;
 
@@ -143,7 +143,7 @@ function drawHistograms(yStartHistogram) {
                 if (d == undefined || d[cut] == undefined)
                     return yStartHistogram;
                 var hScale = d3.scale.linear()
-                    .range([1, 40])
+                    .range([1, 50])
                     .domain([0, 1]);
                 return yStartHistogram - hScale(d[cut].Qmodularity);
             })
@@ -151,12 +151,12 @@ function drawHistograms(yStartHistogram) {
                 if (d == undefined || d[cut] == undefined)
                     return 0;
                 var hScale = d3.scale.linear()
-                    .range([1, 40])
+                    .range([0, 50])
                     .domain([0, 1]);
                 return hScale(d[cut].Qmodularity);
             })
             .attr("width", function (d, i) {
-                var w = XGAP_ / (numCut + 1);
+                var w = XGAP_ / (numCut + 4);
                 if (lMonth - numLens <= i && i <= lMonth + numLens)
                     w = w * lensingMul / 2;
                 return w;
