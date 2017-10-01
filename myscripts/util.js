@@ -267,10 +267,87 @@ function drawColorLegend() {
             .attr("font-family", "sans-serif")
             .attr("font-size", fontSize+"px")
             .style("text-anchor", "end")
-            .style("fill", "#000");    
-        
+            .style("fill", "#000");     
     }   
+    drawTopEntities(text1);
 }
+
+// ******************************************Process top 100 entities array ******************************************
+//Called at the end of drawColorLegend()
+function drawTopEntities(text1){
+   top100termsArray.sort(function (a, b) {
+        if (a.count < b.count) {
+            return 1;
+        }
+        if (a.count > b.count) {
+            return -1;
+        }
+        return 0;
+    });
+
+    var x6 = 0;
+    var y6 = 380;
+
+    svg.append("text")
+        .attr("class", "legendText6")
+        .attr("x", x6)
+        .attr("y", function (d, i) {
+            return y6;
+        })
+        .text(function (d) {
+            return "Top" +top100termsArray.length +" "+text1;
+        })
+        .attr("dy", ".21em")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", "16px")
+        .style("text-anchor", "left")
+        .style("fill", "#000");
+
+
+    var node6 = svg.selectAll(".node6Text")
+        .data(top100termsArray)
+        .enter()
+        .append("text")
+        .attr("class", "node6Text")
+        .attr("x", x6)
+        .attr("y", function (d, i) {
+            return y6 +20 + i * 16+2;
+        })
+        .text(function (d) {
+            return d.term + " ("+numberWithCommas(d.count)+")";
+        })
+        .attr("dy", ".21em")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", "13px")
+        .style("text-anchor", "left")
+        .style("fill", function (d, i) {
+            return getColor3(d.category);
+        })
+        .on("mouseover", function(d){
+            svg.selectAll(".node6Text")
+            .style("fill", function(d2){
+                if (d2.term==d.term){
+                    return "#000";
+                }
+                else{
+                    return getColor3(d2.category);
+                }
+            });
+        })
+        .on("mouseout", function(d){
+            svg.selectAll(".node6Text")
+                .style("fill", function(d2){
+                    return getColor3(d2.category);
+                 });
+        })
+        .on("click", function(d){
+            searchTerm = d.term;
+            recompute();
+        });
+;
+}
+
+
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
@@ -433,9 +510,8 @@ function updateTimeLegend() {
         for (var j = 0; j < 12; j++) {
             var m = (i - minYear) * 12 + j;
             var view = "0 0 " + forceSize + " " + forceSize;
-            var scale = 0.12;
             if (lMonth - numLens <= m && m <= lMonth + numLens)
-                view = (forceSize * (1-scale)/2) + " " + (forceSize * (1-scale)/2) + " " + (forceSize * scale) + " " + (forceSize * scale);
+                view = (forceSize * (1-snapshotScale)/2) + " " + (forceSize * (1-snapshotScale)/2) + " " + (forceSize * snapshotScale) + " " + (forceSize * snapshotScale);
             svg.selectAll(".force" + m).transition().duration(500)
                 .attr("x", xStep - forceSize / 2 + xScale(m))
                 .attr("viewBox", view);

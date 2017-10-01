@@ -9,13 +9,26 @@
 
 var topNumber = 200;
 var top200terms = {}; // top terms from input data
+var top100termsArray = []; // for user selection
 var termList = {}; // List of term to feed to TimeArcs in main.js
 var graphByMonths = [];
 var lNodes, lLinks;  // Nodes in the lensing month
 var numCut = 5;
 var cutOffvalue=[];
 
-var maxRel =  15;   // for scaling, if count > 6 the link will looks similar to 6
+
+var snapshotScale = 0.15; // ******************************************************
+var maxNodesInSnapshot =25; // ******************************************************
+
+var nodeRadiusRange = [0.2, 1]; 
+var linkscaleForSnapshot = 0.15; 
+
+   
+var maxHeightOfStreamGraph = 5;
+var yStepOfStreamGraph = 3.2;
+
+
+var maxRel =  5;   // for scaling, if count > 6 the link will looks similar to 6
 if (fileName == "data2/VISpapers1990-2014.tsv"){
     maxRel=4;
 }    
@@ -66,7 +79,7 @@ function computeMonthlyGraphs() {
             return 0;
         });
         var arr2 = arr.filter(function (d, i) {
-            return i <= 20;
+            return i <= maxNodesInSnapshot;
         });
 
         var cut = 1;
@@ -341,7 +354,7 @@ function drawgraph2() {
 
 // ********************************* Node scales *********************************************************************
     var rScale = d3.scale.linear()
-                    .range([0.1, 0.6])
+                    .range(nodeRadiusRange)
                     .domain([0, Math.sqrt(max)]);    
     
 
@@ -367,12 +380,10 @@ function drawgraph2() {
     drawTextClouds(yTextClouds);    // in main3.js
 
 
-    var yStart = height + 290; // y starts drawing the stream graphs
-    var yStep = 12
-
-
+    var yStart = height + 280; // y starts drawing the stream graphs
+    
     var yScale3 = d3.scale.linear()
-        .range([0, 12])
+        .range([0, maxHeightOfStreamGraph])
         .domain([0, termMax]);
     
 
@@ -382,7 +393,6 @@ function drawgraph2() {
             return xStep + xScale(d.monthId);
         })
         .y0(function (d) {
-            console.log(d.y0)
             return d.yNode - yScale3(d.value);
         })
         .y1(function (d) {
@@ -414,7 +424,10 @@ function drawgraph2() {
                 termList[d.name].monthly = computeMonthlyData(d.name);
             }
             for (var i = 0; i < termList[d.name].monthly.length; i++) {
-                termList[d.name].monthly[i].yNode = yStart + index * yStep;     // Copy node y coordinate
+               // if (index<5)
+                //    termList[d.name].monthly[i].yNode = yStart + index * 10;     // Copy node y coordinate
+                //else
+                    termList[d.name].monthly[i].yNode = yStart + index * yStepOfStreamGraph;     // Copy node y coordinate
             }
             return area3(termList[d.name].monthly);
         });
@@ -462,10 +475,13 @@ function drawgraph2() {
             return xStep + xScale(d.m) - 2;    // x position is at the arcs
         })
         .attr("y", function (d, i) {
-            return yStart + i * yStep + 4;     // Copy node y coordinate
+           // if (i<5)
+             //   return yStart + i * 10 + 4;     // Copy node y coordinate
+            //else 
+                return yStart + i * yStepOfStreamGraph + 4;     // Copy node y coordinate
         })
         .attr("font-family", "sans-serif")
-        .attr("font-size", "12px")
+        .attr("font-size", "11px")
         .text(function (d) {
             return d.name
         });
@@ -486,28 +502,6 @@ function computeMonthlyData(term) {
             monthly.push(mon);
         }
     }
-    // Add another item to first
-    /*if (monthly.length > 0) {
-        var firstObj = monthly[0];
-        if (firstObj.monthId > 0) {
-            var mon = new Object();
-            mon.value = 0;
-            mon.monthId = firstObj.monthId - 1;
-            monthly.unshift(mon);
-        }
-        // Add another item
-        var lastObj = monthly[monthly.length - 1];
-        if (lastObj.monthId < numMonth - 1) {
-            var mon = new Object();
-            mon.value = 0;
-            mon.monthId = lastObj.monthId + 1;
-            monthly.push(mon);
-        }
-    }*/
-    // Add 0 to the missing time points
-
-
-
     return monthly;
 }
 

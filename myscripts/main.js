@@ -27,7 +27,7 @@ var numNode;
 
 var termArray, relationship, termMax=0;
 var terms;
-var xStep = 200;
+var xStep = 380;
 var searchTerm = "";
 
 var isLensing = false;
@@ -36,7 +36,7 @@ var lMonth = -lensingMul * 2;
 var oldLmonth = -1000; // use this variable to compare if we are lensing over a different month
 
 var XGAP_; // gap between months on xAxis
-var numLens = 3;
+var numLens = 6;
 
 function xScale(m) {
     if (isLensing) {
@@ -84,7 +84,7 @@ var getColor3 = d3.scale.category10();  // Colors of categories
 //*****************************************************************
 var isForFigure4 = false;
 
-var fileName =  "data/wikinews.tsv";
+//var fileName =  "data/wikinews.tsv";
 //var fileName = "data/huffington.tsv";
 //var fileName = "data/crooks_and_liars.tsv";
 // var fileName = "data/emptywheel.tsv";
@@ -94,7 +94,7 @@ var fileName =  "data/wikinews.tsv";
 //var fileName = "data/americablog.tsv";
 //var fileName =  "data/propublica.tsv";
 
-//var fileName = "data2/VISpapers1990-2016.tsv";
+var fileName = "data2/VISpapers1990-2016.tsv";
 //var fileName = "data2/imdb1.tsv";
 //var fileName = "data2/PopCha2.tsv";
 //var fileName = "data2/CardsPC.tsv";
@@ -147,9 +147,10 @@ d3.tsv(fileName, function (error, data_) {
         else if (fileName.indexOf("PopCha")>=0){
             minYear = 1975;   // PopCha first movie was in 1937
         }    
+        minYear = 2004;
         // Update months
         numMonth = maxYear - minYear +1;
-        XGAP_ = (width-xStep-150)/numMonth; // gap between months on xAxis
+        XGAP_ = (width-xStep)/numMonth; // gap between months on xAxis
 
         data.forEach(function (d) {    
             d.m = d.m-minYear;
@@ -313,7 +314,8 @@ function readTermsAndRelationships() {
 
         var maxNet = 0;
         var maxMonth = -1;
-        for (var m = 1; m < numMonth; m++) {
+        var count = 0;
+        for (var m = 0; m < numMonth; m++) {
             if (terms[att][m]) {
                 var previous = 0;
                 if (terms[att][m - 1])
@@ -323,10 +325,12 @@ function readTermsAndRelationships() {
                     maxNet = net;
                     maxMonth = m;
                 }
+                count+=terms[att][m];
             }
           //  console.log(att+" net="+net);
         }
         e.max = maxNet;
+        e.count = count;
         e.maxMonth = maxMonth;
         e.category = terms[att].category;
 
@@ -359,15 +363,17 @@ function readTermsAndRelationships() {
     // Compute relationship **********************************************************
     numNode = Math.min(topNumber, termArray.length);
     if (fileName == "data2/VISpapers1990-2016.tsv" || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
-      //  numNode = termArray.length;   
+        numNode = termArray.length;   
     }  
     else if (fileName.indexOf("imdb")>=0){  
         numNode = Math.min(5000, termArray.length);
     }    
     top200terms ={};
+    top100termsArray = [];
     for (var i=0; i<numNode;i++){
        top200terms[termArray[i].term] = termArray[i];  // top200terms is defined in main2.js
-       
+       if (top100termsArray.length<100)
+             top100termsArray.push(termArray[i]);
        /*  // Sentiment request to server
        var query =  "http://127.0.0.1:1337/status?userID="+termArray[i].term;
          new Promise(function(resolve) {
@@ -379,7 +385,14 @@ function readTermsAndRelationships() {
     console.log("numNode="+numNode);
     
 
-    // compute the term frequency
+    
+
+
+
+
+
+
+    // compute the term frequency ************************************************************************************
     termMax = 0;
     for (var i = 0; i < numNode; i++) {
         for (var m = 0; m < numMonth; m++) {

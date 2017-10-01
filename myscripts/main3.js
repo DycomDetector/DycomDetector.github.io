@@ -126,17 +126,18 @@ function drawHistograms(yStartHistogram) {
             .style("stroke", "#000")
             .style("stroke-width", 1)
             .style("stroke-opacity", function () {
-                return cut == selectedCut ? 0.6 : 0.6;
+                return cut == selectedCut ? 1 : 0.2;
             })
             .style("fill", getColor3(cut))
             .style("fill-opacity", function () {
-                return cut == selectedCut ? 1 : 1;
+                return cut == selectedCut ? 1 : 0.2;
             })
             .attr("x", function (d, i) {
                 var w = XGAP_ / (numCut + 4);
-                if (lMonth - numLens <= i && i <= lMonth + numLens)
-                    w = w * lensingMul / 2;
-
+                if (lMonth - numLens <= i && i <= lMonth + numLens){
+                     w = w * lensingMul / 2;
+                     w = Math.min(w, 15);
+                }
                 return xStep + xScale(i) + cut * w - 2 * w;    // x position is at the arcs
             })
             .attr("y", function (d, i) {
@@ -157,8 +158,11 @@ function drawHistograms(yStartHistogram) {
             })
             .attr("width", function (d, i) {
                 var w = XGAP_ / (numCut + 4);
-                if (lMonth - numLens <= i && i <= lMonth + numLens)
+                if (lMonth - numLens <= i && i <= lMonth + numLens){
                     w = w * lensingMul / 2;
+                    w = Math.min(w, 15);
+                }
+                    
                 return w;
             });
     }
