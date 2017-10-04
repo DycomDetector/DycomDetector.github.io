@@ -93,11 +93,11 @@ var isForFigure4 = false;
 //var fileName = "data/glenngreenwald.tsv";
 //var fileName = "data/americablog.tsv";
 //var fileName =  "data/propublica.tsv";
-var fileName = "data/Political_Blogs.tsv";
+//var fileName = "data/Political_Blogs.tsv";
 
 //var fileName = "data2/VISpapers1990-2016.tsv";
 //var fileName = "data2/imdb1.tsv";
-//var fileName = "data2/PopCha2.tsv";
+var fileName = "data2/PopCha2.tsv";
 //var fileName = "data2/CardsPC.tsv";
 //var fileName = "data2/CardsFries.tsv";
 

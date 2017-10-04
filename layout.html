@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1"/>
 <meta name="description" content="DycomDetector: Topic Modeling Using Community Detection in Dynamic networks"/>
-<meta name="keywords" content="DycomDetector"/> 
+<meta name="keywords" content="DycomDetector,Topic Modeling,Community Detection,Dynamic Networks,Louvain method"/> 
 <meta name="author" content="DycomDetector"/> 
 <link rel="stylesheet" type="text/css" href="styles/default.css" media="screen"/>
 <link rel="shortcut icon" href="styles/dycom.png">
@@ -19,7 +19,7 @@
 
 <div class="container">
 	<div class="navigation">
-		<h1>DycomDetector: Topic Modeling Using Community Detection in Dynamic networks </h1>
+		<h1>DycomDetector: Topic Modeling using Community Detection in Dynamic Networks </h1>
 		<h2>PacificVis 2018, Online Submission #1138 </h2>
 
 		<div id="menu">
@@ -28,7 +28,7 @@
 			  <li><a href="index.html"><span style="color:#888">Video</span></a></li>
 			  <li><a href="layout.html"><b><span style="color:#fff">Layout</span></b></a></li>
 			  <li><a href="usecases.html"><span style="color:#888">Use cases</span></a>
-			  <li><a href="usecases.html"><span style="color:#888">Demos</span></a></li>  
+			  <li><a href="demos.html"><span style="color:#888">Demos</span></a></li>  
 			  </li>  
 			  </ul>
 			</nav>
@@ -51,14 +51,29 @@ To enable users to explore the vast temporal text corpora in an efficient way, <
 </li>
   <li><b>Construct networks of collocated terms:</b> This step constructs the relations of terms/phrases based on their co-occurences in the same political blogs. At each time point, we obtain a network snapshot of important terms.</li>
   <li><b>Refine the network snapshots:</b> In the above example, we filter vertices with frequency more than <b>6</b>. <a href="https://en.wikipedia.org/wiki/Louvain_Modularity">Louvain method</a> is applied on the refined networks automatically to detect political events (detected communities highlighted in gray background in the last panel).</li>
-  <li><b>Generate visualization and interactions:</b> Each sub-network (at each time point) is represented as a thumbnail which summarizes its network structure. Modularity histograms, text clouds, arcs diagrams, and small multiples provide supplementary views of these sub-networks.</li>
+  <li><b>Generate visualization and interactions:</b> Each sub-network (at each time point) is represented as a thumbnail which summarizes its network structure. Consecutive thumbnails can be expanded on mouse over. Modularity histograms, text clouds, arcs diagrams, and small multiples provide supplementary views of these sub-networks.</li>
 </ol> 
 Here are some important political events (term communities) detected in the above example:
 <ul>
-  <li><b>Box A:</b> The <a href="https://en.wikipedia.org/wiki/Sandy_Hook_Elementary_School_shooting">Sandy Hook Elementary School shooting</a> occurred on December 14, 2012, in <span style="color:#ff7f0f">Newtown</span>, <span style="color:#ff7f0f">Connecticut</span>, when 20-year-old <span style="color:#2077b5">Adam Lanza</span> fatally shot 20 children.</li>
-</ul> 
+  <li><b>Box A:</b> The <a href="https://en.wikipedia.org/wiki/Sandy_Hook_Elementary_School_shooting">Sandy Hook Elementary School shooting</a> occurred on December 14, 2012, in <span style="color:#ff7f0f">Newtown</span>, <span style="color:#ff7f0f">Connecticut</span>, when 20-year-old <span style="color:#2077b5">Adam Lanza</span> fatally shot 20 children.
+Some time before 9:30 am, <span style="color:#2077b5">Lanza</span> shot and killed his mother <span style="color:#2077b5">Nancy Lanza</span> at their <span style="color:#2077b5">Newtown</span> home with a .22-caliber Savage rifle. <span style="color:#2077b5">Adam Lanza</span> then drove to <span style="color:#2c9f2e">Sandy Hook Elementary School</span> in his mother's car. The <span style="color:#2c9f2e">National Rifle Association</span>  denied that <span style="color:#2077b5">Adam Lanza</span> or <span style="color:#2077b5">Nancy Lanza</span> were members. On December 21, 2012, the <span style="color:#2c9f2e">National Rifle Association</span> 's <span style="color:#2077b5">Wayne LaPierre</span> said gun-free school zones attract killers and that another gun ban would not protect Americans.
 
+  </li>
+  <li><b>Box B:</b> The <a href="https://en.wikipedia.org/wiki/Boston_Marathon_bombing">Boston Marathon bombing</a> occurred on April 15, 2013. Two homemade bombs detonated near the finish line of the annual <span style="color:#d52829">Boston Marathon</span>, killing three people and injuring several hundred others. FBI later identified the bombers: <span style="color:#2077b5">Dzhokhar Tsarnaev</span> and <span style="color:#2077b5">Tamerlan Tsarnaev</span>. The Kyrgyz-American brothers  killed an MIT policeman, kidnapped a man in his car, and had a shootout with the police in nearby <span style="color:#ff7f0f">Watertown</span>. They never lived in <span style="color:#ff7f0f">Chechnya</span>, yet the brothers identified themselves as <span style="color:#d52829">Chechen</span>.  </li>
+
+   <li><b>Box C:</b> On June 21, 2013, the U.S. Department of Justice unsealed charges against <a href="https://en.wikipedia.org/wiki/Edward_Snowden"> Edward Snowden</a>. The <span style="color:#2c9f2e">FISA Amendments Act</span> of 2008, an Act of Congress that amended the <span style="color:#2c9f2e">Foreign Intelligence Surveillance Act</span>, has been used as the legal basis for surveillance programs disclosed by <span style="color:#2077b5">Edward Snowden</span>, including <span style="color:#2c9f2e">PRISM</span>.
+   	<span style="color:#2077b5">Edward Snowden</span> is a former CIA employee who leaked classified information from the <span style="color:#2c9f2e">National Security Agency</span> (<span style="color:#2c9f2e">NSA</span>) in 2013 without authorization. <span style="color:#2c9f2e">NSA</span> Director <span style="color:#2077b5">Keith Alexander</span> initially estimated that <span style="color:#2077b5">Snowden</span> had copied anywhere from 50,000 to 200,000 documents.<br>
+
+   	On May 20, 2013, <span style="color:#2077b5">Snowden</span> flew to <span style="color:#ff7f0f">Hong Kong</span> before revealing the most significant leak in U.S. history by <span style="color:#ff7f0f">Pentagon Papers</span>. Director of National Intelligence <span style="color:#2077b5">James Clapper</span> said <span style="color:#2077b5">Snowden</span>'s leaks created a "perfect storm".  <span style="color:#2077b5">Edward Snowden</span> also revealed that <span style="color:#d52829">Verizon</span> had been providing the <span style="color:#2c9f2e">NSA</span>  with its customers' phone records [<a href="http://mashable.com/2014/06/05/edward-snowden-revelations/#LWf4OcH..Pqa">link</a>].
+   </li>
+
+   <li><b>Box D:</b> The <a href="https://en.wikipedia.org/wiki/Shooting_of_Trayvon_Martin">Shooting of Trayvon Martin</a>. On July 13, 2013, the jury found <span style="color:#2077b5">George Zimmerman</span> not guilty for <span style="color:#2077b5">Trayvon Martin's murder</span>: On the night of February 26, 2012, in <span style="color:#2077b5">Sanford</span>, Florida, <span style="color:#2077b5">George Zimmerman</span> fatally shot <span style="color:#2077b5">Trayvon Martin</span>, a 17-year-old African American high school student. The police chief said that there was no evidence to refute <span style="color:#2077b5">Zimmerman</span> 's claim of having acted in self-defense, and that under Florida's <span style="color:#2c9f2e">Stand Your Ground</span>  statute, the police were prohibited by law from making an arrest. The police chief also said that <span style="color:#2077b5">Zimmerman</span> had a right to defend himself with lethal force.
+	</li>
+</ul>
 <br>
+
+
+
 </div>
 
 <div class="footer">

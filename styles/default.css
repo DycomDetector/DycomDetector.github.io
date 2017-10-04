@@ -17,7 +17,7 @@ body {
     color: #000;
 	margin: 0;
     width: 100%; 
-    height: 95%;
+    height: 99%;
 }
 
 h1 {
@@ -49,21 +49,22 @@ h3 {
 }
 
 ol {
-    margin-top: 6px;
-    margin-bottom: 6px;
+    margin-top: 5px;
+    margin-bottom: 10px;
     margin-left: 6px;
     overflow: hidden;
 }
 
 ul {
-    margin-top: 0px;
-    margin-left: 6px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    margin-left: 5px;
     overflow: hidden;
 }
 
 
 a {
-    color: #00a;
+    color: #008;
     text-decoration: none;
 }
 
