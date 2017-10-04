@@ -7,7 +7,7 @@
  */
 
 
-var topNumber = 200;
+var topNumber = 500;
 var top200terms = {}; // top terms from input data
 var top100termsArray = []; // for user selection
 var termList = {}; // List of term to feed to TimeArcs in main.js
@@ -17,24 +17,24 @@ var numCut = 5;
 var cutOffvalue=[];
 
 
-var snapshotScale = 0.15; // ******************************************************
-var maxNodesInSnapshot =25; // ******************************************************
+var snapshotScale = 0.13; // Snapshiot Size******************************************************
+var maxNodesInSnapshot =30; // ******************************************************
 
-var nodeRadiusRange = [0.2, 1]; 
+var nodeRadiusRange = [0.18, 0.7]; 
 var linkscaleForSnapshot = 0.15; 
 
    
-var maxHeightOfStreamGraph = 5;
-var yStepOfStreamGraph = 3.2;
+var maxHeightOfStreamGraph = 10;
+var yStepOfStreamGraph = 8;
 
 
-var maxRel =  5;   // for scaling, if count > 6 the link will looks similar to 6
+var maxRel =  25;   // for scaling, if count > 6 the link will looks similar to 6
 if (fileName == "data2/VISpapers1990-2014.tsv"){
     maxRel=4;
 }    
 var linkScale3 = function (count) {
     var scale = d3.scale.linear()
-                    .range([0.1, 3])
+                    .range([0.01, 3])
                     .domain([0, maxRel]);
     var count2 = (count>maxRel) ? maxRel : count;  // for scaling, if count > maxRel the link will looks similar to 6                       
     return  scale(count2);   
@@ -66,10 +66,10 @@ function computeMonthlyGraphs() {
         arr.sort(function (a, b) {
             var var1 = a.net * 1000 + a.count;
             var var2 = b.net * 1000 + b.count;
-            if (selectedSetNodeBy==1){
+            //if (selectedSetNodeBy==1){
                 var1 = a.net + 1000*a.count;
                 var2 = b.net + 1000*b.count;
-            }
+            //}
             if (var1 < var2) {
                 return 1;
             }
@@ -94,6 +94,7 @@ function computeMonthlyGraphs() {
                 nod.category = arr2[i].category;
                 nod.name = arr2[i].term;
                 nod.net = arr2[i].net;
+                nod.count = arr2[i].count;
                 nod.x = xStep + xScale(nod.m);   // 2016 initialize x position
                 nod.y = height / 2;
 
@@ -272,74 +273,12 @@ function drawgraph2() {
                 }
                 else
                     return -1;
-
-                /*
-                if (selectedSetNodeBy==2) {
-                    {
-                        if (a.net < b.net) {
-                            return -1;
-                        }
-                        else if (a.net > b.net) {
-                            return 1;
-                        }
-                        else {
-                            if (a.weight < b.weight) {   // weight is the degree of nodes
-                                return -1;
-                            }
-                            else if (a.weight > b.weight) {
-                                return 1;
-                            }
-                            else
-                                return -1;      // random if can not compare on the previous measurements
-                        }
-                    }
-                }
-                else if (selectedSetNodeBy==2) {
-                    {
-                        if (a.net < b.net) {
-                            return -1;
-                        }
-                        else if (a.net > b.net) {
-                            return 1;
-                        }
-                        else {
-                            if (a.weight < b.weight) {   // weight is the degree of nodes
-                                return -1;
-                            }
-                            else if (a.weight > b.weight) {
-                                return 1;
-                            }
-                            else
-                                return -1;      // random if can not compare on the previous measurements
-                        }
-                    }
-                }
-                else if (selectedSetNodeBy==3) {
-                    if (a.weight < b.weight) {   // weight is the degree of nodes
-                        return -1;
-                    }
-                    else if (a.weight > b.weight) {
-                        return 1;
-                    }
-                    else {
-                        if (a.net < b.net) {
-                            return -1;
-                        }
-                        else if (a.net > b.net) {
-                            return 1;
-                        }
-                        else {
-                            return -1;      // random if can not compare on the previous measurements
-                        }
-
-                    }
-                }*/
             }
         }
     });
 
 
-    var yStartHistogram = height + 180; // y starts drawing the stream graphs
+    var yStartHistogram = height + 185; // y starts drawing the stream graphs
     drawHistograms(yStartHistogram);   // in main3.js
     if (selectedCut<0){
         updateHistogramOptimized();   // Update histogram by
@@ -369,18 +308,17 @@ function drawgraph2() {
                 }
                 else{
                     return 1; // min value of rScale
-                }
-                    
-            })
+                }                 
+            });
     }
 
 
 
-    var yTextClouds = height + 200; // y starts drawing the stream graphs
+    var yTextClouds = height + 210; // y starts drawing the stream graphs
     drawTextClouds(yTextClouds);    // in main3.js
 
 
-    var yStart = height + 280; // y starts drawing the stream graphs
+    var yStart = height + 580; // y starts drawing the stream graphs
     
     var yScale3 = d3.scale.linear()
         .range([0, maxHeightOfStreamGraph])
@@ -402,11 +340,9 @@ function drawgraph2() {
 
     svg.selectAll(".layer3").remove();
     var update_ = svg.selectAll(".layer3")
-            .data(lNodes, function (d) {
-                return d.name
-            })
-        ;
-
+        .data(lNodes, function (d) {
+            return d.name
+        });
 
 
     var enter_ = update_.enter();

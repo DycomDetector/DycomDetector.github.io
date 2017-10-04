@@ -172,7 +172,7 @@ function drawHistograms(yStartHistogram) {
 // This Texts is independent from the lower text with stream graphs
 var tNodes;
 function drawTextClouds(yTextClouds) {
-    var numTerms = 5; // numTerms in each month
+    var numTerms = 25; // numTerms in each month
     tNodes = [];
     for (var m = 0; m < numMonth; m++) {
         var newCut = selectedCut;
@@ -260,7 +260,7 @@ function drawTextClouds(yTextClouds) {
 
 
     svg.selectAll(".textCloud3").remove();
-    var yStep = 15;
+    var yStep = 11;
     var updateText = svg.selectAll(".textCloud3")
         .data(tNodes);
     var enterText = updateText.enter();
@@ -273,7 +273,7 @@ function drawTextClouds(yTextClouds) {
             var s;
             if (lMonth-numLens<=d.m && d.m<=lMonth+numLens){
                 var sizeScale = d3.scale.linear()
-                    .range([10, 20])
+                    .range([10, 23])
                     .domain([min, max]);
                 s = sizeScale(d.measurement);
             }
@@ -286,6 +286,7 @@ function drawTextClouds(yTextClouds) {
             return s+"px";
         })
         .style("fill", function(d) {
+            return "#000";
             return getColor3(d.category);
         })
         .attr("x", function(d) {
@@ -296,7 +297,7 @@ function drawTextClouds(yTextClouds) {
         })
         .text(function(d) {
             if (lMonth-numLens<=d.m && d.m<=lMonth+numLens){
-                return d.name.substring(0,18);
+                return d.name.substring(0,18)+" ("+d.count+")";
             }
             else{
                 return d.name.substring(0,10);

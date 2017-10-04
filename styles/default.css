@@ -15,8 +15,7 @@ http://templates.arcsin.se/license/
 body {
 	background: #000 url(./pattern.png) repeat;
     color: #000;
-	font: normal 87% "Lucida Sans Unicode",sans-serif;
-    margin: 0;
+	margin: 0;
     width: 100%; 
     height: 95%;
 }
@@ -37,15 +36,39 @@ h2 {
 	padding-top: 0px;
     padding-left: 0px;
     text-align: center;
-    font: normal 110% "sans-serif",sans-serif;
+    font: normal 100% "sans-serif",sans-serif;
 }
 
 h3 {
     font-size: 1.3em;
-	margin-bottom: 0px;
-	color: #000;
-	padding-top: 0px;
-	border-bottom: 1px dotted rgba(0, 0, 0, 0.9);
+	margin-bottom: 6px;
+    margin-top: 1px;
+    padding-top: 5px;
+    color: #888;
+	border-bottom: 1px dotted rgba(110, 110, 110, 0.9);
+}
+
+ol {
+    margin-top: 6px;
+    margin-bottom: 6px;
+    margin-left: 6px;
+    overflow: hidden;
+}
+
+ul {
+    margin-top: 0px;
+    margin-left: 6px;
+    overflow: hidden;
+}
+
+
+a {
+    color: #00a;
+    text-decoration: none;
+}
+
+a:hover {color: #44F;
+    text-decoration: underline;
 }
 
 
@@ -83,7 +106,7 @@ nav ul:after {
         border: 1px solid;
     }
         nav ul li:hover {
-            background: #880;
+            background: #a00;
             border-radius: 1px;
             border: 1px solid;
         }
@@ -122,7 +145,7 @@ nav ul:after {
         
 .container {
 	margin: 0 auto;
-	width: 1100px;
+	width: 90%;
 }
 
 
@@ -130,10 +153,12 @@ nav ul:after {
 .holder {
 	padding: 15 15 15 15px;
 	background: #fff;
-	padding-top: 2px;
 	padding-bottom: 0px;
 	padding-left: 20px;
 	padding-right: 20px;
+	font: normal 100% "sans-serif",sans-serif;
+	 font-weight: normal;
+    
 }
 
 
@@ -149,7 +174,7 @@ nav ul:after {
 	border-bottom: 1px;
 	background-position: left bottom;
 	color: #776;
-	font-size: 1.1em;
+	font-size: 0.9em;
 	padding: 6px 25px 0;
 }
 .footer .right, .footer .right a {color: #443;}

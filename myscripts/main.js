@@ -27,7 +27,7 @@ var numNode;
 
 var termArray, relationship, termMax=0;
 var terms;
-var xStep = 380;
+var xStep = 280;
 var searchTerm = "";
 
 var isLensing = false;
@@ -36,7 +36,7 @@ var lMonth = -lensingMul * 2;
 var oldLmonth = -1000; // use this variable to compare if we are lensing over a different month
 
 var XGAP_; // gap between months on xAxis
-var numLens = 6;
+var numLens = 5;
 
 function xScale(m) {
     if (isLensing) {
@@ -93,8 +93,9 @@ var isForFigure4 = false;
 //var fileName = "data/glenngreenwald.tsv";
 //var fileName = "data/americablog.tsv";
 //var fileName =  "data/propublica.tsv";
+var fileName = "data/Political_Blogs.tsv";
 
-var fileName = "data2/VISpapers1990-2016.tsv";
+//var fileName = "data2/VISpapers1990-2016.tsv";
 //var fileName = "data2/imdb1.tsv";
 //var fileName = "data2/PopCha2.tsv";
 //var fileName = "data2/CardsPC.tsv";
@@ -147,7 +148,7 @@ d3.tsv(fileName, function (error, data_) {
         else if (fileName.indexOf("PopCha")>=0){
             minYear = 1975;   // PopCha first movie was in 1937
         }    
-        minYear = 2004;
+        //minYear = 2004;
         // Update months
         numMonth = maxYear - minYear +1;
         XGAP_ = (width-xStep)/numMonth; // gap between months on xAxis
@@ -292,7 +293,7 @@ function readTermsAndRelationships() {
     }
 
     var removeList = {};   // remove list **************
-    removeList["source"] = 1;
+    /*removeList["source"] = 1;
     removeList["person"] = 1;
     removeList["location"] = 1;
     removeList["organization"] = 1;
@@ -304,6 +305,27 @@ function readTermsAndRelationships() {
     removeList["dea ’s facebook impersonato"] = 1;
     removeList["dismantle roe"] = 1;
     removeList["huffington post"] = 1;
+
+    removeList["lanza"] = 1;
+    removeList["giglio"] = 1;
+    removeList["portman"] = 1;
+    removeList["thatcher"] = 1;
+    removeList["ground"] = 1;
+    removeList["summers"] = 1;
+    removeList["lapierre"] = 1;
+    removeList["hagel"] = 1;
+    removeList["swartz"] = 1;
+    removeList["tsarnaev"] = 1;
+    removeList["marathon"] = 1;
+    removeList["martin"] = 1;
+    removeList["zimmerman"] = 1;
+    removeList["karzai"] = 1;
+    removeList["rice"] = 1;
+    removeList["tamerlan"] = 1;
+    removeList["boston"] = 1;
+    removeList["foreign intelligence surveillance court"] = 1;
+    removeList["trayvon"] = 1;
+    */
 
     termArray = [];
     for (var att in terms) {
@@ -346,7 +368,7 @@ function readTermsAndRelationships() {
             termArray.push(e);
         }
         else{    
-           // if (e.max > 2 && e.term.length>2)    // Only get terms with some increase ************** with TEXT
+          //  if (e.max > 2 && e.term.length>2)    // Only get terms with some increase ************** with TEXT
                 termArray.push(e);
         }
     }
@@ -383,13 +405,6 @@ function readTermsAndRelationships() {
         });*/
     }
     console.log("numNode="+numNode);
-    
-
-    
-
-
-
-
 
 
     // compute the term frequency ************************************************************************************
