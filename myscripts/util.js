@@ -8,8 +8,8 @@ var yTimeBox = 0;
     
 
 function drawColorLegend() {
-    var xx = 10;
-    var yy = 267;
+    var xx = 15;
+    var yy = 50;
     var rr = 6;
     // number of input terms
     var text1 = "terms";
@@ -286,7 +286,7 @@ function drawTopEntities(text1){
     });
 
     var x6 = 0;
-    var y6 = 380;
+    var y6 = 360;
 
     svg.append("text")
         .attr("class", "legendText6")
@@ -311,14 +311,14 @@ function drawTopEntities(text1){
         .attr("class", "node6Text")
         .attr("x", x6)
         .attr("y", function (d, i) {
-            return y6 +20 + i * 16+2;
+            return y6 +20 + i * 15;
         })
         .text(function (d) {
             return d.term + " ("+numberWithCommas(d.count)+")";
         })
         .attr("dy", ".21em")
         .attr("font-family", "sans-serif")
-        .attr("font-size", "13px")
+        .attr("font-size", "12px")
         .style("text-anchor", "left")
         .style("fill", function (d, i) {
             return getColor3(d.category);
@@ -589,9 +589,9 @@ var buttonColor = "#ddd";
 
 function drawControlPanel(){
     // Control panel on the left *********************
-    var yControl = 80;
+    var yControl = 160;
     var data =[{"id":1, "value":">=1"},{"id":2, "value":">=2"},{"id":3, "value":">=3"},{"id":4, "value":">=4"},{"id":5, "value":">=5"},{"id":"optimized", "value":"Best Q modularity"}];
-    svg.append('rect').attr("class", "rect1").attr('x',0.1).attr('y',yControl).attr('width',150).attr('height',110).style("stroke","black").attr("stroke-width", 0.1).style('fill',"#eee").attr("rx", roundConner)
+    svg.append('rect').attr("class", "rect1").attr('x',5).attr('y',yControl).attr('width',150).attr('height',110).style("stroke","black").attr("stroke-width", 0.1).style('fill',"#ccc").attr("rx", roundConner)
         .attr("ry", roundConner)
     svg.append('text')
         .attr('class','textcutoff')

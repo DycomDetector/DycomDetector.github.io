@@ -17,15 +17,15 @@ var numCut = 5;
 var cutOffvalue=[];
 
 
-var snapshotScale = 0.13; // Snapshiot Size******************************************************
+var snapshotScale = 0.20; // Snapshiot Size******************************************************
 var maxNodesInSnapshot =30; // ******************************************************
 
 var nodeRadiusRange = [0.18, 0.7]; 
 var linkscaleForSnapshot = 0.15; 
 
    
-var maxHeightOfStreamGraph = 10;
-var yStepOfStreamGraph = 8;
+var maxHeightOfStreamGraph = 11;
+var yStepOfStreamGraph = 9;
 
 
 var maxRel =  25;   // for scaling, if count > 6 the link will looks similar to 6
@@ -314,11 +314,11 @@ function drawgraph2() {
 
 
 
-    var yTextClouds = height + 210; // y starts drawing the stream graphs
+    var yTextClouds = height + 200; // y starts drawing the stream graphs
     drawTextClouds(yTextClouds);    // in main3.js
 
 
-    var yStart = height + 580; // y starts drawing the stream graphs
+    var yStart = height + 260; // y starts drawing the stream graphs
     
     var yScale3 = d3.scale.linear()
         .range([0, maxHeightOfStreamGraph])

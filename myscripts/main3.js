@@ -126,11 +126,11 @@ function drawHistograms(yStartHistogram) {
             .style("stroke", "#000")
             .style("stroke-width", 1)
             .style("stroke-opacity", function () {
-                return cut == selectedCut ? 1 : 0.2;
+                return cut == selectedCut ? 1 : 0.3;
             })
             .style("fill", getColor3(cut))
             .style("fill-opacity", function () {
-                return cut == selectedCut ? 1 : 0.2;
+                return cut == selectedCut ? 1 : 0.4;
             })
             .attr("x", function (d, i) {
                 var w = XGAP_ / (numCut + 4);
@@ -172,7 +172,7 @@ function drawHistograms(yStartHistogram) {
 // This Texts is independent from the lower text with stream graphs
 var tNodes;
 function drawTextClouds(yTextClouds) {
-    var numTerms = 25; // numTerms in each month
+    var numTerms = 5; // numTerms in each month
     tNodes = [];
     for (var m = 0; m < numMonth; m++) {
         var newCut = selectedCut;
@@ -273,7 +273,7 @@ function drawTextClouds(yTextClouds) {
             var s;
             if (lMonth-numLens<=d.m && d.m<=lMonth+numLens){
                 var sizeScale = d3.scale.linear()
-                    .range([10, 23])
+                    .range([11, 18])
                     .domain([min, max]);
                 s = sizeScale(d.measurement);
             }
@@ -286,7 +286,7 @@ function drawTextClouds(yTextClouds) {
             return s+"px";
         })
         .style("fill", function(d) {
-            return "#000";
+           // return "#000";
             return getColor3(d.category);
         })
         .attr("x", function(d) {
@@ -297,7 +297,7 @@ function drawTextClouds(yTextClouds) {
         })
         .text(function(d) {
             if (lMonth-numLens<=d.m && d.m<=lMonth+numLens){
-                return d.name.substring(0,18)+" ("+d.count+")";
+                return d.name.substring(0,18);//+" ("+d.count+")";
             }
             else{
                 return d.name.substring(0,10);

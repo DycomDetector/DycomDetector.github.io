@@ -27,7 +27,7 @@ var numNode;
 
 var termArray, relationship, termMax=0;
 var terms;
-var xStep = 280;
+var xStep = 200;
 var searchTerm = "";
 
 var isLensing = false;
