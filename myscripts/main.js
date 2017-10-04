@@ -14,7 +14,7 @@ var height = 50 - margin.top - margin.bottom;
 //Append a SVG to the body of the html page. Assign this SVG as an object to svg
 var svg = d3.select("body").append("svg")
     .attr("width", width)
-    .attr("height", 1900);
+    .attr("height", 2000);
 svg.call(tip);  
 
 var personTerms, locTerms, misTerms, orgTerms;
@@ -96,8 +96,8 @@ var isForFigure4 = false;
 //var fileName = "data/Political_Blogs.tsv";
 
 //var fileName = "data2/VISpapers1990-2016.tsv";
-//var fileName = "data2/imdb1.tsv";
-var fileName = "data2/PopCha2.tsv";
+var fileName = "data2/imdb1.tsv";
+//var fileName = "data2/PopCha2.tsv";
 //var fileName = "data2/CardsPC.tsv";
 //var fileName = "data2/CardsFries.tsv";
 
@@ -235,18 +235,22 @@ d3.tsv(fileName, function (error, data_) {
         });
     }
     
-      
-    
     readTermsAndRelationships();
     console.log("DONE computing relationshipMax=" + relationshipMax);
 
-    
+    svg.append("rect")
+        .attr("class", "background")
+        .style("fill", "#fff")
+        .attr("x", xStep)
+        .attr("y", yTimeBox)
+        .attr("width", width)
+        .attr("height", 2000)
+
     drawColorLegend();
     drawTimeLegend();
-
-    drawTimeBox(); // This box is for brushing
-   
-
+    drawTimeBox(); // This box is for brushing 
+    
+    
 
     // 2017. this function is main2.js
     computeMonthlyGraphs();
@@ -368,7 +372,7 @@ function readTermsAndRelationships() {
             termArray.push(e);
         }
         else{    
-          //  if (e.max > 2 && e.term.length>2)    // Only get terms with some increase ************** with TEXT
+            if (e.max > 1 && e.term.length>2)    // Only get terms with some increase ************** with TEXT
                 termArray.push(e);
         }
     }

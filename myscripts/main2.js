@@ -24,17 +24,17 @@ var nodeRadiusRange = [0.18, 0.7];
 var linkscaleForSnapshot = 0.15; 
 
    
-var maxHeightOfStreamGraph = 11;
+var maxHeightOfStreamGraph = 10;
 var yStepOfStreamGraph = 9;
 
 
-var maxRel =  25;   // for scaling, if count > 6 the link will looks similar to 6
+var maxRel =  12;   // for scaling, if count > 6 the link will looks similar to 6
 if (fileName == "data2/VISpapers1990-2014.tsv"){
     maxRel=4;
 }    
 var linkScale3 = function (count) {
     var scale = d3.scale.linear()
-                    .range([0.01, 3])
+                    .range([0.1, 3])
                     .domain([0, maxRel]);
     var count2 = (count>maxRel) ? maxRel : count;  // for scaling, if count > maxRel the link will looks similar to 6                       
     return  scale(count2);   
