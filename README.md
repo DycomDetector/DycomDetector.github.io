@@ -7,7 +7,7 @@ Online demo:  https://dycomdetector.github.io/
 
 ![ScreenShot](https://github.com/DycomDetector/DycomDetector.github.io/blob/master/images2/schema2.png)
 
-More details can be *DycomDetector* layout found here: https://dycomdetector.github.io/layout.html 
+More details about *DycomDetector* layout can be found here: https://dycomdetector.github.io/layout.html 
 
 
 

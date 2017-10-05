@@ -9,7 +9,7 @@ var yTimeBox = 0;
 
 function drawColorLegend() {
     var xx = 15;
-    var yy = 50;
+    var yy = 60;
     var rr = 6;
     // number of input terms
     var text1 = "terms";

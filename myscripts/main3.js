@@ -124,13 +124,13 @@ function drawHistograms(yStartHistogram) {
             .attr("class", "histogram" + cut)
             .attr("id", cut)
             .style("stroke", "#000")
-            .style("stroke-width", 1)
+            .style("stroke-width", 0.4)
             .style("stroke-opacity", function () {
                 return cut == selectedCut ? 1 : 0.3;
             })
             .style("fill", getColor3(cut))
             .style("fill-opacity", function () {
-                return cut == selectedCut ? 1 : 0.4;
+                return cut == selectedCut ? 1 : 0.15;
             })
             .attr("x", function (d, i) {
                 var w = XGAP_ / (numCut + 4);
@@ -260,7 +260,7 @@ function drawTextClouds(yTextClouds) {
 
 
     svg.selectAll(".textCloud3").remove();
-    var yStep = 11;
+    var yStep = 12;
     var updateText = svg.selectAll(".textCloud3")
         .data(tNodes);
     var enterText = updateText.enter();

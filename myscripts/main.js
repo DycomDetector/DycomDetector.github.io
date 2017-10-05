@@ -86,7 +86,7 @@ var isForFigure4 = false;
 
 //var fileName =  "data/wikinews.tsv";
 //var fileName = "data/huffington.tsv";
-//var fileName = "data/crooks_and_liars.tsv";
+var fileName = "data/crooks_and_liars.tsv";
 // var fileName = "data/emptywheel.tsv";
 //var fileName = "data/esquire.tsv"; 
 //var fileName = "data/factcheck.tsv"; // Combine with glengreen + americablog and probublica
@@ -96,7 +96,7 @@ var isForFigure4 = false;
 //var fileName = "data/Political_Blogs.tsv";
 
 //var fileName = "data2/VISpapers1990-2016.tsv";
-var fileName = "data2/imdb1.tsv";
+//var fileName = "data2/imdb1.tsv";
 //var fileName = "data2/PopCha2.tsv";
 //var fileName = "data2/CardsPC.tsv";
 //var fileName = "data2/CardsFries.tsv";
@@ -199,7 +199,7 @@ d3.tsv(fileName, function (error, data_) {
         });
         //************************* Figure4 **********************
         //if (isForFigure4)
-           minYear = 2012;
+        //   minYear = 2012;
         //    maxYear = 2009;
         // Update months
         numMonth = 12*(maxYear - minYear);
@@ -241,7 +241,7 @@ d3.tsv(fileName, function (error, data_) {
     svg.append("rect")
         .attr("class", "background")
         .style("fill", "#fff")
-        .attr("x", xStep)
+        .attr("x", 0)
         .attr("y", yTimeBox)
         .attr("width", width)
         .attr("height", 2000)

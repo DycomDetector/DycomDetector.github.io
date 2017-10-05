@@ -85,6 +85,20 @@ h3 {
     position:absolute;
     border-radius: 5px;
     z-index: 0;
+    top: 100px;
+    left: 5px;
+    width: 200px;
+    height: 60px;
+    border: 0px solid rgba(0,0,0, 1);
+    font-family: "sans-serif";
+}
+label {
+    font: normal 13px sans-serif !important;
+}
+#holder2 {
+    position:absolute;
+    border-radius: 5px;
+    z-index: 0;
     top: 400px;
     left: 5px;
     width: 200px;
@@ -189,7 +203,17 @@ button {
     </div>
   </div>
 
+<!-- Select datasets -->
 <div id="holder1"  class="holder1">
+  <label for="inds">Select dataset: </label>
+  <select id="inds">
+      <option value="1" selected="selected">apples</option>
+      <option value="2">pears</option>
+      <option value="3">tomatoes</option>
+  </select>
+</div>
+
+<div id="holder2"  class="holder2">
     <!--   <input type="checkbox" id="checkbox1" value="value2" class="check" onclick="update()">
       <label for="checkbox1">Area graph only</label>
       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-->

@@ -28,7 +28,7 @@ var maxHeightOfStreamGraph = 10;
 var yStepOfStreamGraph = 9;
 
 
-var maxRel =  12;   // for scaling, if count > 6 the link will looks similar to 6
+var maxRel = 15;   // for scaling, if count > 6 the link will looks similar to 6
 if (fileName == "data2/VISpapers1990-2014.tsv"){
     maxRel=4;
 }    
@@ -314,11 +314,11 @@ function drawgraph2() {
 
 
 
-    var yTextClouds = height + 200; // y starts drawing the stream graphs
+    var yTextClouds = height + 202; // y starts drawing the stream graphs
     drawTextClouds(yTextClouds);    // in main3.js
 
 
-    var yStart = height + 260; // y starts drawing the stream graphs
+    var yStart = height + 270; // y starts drawing the stream graphs
     
     var yScale3 = d3.scale.linear()
         .range([0, maxHeightOfStreamGraph])
