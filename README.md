@@ -1,34 +1,11 @@
-## DycomDetector: Topic Modeling using Community Detection in Dynamic Networks
-
-[![ScreenShot](https://github.com/iDataVisualizationLab/DycomDetector/blob/master/dycomthumb.png)](https://youtu.be/Sk1rde-C0Pc)
+### DycomDetector: Topic Modeling using Community Detection in Dynamic Networks
 Online demo:  https://dycomdetector.github.io/
+[![ScreenShot](https://github.com/iDataVisualizationLab/DycomDetector/blob/master/dycomthumb.png)](https://youtu.be/Sk1rde-C0Pc)
 
-### Exploring Topics and Events using DycomDetector
-The following image shows the visualization of 7290 terms from 11267 political blog posts in last 10 years. We considered around 100,000 blogs of different datasets from which we filter and process the above terms and blog posts using topic modeling to find the important and meaningful terms. The terms which are collocated in same political blogs are brought closer and connected by arcs. The arc thickness indicates the frequency of collocated terms. The key features of DycomDetector are:
+### Schematic overview of DycomDetector
+DycomDetector is a novel approach for topic modeling in text corpora. Our algorithm extracts and classifies the keywords, calculates relationships based on keywork co-ocurrences, constructs the networks at different time points, applies a graph partitioning algorithm to extract latent communities. The intuitive interface of our system supports various interactive features, such as lensing and filerting by sudden increase in term ferequency, vertex degree, betweenness centrality, etc. It also allows the users to search for a topic of interest and visualize its temporal relations with other detected communities.
 
-**Box A:** The users can search and explore the relation of a particular term with other terms using the search box. It will filter the topics and process the data only related to the search term.
-
-**Box B:** The cut-off value helps a user to see the terms which have a stronger relation. Based on the terms collocation this value is determined. A cut-off value of 5, filters the words which appear more than five times together.
-
-**Box C:** This interactive drop-down selection helps a user to redefined the vertices based on the network properties such as Frequency, Net frequency, Degree, and Betweenness centrality.
-
-**Box D:** The processed terms and blogs information are shown here. Terms are color-coded by categories as depicted on the box D.
-
-**Box E:** The users can get a quick overview of the terms and events by this area. The most frequent terms and their relations are shown here.
-
-**Box F:** The viewers can lens into a period to see the details by mousing over the time axis. The following figure depicts lensing into the year of 2012.
-
-![ScreenShot](https://github.com/iDataVisualizationLab/DycomDetector/blob/master/images/DycomDetector.png)
-
-### DycomDetector on the Huffington Post with lensing
-The following figure depicts the related topics in the Huffington Post for the input term "tucson". The terms are ordered based on the betweenness centrality which defined the most central topics. For example, "newtown" and "sandy hook" are the two central terms appearing on many political blogs due to the shooting event at the Sandy Hook Elementary School shooting occurred on December 14, 2012, in Newtown, Connecticut. This visualization enable a user to quickly get a brief idea about the event on that specific time.
-
-![ScreenShot](https://github.com/iDataVisualizationLab/DycomDetector/blob/master/images/tucson.png)
-
-### DycomDetector on the Esquire blog with lensing into 2012
-The following image shows the top 5 terms under modularity histograms are ordered by betweenness centrality. For example, "willard", "politico", and "boston" globe are the hottest topics in July 2012.
-
-![ScreenShot](https://github.com/iDataVisualizationLab/DycomDetector/blob/master/images/Esquire.png)
+![ScreenShot](https://github.com/iDataVisualizationLab/DycomDetector/blob/master/images2/schema2.png)
 
 
 
