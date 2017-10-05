@@ -7,6 +7,7 @@ DycomDetector is a novel approach for topic modeling in text corpora. Our algori
 
 ![ScreenShot](https://github.com/DycomDetector/DycomDetector.github.io/blob/master/images2/schema2.png)
 
+More details can be found here: https://dycomdetector.github.io/layout.html 
 
 
 
