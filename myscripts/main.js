@@ -733,8 +733,7 @@ function searchNode() {
 }
 
 function addDatasetsOptions() {
-    var select = document.getElementById("datasetsSelect"); 
-    
+    var select = document.getElementById("datasetsSelect");   
     for(var i = 0; i < fileList.length; i++) {
         var opt = fileList[i];
         var el = document.createElement("option");
@@ -747,5 +746,7 @@ function addDatasetsOptions() {
 }
 
 function scheduleA(event) {
-    alert(this.options[this.selectedIndex].text + " this.selectedIndex="+this.selectedIndex);
+    //alert(this.options[this.selectedIndex].text + " this.selectedIndex="+this.selectedIndex);
+    fileName = this.options[this.selectedIndex].text;
+    loadData();
 }

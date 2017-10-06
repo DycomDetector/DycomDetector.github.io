@@ -285,7 +285,7 @@ function drawTopEntities(text1){
         return 0;
     });
 
-    var x6 = 0;
+    var x6 = 4;
     var y6 = 360;
 
     svg.append("text")
