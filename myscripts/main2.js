@@ -7,7 +7,7 @@
  */
 
 
-var topNumber = 500;
+var topNumber = 100;
 var top200terms = {}; // top terms from input data
 var top100termsArray = []; // for user selection
 var termList = {}; // List of term to feed to TimeArcs in main.js

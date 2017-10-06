@@ -9,7 +9,7 @@ var yTimeBox = 0;
 
 function drawColorLegend() {
     var xx = 15;
-    var yy = 60;
+    var yy = 70;
     var rr = 6;
     // number of input terms
     var text1 = "terms";
@@ -43,7 +43,7 @@ function drawColorLegend() {
     else{
         textFile = fileName.split("/")[1].split(".tsv")[0];
     }
-
+    /*
     svg.append("text")
         .attr("class", "nodeLegend")
         .attr("x", xx - 10)
@@ -64,7 +64,7 @@ function drawColorLegend() {
         .attr("font-family", "Impact, Charcoal, sans-serif")
         .attr("font-size", "18px")
         .style("text-anchor", "left")
-        .style("fill", "#000");    
+        .style("fill", "#000");    */
 
     svg.append("text")
         .attr("class", "nodeLegend")
@@ -591,7 +591,7 @@ function drawControlPanel(){
     // Control panel on the left *********************
     var yControl = 160;
     var data =[{"id":1, "value":">=1"},{"id":2, "value":">=2"},{"id":3, "value":">=3"},{"id":4, "value":">=4"},{"id":5, "value":">=5"},{"id":"optimized", "value":"Best Q modularity"}];
-    svg.append('rect').attr("class", "rect1").attr('x',5).attr('y',yControl).attr('width',150).attr('height',110).style("stroke","black").attr("stroke-width", 0.2).style('fill',"#d8d8d8").attr("rx", roundConner)
+    svg.append('rect').attr("class", "rect1").attr('x',5).attr('y',yControl).attr('width',150).attr('height',110).style("stroke","black").attr("stroke-width", 0.2).style('fill',"#eee").attr("rx", roundConner)
         .attr("ry", roundConner)
     svg.append('text')
         .attr('class','textcutoff')
