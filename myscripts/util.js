@@ -30,12 +30,12 @@ function drawColorLegend() {
         text2 = "movies";
         textFile = "PopCha movies";
     }
-    else if (fileName.indexOf("imdb")>=0){
+    else if (fileName.indexOf("IMDB")>=0){
         text1 = "actors";
         text2 = "movies";
         textFile = "IMDB movies";
     }
-    else if (fileName == "data2/VISpapers1990-2016.tsv"){
+    else if (fileName.indexOf("VIS")>=0){
         text1 = "authors";
         text2 = "papers";
         textFile = "VIS publications";
@@ -358,7 +358,7 @@ function removeColorLegend() {
 
 function drawTimeLegend() {
     var listX = [];
-    if (fileName == "data2/VISpapers1990-2016.tsv" || fileName.indexOf("imdb")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
+    if (fileName.indexOf("VIS")>=0|| fileName.indexOf("IMDB")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
         for (var i = minYear; i <= maxYear; i++) {
             var xx = xStep + xScale(i - minYear);
             var obj = {};
@@ -409,7 +409,7 @@ function drawTimeLegend() {
         .attr("font-family", "sans-serif")
         .attr("font-size", "15px")
         .text(function (d, i) {
-            if (fileName == "data2/VISpapers1990-2016.tsv" || fileName.indexOf("imdb")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
+            if (fileName.indexOf("VIS")>=0 || fileName.indexOf("IMDB")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
                 return d.year;
             }    
             else{
@@ -424,7 +424,7 @@ function drawTimeLegend() {
 function updateTimeLegend() {
     var listX = [];
 
-    if (fileName == "data2/VISpapers1990-2016.tsv" || fileName.indexOf("imdb")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
+    if (fileName.indexOf("VIS")>=0 || fileName.indexOf("IMDB")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
         for (var i = minYear; i <= maxYear; i++) {
             var xx = xStep + xScale(i - minYear);
             var obj = {};
@@ -447,7 +447,7 @@ function updateTimeLegend() {
 
     svg.selectAll(".timeLegendLine").data(listX).transition().duration(500)
         .style("stroke-dasharray", function (d, i) {
-            if (fileName == "data2/VISpapers1990-2016.tsv" || fileName.indexOf("imdb")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
+            if (fileName.indexOf("VIS")>=0 || fileName.indexOf("IMDB")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
                 return i % 5 == 0 ? "3, 1" : "1, 3"
             }
             else{ 
@@ -458,7 +458,7 @@ function updateTimeLegend() {
             }    
         })
         .style("stroke-opacity", function (d, i) {
-            if (fileName == "data2/VISpapers1990-2016.tsv" || fileName.indexOf("imdb")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
+            if (fileName.indexOf("VIS")>=0 || fileName.indexOf("IMDB")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
                 return 1;
             }
             else{    
@@ -480,7 +480,7 @@ function updateTimeLegend() {
         });
     svg.selectAll(".timeLegendText").data(listX).transition().duration(500)
         .style("fill-opacity", function (d, i) {
-            if (fileName == "data2/VISpapers1990-2016.tsv" || fileName.indexOf("imdb")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
+            if (fileName.indexOf("VIS")>=0 || fileName.indexOf("IMDB")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
                 if (i % 5 == 0)
                     return 1;
                 else {
@@ -562,7 +562,7 @@ function updateTimeBox() {
             // For figure 4
             if (isForFigure4) return (i==0) ? 0 : 548;
 
-            if (fileName == "data2/VISpapers1990-2016.tsv"  || fileName.indexOf("imdb")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
+            if (fileName.indexOf("VIS")>=0  || fileName.indexOf("IMDB")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
                 return yTimeBox + 20;
             }
             else{

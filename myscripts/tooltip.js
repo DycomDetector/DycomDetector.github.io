@@ -68,14 +68,6 @@ function showTip(d,tipItem) {
       str+="<b> Node info: </b>"
       str+="<table border='0.5px'  style='width:100%'>"
       for (key in d) {
-        /*if (key== "m"){
-          if (fileName == "data2/VISpapers1990-2016.tsv" || fileName.indexOf("imdb")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
-            str+=  "<tr><td>Year</td> <td align='right'>  <span style='color:black'>" +(d[key]+minYear)+ "</span> </td></tr>";
-          }
-          else 
-            str+=  "<tr><td>Month</td> <td align='right'>  <span style='color:black'>" +months[d[key]%12]+" "+ Math.round(minYear+d[key]/12)+ "</span> </td></tr>";
-        }
-        else */
         if (key== "net"){     
           str+=  "<tr><td>frequency net</td> <td align='right'>  <span style='color:black'>" +Math.round(d[key])+ "</span> </td></tr>";
         }
@@ -105,7 +97,7 @@ function showTip(d,tipItem) {
         str+="<table border='0.5px'  style='background-color:rgba(0, 0, 0, 0);width:100%'>"
 
         // table header 
-        if (fileName == "data2/VISpapers1990-2016.tsv" || fileName.indexOf("imdb")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
+        if (fileName.indexOf("VIS")>=0|| fileName.indexOf("IMDB")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
             str+=  "<tr><td align='right' style='background-color:rgba(0, 0, 0, 0);'><b>Year</b></td> <td align='right' style='background-color:rgba(0, 0, 0, 0);'>  <span style='color:black'> <b>frequency<b> </span> </td></tr>";
         }
         else 
@@ -116,7 +108,7 @@ function showTip(d,tipItem) {
           if (value>0){
             // table header 
             var time ;
-            if (fileName == "data2/VISpapers1990-2016.tsv" || fileName.indexOf("imdb")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
+            if (fileName.indexOf("VIS")>=0 || fileName.indexOf("IMDB")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
                 time =  (+monthly[key].monthId+minYear);
               }
             else {

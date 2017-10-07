@@ -29,7 +29,7 @@ var yStepOfStreamGraph = 9;
 
 
 var maxRel = 15;   // for scaling, if count > 6 the link will looks similar to 6
-if (fileName == "data2/VISpapers1990-2014.tsv"){
+if (fileName.indexOf("VIS")>=0){
     maxRel=4;
 }    
 var linkScale3 = function (count) {

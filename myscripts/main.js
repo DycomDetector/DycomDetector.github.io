@@ -84,8 +84,8 @@ var getColor3 = d3.scale.category10();  // Colors of categories
 //*****************************************************************
 var isForFigure4 = false;
 
-var fileList = ["FactCheck","Huffington","CrooksAndLiars","EmptyWheel","Esquire","WikiNews"
-                ,"VIS_papers","IMDB","PopCha","Cards_PC","Cards_Fries"]
+var fileList = ["PopCha","FactCheck","Huffington","CrooksAndLiars","EmptyWheel","Esquire","WikiNews"
+                ,"VIS_papers","IMDB","Cards_PC","Cards_Fries"]
 var fileName;
 
 
@@ -104,12 +104,15 @@ function loadData(){
     else if (fileName.indexOf("PopCha")>=0){
         categories = ["Comedy","Drama","Action", "Fantasy", "Horror"];
     }
-    else if (fileName.indexOf("imdb")>=0){
+    else if (fileName.indexOf("IMDB")>=0){
         categories = ["Comedy","Drama","Action"];
     }
-    else if (fileName == "data2/VISpapers1990-2016.tsv"){
+    else if (fileName.indexOf("VIS")>=0){
         categories = ["Vis","VAST","InfoVis","SciVis"];
     }
+    else 
+        categories = ["person","location","organization","miscellaneous"];
+    
     for (var cate=0; cate<categories.length;cate++){ // This loop makes sure person is Blue ...
         var category = categories[cate];
         getColor3(category);
@@ -124,7 +127,7 @@ function loadData(){
         minYear = 9999;
         maxYear = 0;
 
-        if (fileName == "data2/VISpapers1990-2016.tsv" || fileName.indexOf("imdb")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
+        if (fileName.indexOf("VIS")>=0 || fileName.indexOf("IMDB")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
             data.forEach(function (d) { // Update month
                 // Process date
                 var year =+d["Year"];
@@ -135,7 +138,7 @@ function loadData(){
                 d.m = year;
             });    
 
-            if (fileName.indexOf("imdb")>=0){
+            if (fileName.indexOf("IMDB")>=0){
                 minYear = 1975;   // IMDB first movie was in 1919
             }  
             else if (fileName.indexOf("PopCha")>=0){
@@ -361,7 +364,7 @@ function loadData(){
                 e.max = 500 + selected[e.term].isSelected;
             }
 
-            if (fileName == "data2/VISpapers1990-2016.tsv"  || fileName.indexOf("imdb")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
+            if (fileName.indexOf("VIS")>=0 || fileName.indexOf("IMDB")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
                 termArray.push(e);
             }
             else{    
@@ -381,10 +384,10 @@ function loadData(){
 
         // Compute relationship **********************************************************
         numNode = Math.min(topNumber, termArray.length);
-        if (fileName == "data2/VISpapers1990-2016.tsv" || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
+        if (fileName.indexOf("VIS")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
             numNode = termArray.length;   
         }  
-        else if (fileName.indexOf("imdb")>=0){  
+        else if (fileName.indexOf("IMDB")>=0){  
             numNode = Math.min(5000, termArray.length);
         }    
         top200terms ={};
@@ -416,7 +419,6 @@ function loadData(){
                 }
             }
         }
-
         relationship ={};
         relationshipMax =0;
         data2.forEach(function(d) { 
@@ -454,7 +456,6 @@ $('#btnUpload').click(function () {
     var bar = document.getElementById('progBar'),
         fallback = document.getElementById('downloadProgress'),
         loaded = 0;
-
     var load = function () {
         loaded += 1;
         bar.value = loaded;
@@ -469,7 +470,6 @@ $('#btnUpload').click(function () {
             console.log('Load was performed.');
         }
     };
-
     var beginLoad = setInterval(function () {
         load();
     }, 50);
@@ -494,9 +494,7 @@ function chartStreamGraphs(color) {
       colorrange = ["#B30000", "#E34A33", "#FC8D59", "#FDBB84", "#FDD49E", "#FEF0D9"];
     }
     strokecolor = colorrange[0];
-
     var format = d3.time.format("%m/%d/%y");
-
     var width = document.body.clientWidth ;
     var height = 700;
 
@@ -508,42 +506,32 @@ function chartStreamGraphs(color) {
         .style("visibility", "hidden")
         .style("top", "30px")
         .style("left", "55px");
-
     var x = d3.time.scale()
         .range([xStep, width]);
-
     var y = d3.scale.linear()
         .range([height, 400]);
-
     var z = d3.scale.ordinal()
         .range(colorrange);
-
     var xAxis = d3.svg.axis()
         .scale(x)
         .orient("bottom");
-
     var yAxis = d3.svg.axis()
         .scale(y)
         .ticks(4);
-
     var yAxisr = d3.svg.axis()
         .scale(y);
-
     var stack = d3.layout.stack()
         .offset("silhouette")
         .values(function(d) { return d.values; })
         .x(function(d) { return d.date; })
         .y(function(d) { return d.value; });
-
     var nest = d3.nest()
         .key(function(d) { return d.key; });
-
     var area = d3.svg.area()
         .interpolate("cardinal")
         .x(function(d) { return x(d.date); })
         .y0(function(d) { return y(d.y0); })
         .y1(function(d) { return y(d.y0 + d.y); });
-
         var data2 = [];
         var maxNet2 = 0;
         for (var k in top200terms){
@@ -562,8 +550,7 @@ function chartStreamGraphs(color) {
                 data2.push(obj);
             }    
         }
-       //debugger;
-       data2.sort(function (a, b) {
+        data2.sort(function (a, b) {
         if (getPosition(categories,top200terms[a.key].category) < getPosition(categories,top200terms[b.key].category)) {
             return 1;
         }
@@ -688,12 +675,12 @@ function chartStreamGraphs(color) {
             .style("left", "0px")
             .style("background", "#fff");
 
-      d3.select(".chart")
-          .on("mousemove", function(){  
+    d3.select(".chart")
+        .on("mousemove", function(){  
              mousex = d3.mouse(this);
              mousex = mousex[0] + 5;
              vertical.style("left", mousex + "px" )})
-          .on("mouseover", function(){  
+        .on("mouseover", function(){  
              mousex = d3.mouse(this);
              mousex = mousex[0] + 5;
              vertical.style("left", mousex + "px")});
@@ -740,13 +727,14 @@ function addDatasetsOptions() {
         el.textContent = opt;
         el.value = opt;
         select.appendChild(el);
-    }    
+    }        
     fileName = fileList[0];
     loadData();
 }
 
-function scheduleA(event) {
+function loadNewData(event) {
     //alert(this.options[this.selectedIndex].text + " this.selectedIndex="+this.selectedIndex);
+    svg.selectAll("*").remove();
     fileName = this.options[this.selectedIndex].text;
     loadData();
 }
