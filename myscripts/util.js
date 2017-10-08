@@ -295,7 +295,7 @@ function drawTopEntities(text1){
             return y6;
         })
         .text(function (d) {
-            return "Top" +top100termsArray.length +" "+text1;
+            return "Top " +top100termsArray.length +" "+text1;
         })
         .attr("dy", ".21em")
         .attr("font-family", "sans-serif")

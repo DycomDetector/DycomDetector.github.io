@@ -365,7 +365,8 @@ function loadData(){
             }
 
             if (fileName.indexOf("VIS")>=0 || fileName.indexOf("IMDB")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
-                termArray.push(e);
+                if (e.term.length>1)  
+                    termArray.push(e);
             }
             else{    
                 if (e.max > 1 && e.term.length>2)    // Only get terms with some increase ************** with TEXT
@@ -394,7 +395,7 @@ function loadData(){
         top100termsArray = [];
         for (var i=0; i<numNode;i++){
            top200terms[termArray[i].term] = termArray[i];  // top200terms is defined in main2.js
-           if (top100termsArray.length<100)
+           if (top100termsArray.length<20)
                  top100termsArray.push(termArray[i]);
            /*  // Sentiment request to server
            var query =  "http://127.0.0.1:1337/status?userID="+termArray[i].term;
