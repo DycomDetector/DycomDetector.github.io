@@ -6,8 +6,6 @@
  * OF THIS SOFTWARE OR ITS FITNESS FOR ANY PARTICULAR PURPOSE.
  */
 
-var selectedCut = 0;
-var selectedSetNodeBy = 1;
 
 function setCut(cutvalue){
     var selectedvalue = cutvalue;
@@ -24,7 +22,7 @@ function setCut(cutvalue){
 }
 
 function setNodesBy(){
-    selectedSetNodeBy = d3.select('#orderdropdown').property('value');
+    selectedSetNodeBy = d3.select('#nodeDropdown').property('value');
 
     // Recompute the sub graphs
     computeMonthlyGraphs();
@@ -40,7 +38,7 @@ function setNodesBy(){
         console.log(selectedSetNodeBy);
     }
     else if(selectedSetNodeBy==4){
-        var cut_value = $('#sdropdown').val();
+        var cut_value = $('#nodeDropdown').val();
         //Check if cutoff is calculated, if yes then skip
         if(cutoff_Check.indexOf(+cut_value)===-1){
             graphInsertBetweeness(graphByMonths, +cut_value);

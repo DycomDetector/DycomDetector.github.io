@@ -286,7 +286,7 @@ function drawTopEntities(text1){
     });
 
     var x6 = 4;
-    var y6 = 360;
+    var y6 = 350;
 
     svg.append("text")
         .attr("class", "legendText6")
@@ -299,8 +299,9 @@ function drawTopEntities(text1){
         })
         .attr("dy", ".21em")
         .attr("font-family", "sans-serif")
-        .attr("font-size", "16px")
+        .attr("font-size", "14px")
         .style("text-anchor", "left")
+        .style("font-weight", "bold")
         .style("fill", "#000");
 
 
@@ -311,7 +312,7 @@ function drawTopEntities(text1){
         .attr("class", "node6Text")
         .attr("x", x6)
         .attr("y", function (d, i) {
-            return y6 +20 + i * 15;
+            return y6 +17 + i * 14;
         })
         .text(function (d) {
             return d.term + " ("+numberWithCommas(d.count)+")";
@@ -587,12 +588,12 @@ var roundConner = 4;
 var colorHighlight = "#fc8";
 var buttonColor = "#ddd";
 
-function drawControlPanel(){
-    // Control panel on the left *********************
+// Control panel on the left *********************
+function drawControlPanelBackground(){
     var yControl = 160;
-    var data =[{"id":1, "value":">=1"},{"id":2, "value":">=2"},{"id":3, "value":">=3"},{"id":4, "value":">=4"},{"id":5, "value":">=5"},{"id":"optimized", "value":"Best Q modularity"}];
     svg.append('rect').attr("class", "rect1").attr('x',5).attr('y',yControl).attr('width',150).attr('height',110).style("stroke","black").attr("stroke-width", 0.2).style('fill',"#eee").attr("rx", roundConner)
         .attr("ry", roundConner)
+    
     svg.append('text')
         .attr('class','textcutoff')
         .style("font-style","italic")
@@ -609,27 +610,33 @@ function drawControlPanel(){
         .attr("font-family", "sans-serif")
         .attr("font-size", "12px")
         .text('Select edge weight');
+}    
 
-    // Control panel on the left *********************
-    var select = d3.select('body').append('select').attr('id','sdropdown').on('change',function () {
-        selectValue = d3.select('#sdropdown').property('value');
+function drawControlPanel(){
+    
+    //  node Dropdown *********************
+    var nodedata = [{"id": 1, "value": "Frequency"}, {"id": 2, "value": "Net frequency"}, {"id": 3, "value": "Degree"},{
+        "id": 4,"value": "Betweenness centrality"
+    }];
+    var selectOrder = d3.select('body').append('select').attr('id', 'nodeDropdown').on('change',setNodesBy);
+    var Orderoptions = selectOrder.selectAll('option').data(nodedata).enter().append('option').attr('value', function (d) {
+        return d.id;
+    }).text(function (d) {
+        return d.value;
+    })
+
+    //  edge Weight Dropdown *********************
+    var edgeData =[{"id":1, "value":">=1"},{"id":2, "value":">=2"},{"id":3, "value":">=3"},{"id":4, "value":">=4"},{"id":5, "value":">=5"},{"id":"optimized", "value":"Best Q modularity"}];
+    var select = d3.select('body').append('select').attr('id','edgeWeightDropdown').on('change',function () {
+        selectValue = d3.select('#edgeWeightDropdown').property('value');
         setCut(selectValue);
 
     })
-    var options = select.selectAll('option').data(data).enter().append('option').attr('value', function (d) {
+    var options = select.selectAll('option').data(edgeData).enter().append('option').attr('value', function (d) {
         return d.id;
     }).text(function (d) {
         return d.value;
     })
 
-    var orderdata = [{"id": 1, "value": "Frequency"}, {"id": 2, "value": "Net frequency"}, {"id": 3, "value": "Degree"},{
-        "id": 4,
-        "value": "Betweenness centrality"
-    }];
-    var selectOrder = d3.select('body').append('select').attr('id', 'orderdropdown').on('change',setNodesBy);
-    var Orderoptions = selectOrder.selectAll('option').data(orderdata).enter().append('option').attr('value', function (d) {
-        return d.id;
-    }).text(function (d) {
-        return d.value;
-    })
+   
 }

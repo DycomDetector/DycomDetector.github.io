@@ -25,18 +25,23 @@ var minYear, maxYear, numMonth;
 var nodes;
 var numNode;
 
-var termArray, relationship, termMax=0;
+var termArray, relationship, termMax;
 var terms;
 var xStep = 210;
-var searchTerm = "";
+var searchTerm;
 
-var isLensing = false;
-var lensingMul = 7;
+var isLensing;
+var lensingMul = 8;
 var lMonth = -lensingMul * 2;
-var oldLmonth = -1000; // use this variable to compare if we are lensing over a different month
+var oldLmonth; // use this variable to compare if we are lensing over a different month
+
+// Selected values from dropdown ****** used in main2.js and main3.js
+var selectedSetNodeBy;
+var selectedCut;
+
 
 var XGAP_; // gap between months on xAxis
-var numLens = 5;
+var numLens = 3;
 
 function xScale(m) {
     if (isLensing) {
@@ -78,27 +83,34 @@ var optArray = [];   // FOR search box
 var listMonth;
 
 var categories = ["person","location","organization","miscellaneous"];
-var getColor3 = d3.scale.category10();  // Colors of categories
+var getColor3;  // Colors of categories
  
 
 //*****************************************************************
 var isForFigure4 = false;
 
-var fileList = ["PopCha","FactCheck","Huffington","CrooksAndLiars","EmptyWheel","Esquire","WikiNews"
-                ,"VIS_papers","IMDB","Cards_PC","Cards_Fries"]
+var fileList = ["FactCheck","Huffington","CrooksAndLiars","EmptyWheel","Esquire","WikiNews"
+                ,"VIS_papers","PopCha","IMDB","Cards_PC","Cards_Fries"]
 var fileName;
 
 
 addDatasetsOptions(); // Add these dataset to the select dropdown, at the end of this files
+drawControlPanel();
+
 //chartStreamGraphs("orange");
 
+
 function loadData(){
+    searchTerm = "";
+    isLensing = false;
+    termMax=0;
+    oldLmonth = -1000;
     fileName = "data/"+fileName+".tsv"; // Add data folder path
     
-    if (fileName.indexOf("CardsFries")>=0){
+    if (fileName.indexOf("Cards_Fries")>=0){
         categories = ["increases_activity", "decreases_activity"];
     }
-    else if (fileName.indexOf("CardsPC")>=0){
+    else if (fileName.indexOf("Cards_PC")>=0){
         categories = ["adds_modification", "removes_modification", "increases","decreases", "binds", "translocation"];
     }
     else if (fileName.indexOf("PopCha")>=0){
@@ -113,11 +125,26 @@ function loadData(){
     else 
         categories = ["person","location","organization","miscellaneous"];
     
+    getColor3 = d3.scale.category10(); 
     for (var cate=0; cate<categories.length;cate++){ // This loop makes sure person is Blue ...
         var category = categories[cate];
         getColor3(category);
     }  
     
+    // START: loader spinner settings ****************************
+    var opts = {
+      lines: 25, // The number of lines to draw
+      length: 15, // The length of each line
+      width: 5, // The line thickness
+      radius: 25, // The radius of the inner circle
+      color: '#000', // #rgb or #rrggbb or array of colors
+      speed: 2, // Rounds per second
+      trail: 50, // Afterglow percentage
+      className: 'spinner', // The CSS class to assign to the spinner
+    };
+    var target = document.getElementById('loadingSpinner');
+    var spinner = new Spinner(opts).spin(target);
+    // END: loader spinner settings ****************************
 
     d3.tsv(fileName, function (error, data_) {
         if (error) throw error;
@@ -144,6 +171,9 @@ function loadData(){
             else if (fileName.indexOf("PopCha")>=0){
                 minYear = 1975;   // PopCha first movie was in 1937
             }    
+            // Set the dropdown value
+            document.getElementById('edgeWeightDropdown').value = "1";  
+
             //minYear = 2004;
             // Update months
             numMonth = maxYear - minYear +1;
@@ -193,6 +223,14 @@ function loadData(){
                 d.m = m;
                 
             });
+
+            if (fileName.indexOf("FactCheck")>=0){
+                minYear = 2007;   
+                document.getElementById('edgeWeightDropdown').value = "2";      
+            }  
+            else if (fileName.indexOf("FactCheck")>=0){
+                minYear = 1975;   // PopCha first movie was in 1937
+            }
             //************************* Figure4 **********************
             //if (isForFigure4)
             //   minYear = 2012;
@@ -230,7 +268,11 @@ function loadData(){
                 }
             });
         }
+        // Set the value from dropdown (which might be changed depending on the input dataset above)
+        selectedCut = document.getElementById('edgeWeightDropdown').value-1; // dropdown start at 1
+        selectedSetNodeBy = document.getElementById('nodeDropdown').value; // Exceptional for categorical dropdown
         
+
         readTermsAndRelationships();
         console.log("DONE computing relationshipMax=" + relationshipMax);
 
@@ -246,12 +288,13 @@ function loadData(){
         drawTimeLegend();
         drawTimeBox(); // This box is for brushing 
         
-        
-
         // 2017. this function is main2.js
         computeMonthlyGraphs();
+        drawControlPanelBackground();
 
-         drawControlPanel();
+        // Spinner Stop ********************************************************************
+        spinner.stop();
+
 
         var maxNum = Math.min(termArray.length, 10000);
         for (var i = 0; i < termArray.length; i++) {
@@ -264,193 +307,192 @@ function loadData(){
             });
         });
     });
-
-
-    function readTermsAndRelationships() {
-        console.log("readTermsAndRelationships");
-        data2 = data.filter(function (d, i) {
-            if (!searchTerm || searchTerm == "") {
-                return d;
-            }
-            else if (d[searchTerm])  // data2 contain the row which contains searched term
-                return d;
-        });
-
-        var selected = {}
-        if (searchTerm && searchTerm != "") {
-            data2.forEach(function (d) {
-                for (var term1 in d) {
-                    if (!selected[term1])
-                        selected[term1] = {};
-                    else {
-                        if (!selected[term1].isSelected)
-                            selected[term1].isSelected = 1;
-                        else
-                            selected[term1].isSelected++;
-                    }
-                }
-            });
-        }
-
-        var removeList = {};   // remove list **************
-        /*removeList["source"] = 1;
-        removeList["person"] = 1;
-        removeList["location"] = 1;
-        removeList["organization"] = 1;
-        removeList["miscellaneous"] = 1;
-
-        removeList["muckreads weekly deadly force"] = 1
-        removeList["propublica"] = 1;
-        removeList["white this alabama judge has figured out how"] = 1;
-        removeList["dea ’s facebook impersonato"] = 1;
-        removeList["dismantle roe"] = 1;
-        removeList["huffington post"] = 1;
-
-        removeList["lanza"] = 1;
-        removeList["giglio"] = 1;
-        removeList["portman"] = 1;
-        removeList["thatcher"] = 1;
-        removeList["ground"] = 1;
-        removeList["summers"] = 1;
-        removeList["lapierre"] = 1;
-        removeList["hagel"] = 1;
-        removeList["swartz"] = 1;
-        removeList["tsarnaev"] = 1;
-        removeList["marathon"] = 1;
-        removeList["martin"] = 1;
-        removeList["zimmerman"] = 1;
-        removeList["karzai"] = 1;
-        removeList["rice"] = 1;
-        removeList["tamerlan"] = 1;
-        removeList["boston"] = 1;
-        removeList["foreign intelligence surveillance court"] = 1;
-        removeList["trayvon"] = 1;
-        */
-
-        termArray = [];
-        for (var att in terms) {
-            var e = {};
-            e.term = att;
-            if (removeList[e.term] || (searchTerm && searchTerm != "" && !selected[e.term])) // remove list **************
-                continue;
-
-            var maxNet = 0;
-            var maxMonth = -1;
-            var count = 0;
-            for (var m = 0; m < numMonth; m++) {
-                if (terms[att][m]) {
-                    var previous = 0;
-                    if (terms[att][m - 1])
-                        previous = terms[att][m - 1];
-                    var net = (terms[att][m] + 1) / (previous + 1);
-                    if (net > maxNet) {
-                        maxNet = net;
-                        maxMonth = m;
-                    }
-                    count+=terms[att][m];
-                }
-              //  console.log(att+" net="+net);
-            }
-            e.max = maxNet;
-            e.count = count;
-            e.maxMonth = maxMonth;
-            e.category = terms[att].category;
-
-            if (e.term == searchTerm) {
-                e.max = 1000;
-                e.isSearchTerm = 1;
-            }
-            else if (searchTerm && searchTerm != "" && selected[e.term] && selected[e.term].isSelected) {
-                e.max = 500 + selected[e.term].isSelected;
-            }
-
-            if (fileName.indexOf("VIS")>=0 || fileName.indexOf("IMDB")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
-                if (e.term.length>1)  
-                    termArray.push(e);
-            }
-            else{    
-                if (e.max > 1 && e.term.length>2)    // Only get terms with some increase ************** with TEXT
-                    termArray.push(e);
-            }
-        }
-        termArray.sort(function (a, b) {
-            if (a.max < b.max) {
-                return 1;
-            }
-            if (a.max > b.max) {
-                return -1;
-            }
-            return 0;
-        });
-
-        // Compute relationship **********************************************************
-        numNode = Math.min(topNumber, termArray.length);
-        if (fileName.indexOf("VIS")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
-            numNode = termArray.length;   
-        }  
-        else if (fileName.indexOf("IMDB")>=0){  
-            numNode = Math.min(5000, termArray.length);
-        }    
-        top200terms ={};
-        top100termsArray = [];
-        for (var i=0; i<numNode;i++){
-           top200terms[termArray[i].term] = termArray[i];  // top200terms is defined in main2.js
-           if (top100termsArray.length<20)
-                 top100termsArray.push(termArray[i]);
-           /*  // Sentiment request to server
-           var query =  "http://127.0.0.1:1337/status?userID="+termArray[i].term;
-             new Promise(function(resolve) {
-              d3.json(query, function(d) { 
-               // debugger;
-                resolve(d) })
-            });*/
-        }
-        console.log("numNode="+numNode);
-
-
-        // compute the term frequency ************************************************************************************
-        termMax = 0;
-        for (var i = 0; i < numNode; i++) {
-            for (var m = 0; m < numMonth; m++) {
-                var mon = new Object();
-                if (terms[termArray[i].term][m]) {
-                    mon.value = terms[termArray[i].term][m];
-                    if (mon.value > termMax)
-                        termMax = mon.value;
-                }
-            }
-        }
-        relationship ={};
-        relationshipMax =0;
-        data2.forEach(function(d) { 
-            var m = d.m;
-            for (var term1 in d) {
-                if (top200terms[term1]){   // if the term is in the selected 100 terms
-                    for (var term2 in d) {
-                        if (top200terms[term2]){   // if the term is in the selected 100 terms
-                            if (!relationship[term1+"__"+term2]){
-                                relationship[term1+"__"+term2] = new Object();
-                                relationship[term1+"__"+term2].max = 1;
-                                relationship[term1+"__"+term2].maxMonth =m;
-                            }    
-                            if (!relationship[term1+"__"+term2][m])
-                                relationship[term1+"__"+term2][m] = 1;
-                            else{
-                                relationship[term1+"__"+term2][m]++;
-                                if (relationship[term1+"__"+term2][m]>relationship[term1+"__"+term2].max){
-                                    relationship[term1+"__"+term2].max = relationship[term1+"__"+term2][m];
-                                    relationship[term1+"__"+term2].maxMonth =m;  
-                                    if (relationship[term1+"__"+term2].max>relationshipMax) // max over time
-                                        relationshipMax = relationship[term1+"__"+term2].max;
-                                }  
-                            }    
-                        }
-                    }
-                }
-            }
-        });  
-    }
 }    
+
+function readTermsAndRelationships() {
+    console.log("readTermsAndRelationships");
+    data2 = data.filter(function (d, i) {
+        if (!searchTerm || searchTerm == "") {
+            return d;
+        }
+        else if (d[searchTerm])  // data2 contain the row which contains searched term
+            return d;
+    });
+
+    var selected = {}
+    if (searchTerm && searchTerm != "") {
+        data2.forEach(function (d) {
+            for (var term1 in d) {
+                if (!selected[term1])
+                    selected[term1] = {};
+                else {
+                    if (!selected[term1].isSelected)
+                        selected[term1].isSelected = 1;
+                    else
+                        selected[term1].isSelected++;
+                }
+            }
+        });
+    }
+
+    var removeList = {};   // remove list **************
+    /*removeList["source"] = 1;
+    removeList["person"] = 1;
+    removeList["location"] = 1;
+    removeList["organization"] = 1;
+    removeList["miscellaneous"] = 1;
+
+    removeList["muckreads weekly deadly force"] = 1
+    removeList["propublica"] = 1;
+    removeList["white this alabama judge has figured out how"] = 1;
+    removeList["dea ’s facebook impersonato"] = 1;
+    removeList["dismantle roe"] = 1;
+    removeList["huffington post"] = 1;
+
+    removeList["lanza"] = 1;
+    removeList["giglio"] = 1;
+    removeList["portman"] = 1;
+    removeList["thatcher"] = 1;
+    removeList["ground"] = 1;
+    removeList["summers"] = 1;
+    removeList["lapierre"] = 1;
+    removeList["hagel"] = 1;
+    removeList["swartz"] = 1;
+    removeList["tsarnaev"] = 1;
+    removeList["marathon"] = 1;
+    removeList["martin"] = 1;
+    removeList["zimmerman"] = 1;
+    removeList["karzai"] = 1;
+    removeList["rice"] = 1;
+    removeList["tamerlan"] = 1;
+    removeList["boston"] = 1;
+    removeList["foreign intelligence surveillance court"] = 1;
+    removeList["trayvon"] = 1;
+    */
+
+    termArray = [];
+    for (var att in terms) {
+        var e = {};
+        e.term = att;
+        if (removeList[e.term] || (searchTerm && searchTerm != "" && !selected[e.term])) // remove list **************
+            continue;
+
+        var maxNet = 0;
+        var maxMonth = -1;
+        var count = 0;
+        for (var m = 0; m < numMonth; m++) {
+            if (terms[att][m]) {
+                var previous = 0;
+                if (terms[att][m - 1])
+                    previous = terms[att][m - 1];
+                var net = (terms[att][m] + 1) / (previous + 1);
+                if (net > maxNet) {
+                    maxNet = net;
+                    maxMonth = m;
+                }
+                count+=terms[att][m];
+            }
+          //  console.log(att+" net="+net);
+        }
+        e.max = maxNet;
+        e.count = count;
+        e.maxMonth = maxMonth;
+        e.category = terms[att].category;
+
+        if (e.term == searchTerm) {
+            e.max = 1000;
+            e.isSearchTerm = 1;
+        }
+        else if (searchTerm && searchTerm != "" && selected[e.term] && selected[e.term].isSelected) {
+            e.max = 500 + selected[e.term].isSelected;
+        }
+
+        if (fileName.indexOf("VIS")>=0 || fileName.indexOf("IMDB")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
+            if (e.term.length>1)  
+                termArray.push(e);
+        }
+        else{    
+            if (e.max > 1 && e.term.length>2)    // Only get terms with some increase ************** with TEXT
+                termArray.push(e);
+        }
+    }
+    termArray.sort(function (a, b) {
+        if (a.max < b.max) {
+            return 1;
+        }
+        if (a.max > b.max) {
+            return -1;
+        }
+        return 0;
+    });
+
+    // Compute relationship **********************************************************
+    numNode = Math.min(topNumber, termArray.length);
+    if (fileName.indexOf("VIS")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
+        numNode = termArray.length;   
+    }  
+    else if (fileName.indexOf("IMDB")>=0){  
+        numNode = Math.min(5000, termArray.length);
+    }    
+    top200terms ={};
+    top100termsArray = [];
+    for (var i=0; i<numNode;i++){
+       top200terms[termArray[i].term] = termArray[i];  // top200terms is defined in main2.js
+       if (top100termsArray.length<30)
+             top100termsArray.push(termArray[i]);
+       /*  // Sentiment request to server
+       var query =  "http://127.0.0.1:1337/status?userID="+termArray[i].term;
+         new Promise(function(resolve) {
+          d3.json(query, function(d) { 
+           // debugger;
+            resolve(d) })
+        });*/
+    }
+    console.log("numNode="+numNode);
+
+
+    // compute the term frequency ************************************************************************************
+    termMax = 0;
+    for (var i = 0; i < numNode; i++) {
+        for (var m = 0; m < numMonth; m++) {
+            var mon = new Object();
+            if (terms[termArray[i].term][m]) {
+                mon.value = terms[termArray[i].term][m];
+                if (mon.value > termMax)
+                    termMax = mon.value;
+            }
+        }
+    }
+    relationship ={};
+    relationshipMax =0;
+    data2.forEach(function(d) { 
+        var m = d.m;
+        for (var term1 in d) {
+            if (top200terms[term1]){   // if the term is in the selected 100 terms
+                for (var term2 in d) {
+                    if (top200terms[term2]){   // if the term is in the selected 100 terms
+                        if (!relationship[term1+"__"+term2]){
+                            relationship[term1+"__"+term2] = new Object();
+                            relationship[term1+"__"+term2].max = 1;
+                            relationship[term1+"__"+term2].maxMonth =m;
+                        }    
+                        if (!relationship[term1+"__"+term2][m])
+                            relationship[term1+"__"+term2][m] = 1;
+                        else{
+                            relationship[term1+"__"+term2][m]++;
+                            if (relationship[term1+"__"+term2][m]>relationship[term1+"__"+term2].max){
+                                relationship[term1+"__"+term2].max = relationship[term1+"__"+term2][m];
+                                relationship[term1+"__"+term2].maxMonth =m;  
+                                if (relationship[term1+"__"+term2].max>relationshipMax) // max over time
+                                    relationshipMax = relationship[term1+"__"+term2].max;
+                            }  
+                        }    
+                    }
+                }
+            }
+        }
+    });  
+}
 
 
 $('#btnUpload').click(function () {
@@ -732,6 +774,7 @@ function addDatasetsOptions() {
     fileName = fileList[0];
     loadData();
 }
+
 
 function loadNewData(event) {
     //alert(this.options[this.selectedIndex].text + " this.selectedIndex="+this.selectedIndex);

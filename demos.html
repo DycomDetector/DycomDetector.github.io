@@ -67,14 +67,14 @@ h3 {
     font-family: "Helvetica";
 }
 
-#orderdropdown{
+#nodeDropdown{
     position: absolute;
     top: 313px;
     left: 15px;
     width: 125px;
 }
 
-#sdropdown{
+#edgeWeightDropdown{
     position: absolute;
     top: 362px;
     left: 18px;
@@ -187,6 +187,10 @@ button {
   left: 100px;
   top: 19px;
 }
+
+/* Spinner when loading*/
+
+
 </style>
 
 <link rel="stylesheet" type="text/css" href="styles/default.css" media="screen"/>
@@ -208,10 +212,14 @@ button {
     </div>
   </div>
 
+<!-- Spinner when loading -->
+<div id="loadingSpinner">
+  <!-- <span id="progressText"> -->
+</div>
 
 <!-- Select datasets -->
 <div id="holder1"  class="holder1">
-  <label for="datasetsSelect">Data: </label>
+  <label for="datasetsSelect"> <i>Data:</i> </label>
   <select id="datasetsSelect" class="styled-select" onchange="loadNewData.call(this, event)">
   </select>
 </div>
@@ -232,12 +240,12 @@ button {
 <script src="javascripts/fisheye.js"></script>
 <script src="javascripts/select2.min.js"></script>
 <script src="myscripts/util.js"></script>
-<!--<script src="myscripts/sliderRelationship.js"></script>-->
 <script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.min.js'></script> <!-- Spinner when loading -->
 <script src="myscripts/tooltip.js"></script>
+<script src="myscripts/main3.js"></script>
 <script src="myscripts/main.js"></script>
 <script src="myscripts/main2.js"></script>
-<script src="myscripts/main3.js"></script>
 <script src="myscripts/jLouvain.js"></script>
 <script src="myscripts/clusters.js"></script>
 <script src="myscripts/iDVLab.js"></script>

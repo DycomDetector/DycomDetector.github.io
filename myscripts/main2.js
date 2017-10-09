@@ -170,7 +170,9 @@ function computeMonthlyGraphs() {
             cut += 1;
         }
         
+        // Draw network snapshot
         if (graphByMonths[m][selectedCut] != undefined) {
+            console.log("selectedCut="+selectedCut);
             updateSubLayout(graphByMonths[m][selectedCut].nodes, graphByMonths[m][selectedCut].links, m);
         }
     }
