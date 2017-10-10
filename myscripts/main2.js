@@ -23,7 +23,7 @@ var maxNodesInSnapshot =30; // *************************************************
 var nodeRadiusRange = [0.18, 0.7]; 
 var linkscaleForSnapshot = 0.15; 
    
-var maxHeightOfStreamGraph = 10;
+var maxHeightOfStreamGraph = 9;
 var yStepOfStreamGraph = 9;
 var maxRel = 15;   // for scaling, if count > 6 the link will looks similar to 6
 
@@ -289,17 +289,31 @@ function drawgraph2() {
 
 
     var max = 1;
+    var yStart = height + 270; // y starts drawing the stream graphs
+    var yTemp = yStart;
+    var numNodesInFirstMonth = 0;
+    // Compute y position of small multiple *******
+    var yStep1 = Math.min(11,(heightSVG-yStart-5)/lNodes.length)
+    var yStep2 = Math.max(yStepOfStreamGraph,yStep1);
     for (var i=0;i<lNodes.length;i++){
         if (lNodes[i].measurement>max)
             max = lNodes[i].measurement;
-    }
+        if (lNodes[i].m==lNodes[0].m){
+            yTemp += yStep2;
+            numNodesInFirstMonth++;
+        }
+        else{
+            var yStep3= Math.min(yStep1,(heightSVG-yStart-numNodesInFirstMonth*yStep2-5)/(lNodes.length-numNodesInFirstMonth));
+            yTemp += yStep3;
+        }
+        lNodes[i].yInMultiples =  yTemp;
+    }        
 
-// ********************************* Node scales *********************************************************************
+    // ********************************* Node scales *********************************************************************
     var rScale = d3.scale.linear()
                     .range(nodeRadiusRange)
                     .domain([0, Math.sqrt(max)]);    
     
-
     for (var i=0; i<allSVG.length;i++){
         var svg2 = allSVG[i];
         svg2.selectAll(".node5")
@@ -321,7 +335,6 @@ function drawgraph2() {
     drawTextClouds(yTextClouds);    // in main3.js
 
 
-    var yStart = height + 270; // y starts drawing the stream graphs
     
     var yScale3 = d3.scale.linear()
         .range([0, maxHeightOfStreamGraph])
@@ -362,11 +375,10 @@ function drawgraph2() {
             if (termList[d.name].monthly == undefined) {
                 termList[d.name].monthly = computeMonthlyData(d.name);
             }
+
+
             for (var i = 0; i < termList[d.name].monthly.length; i++) {
-               // if (index<5)
-                //    termList[d.name].monthly[i].yNode = yStart + index * 10;     // Copy node y coordinate
-                //else
-                    termList[d.name].monthly[i].yNode = yStart + index * yStepOfStreamGraph;     // Copy node y coordinate
+                termList[d.name].monthly[i].yNode = d.yInMultiples;     // Copy node y coordinate
             }
             return area3(termList[d.name].monthly);
         });
@@ -399,7 +411,7 @@ function drawgraph2() {
     svg.selectAll(".nodeText3").remove();
     var updateText = svg.selectAll(".nodeText3")
             .data(lNodes, function (d) {
-                return d.name
+                return d.name;
             });
     var enterText = updateText.enter();
     enterText.append("text")
@@ -409,15 +421,11 @@ function drawgraph2() {
         })
         .style("text-anchor", "end")
         .style("text-shadow", "1px 1px 0 rgba(255, 255, 255, 0.99")
-        //.attr("x", xStep-2)   show text on the left side
         .attr("x", function (d) {
             return xStep + xScale(d.m) - 2;    // x position is at the arcs
         })
         .attr("y", function (d, i) {
-           // if (i<5)
-             //   return yStart + i * 10 + 4;     // Copy node y coordinate
-            //else 
-                return yStart + i * yStepOfStreamGraph + 4;     // Copy node y coordinate
+             return d.yInMultiples+4;     // Copy node y coordinate
         })
         .attr("font-family", "sans-serif")
         .attr("font-size", "11px")

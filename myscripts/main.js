@@ -10,11 +10,12 @@
 var margin = {top: 0, right: 0, bottom: 0, left: 0};
 var width = document.body.clientWidth - margin.left - margin.right;
 var height = 50 - margin.top - margin.bottom;
+var heightSVG = 1200;
 
 //Append a SVG to the body of the html page. Assign this SVG as an object to svg
 var svg = d3.select("body").append("svg")
     .attr("width", width)
-    .attr("height", 1500);
+    .attr("height", heightSVG);
 svg.call(tip);  
 
 var personTerms, locTerms, misTerms, orgTerms;
@@ -175,7 +176,10 @@ function loadData(){
             maxNodesInSnapshot =35;
             maxRel = 5;
             snapshotScale = 0.22; 
-             if (fileName.indexOf("IMDB")>=0){
+            if (fileName.indexOf("VIS")>=0){
+                snapshotScale = 0.18;   
+            }
+            else if (fileName.indexOf("IMDB")>=0){
                 minYear = 1975;   // IMDB first movie was in 1919
             }  
             else if (fileName.indexOf("PopCha")>=0){
@@ -330,7 +334,7 @@ function loadData(){
             .attr("x", 0)
             .attr("y", yTimeBox)
             .attr("width", width)
-            .attr("height", 1500)
+            .attr("height", heightSVG)
 
         drawColorLegend();
         drawTimeLegend();
