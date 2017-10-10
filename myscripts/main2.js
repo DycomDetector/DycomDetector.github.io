@@ -172,6 +172,10 @@ function computeMonthlyGraphs() {
         if (graphByMonths[m][selectedCut] != undefined) {
             updateSubLayout(graphByMonths[m][selectedCut].nodes, graphByMonths[m][selectedCut].links, m);
         }
+        else{
+           // debugger;
+           // setCut("optimized");
+        }
     }
     // Update the layout
     updateTimeLegend();

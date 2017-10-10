@@ -539,8 +539,7 @@ function drawTimeBox() {
             isLensing = true;
             coordinate = d3.mouse(this);
             lMonth = Math.floor((coordinate[0] - xStep) / XGAP_);
-            console.log("lMonth="+lMonth);
-            
+ 
             // Update layout
             updateTimeLegend();
             updateTimeBox();

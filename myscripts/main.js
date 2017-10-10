@@ -14,7 +14,7 @@ var height = 50 - margin.top - margin.bottom;
 //Append a SVG to the body of the html page. Assign this SVG as an object to svg
 var svg = d3.select("body").append("svg")
     .attr("width", width)
-    .attr("height", 2000);
+    .attr("height", 1500);
 svg.call(tip);  
 
 var personTerms, locTerms, misTerms, orgTerms;
@@ -32,7 +32,7 @@ var searchTerm;
 
 var isLensing;
 var lensingMul = 8;
-var lMonth = -lensingMul * 2;
+var lMonth;
 var oldLmonth; // use this variable to compare if we are lensing over a different month
 
 // Selected values from dropdown ****** used in main2.js and main3.js
@@ -89,8 +89,10 @@ var getColor3;  // Colors of categories
 //*****************************************************************
 var isForFigure4 = false;
 
-var fileList = ["WikiNews","FactCheck","CrooksAndLiars","EmptyWheel","Esquire","Huffington"
-                ,"VIS_papers","PopCha","IMDB","Cards_PC","Cards_Fries"]
+var fileList = ["WikiNews","Huffington","CrooksAndLiars","EmptyWheel","Esquire","FactCheck"
+                ,"VIS_papers","IMDB","PopCha","Cards_PC","Cards_Fries"]
+var initialDataset = "VIS_papers";
+
 var fileName;
 
 
@@ -105,6 +107,7 @@ function loadData(){
     isLensing = false;
     termMax=0;
     oldLmonth = -1000;
+    lMonth = -lensingMul * 2;
     fileName = "data/"+fileName+".tsv"; // Add data folder path
     
     if (fileName.indexOf("Cards_Fries")>=0){
@@ -165,14 +168,22 @@ function loadData(){
                 d.m = year;
             });    
 
-            if (fileName.indexOf("IMDB")>=0){
+            
+            // Set the dropdown value
+            document.getElementById('edgeWeightDropdown').value = "1";  
+            document.getElementById('nodeDropdown').value = "1";  
+            maxNodesInSnapshot =35;
+            maxRel = 5;
+            snapshotScale = 0.22; 
+             if (fileName.indexOf("IMDB")>=0){
                 minYear = 1975;   // IMDB first movie was in 1919
             }  
             else if (fileName.indexOf("PopCha")>=0){
-                minYear = 1975;   // PopCha first movie was in 1937
-            }    
-            // Set the dropdown value
-            document.getElementById('edgeWeightDropdown').value = "1";  
+                minYear = 1980;   // PopCha first movie was in 1937
+            }  
+            else if (fileName.indexOf("Cards_PC")>=0){
+                snapshotScale = 0.17;    // PopCha first movie was in 1937
+            }   
 
             //minYear = 2004;
             // Update months
@@ -240,14 +251,14 @@ function loadData(){
                 snapshotScale = 0.16;   
             }
             else if (fileName.indexOf("EmptyWheel")>=0){
-                document.getElementById('nodeDropdown').value = "1";  
+                document.getElementById('nodeDropdown').value = "2";  
                 document.getElementById('edgeWeightDropdown').value = "2";  
-                maxNodesInSnapshot =15;
+                maxNodesInSnapshot =20;
                 maxRel = 12;
                 snapshotScale = 0.16;   
             }
             else if (fileName.indexOf("CrooksAndLiars")>=0){
-                document.getElementById('nodeDropdown').value = "2";  
+                document.getElementById('nodeDropdown').value = "3";  
                 document.getElementById('edgeWeightDropdown').value = "2";  
                 maxNodesInSnapshot =25;
                 maxRel = 12;
@@ -256,15 +267,15 @@ function loadData(){
             else if (fileName.indexOf("Huffington")>=0){
                 document.getElementById('nodeDropdown').value = "4";  
                 document.getElementById('edgeWeightDropdown').value = "5";  
-                maxNodesInSnapshot =30;
-                maxRel = 40;
+                maxNodesInSnapshot =20;
+                maxRel = 50;
                 snapshotScale = 0.15;   
             }
             else if (fileName.indexOf("WikiNews")>=0){
                 minYear = 2005; 
                 document.getElementById('nodeDropdown').value = "4";  
                 document.getElementById('edgeWeightDropdown').value = "3";  
-                maxNodesInSnapshot =20;
+                maxNodesInSnapshot =30;
                 maxRel = 25;
                 snapshotScale = 0.19;   
             }
@@ -319,7 +330,7 @@ function loadData(){
             .attr("x", 0)
             .attr("y", yTimeBox)
             .attr("width", width)
-            .attr("height", 2000)
+            .attr("height", 1500)
 
         drawColorLegend();
         drawTimeLegend();
@@ -804,7 +815,8 @@ function addDatasetsOptions() {
         el.value = opt;
         select.appendChild(el);
     }        
-    fileName = fileList[0];
+    document.getElementById('datasetsSelect').value = initialDataset;  //************************************************
+    fileName = document.getElementById("datasetsSelect").value;
     loadData();
 }
 
