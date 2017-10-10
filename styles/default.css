@@ -21,16 +21,17 @@ body {
 }
 
 h1 {
-    font-size: 1.8em;
-	margin-bottom: 0px;
-	color: #000;
+    font-size: 1.5em;
+	margin-top: 0px;
+    margin-bottom: 0px;
 	padding-top: 0px;
-    padding-left: 0px;
-    text-align: center;
+    padding-bottom: 0px;
+    color: #000;
+	text-align: center;
 }
 
 h2 {
-    font-size: 1.4em;
+    font-size: 1.2em;
 	margin-bottom: 2px;
 	color: #000;
 	padding-top: 0px;
@@ -40,7 +41,7 @@ h2 {
 }
 
 h3 {
-    font-size: 1.3em;
+    font-size: 1.2em;
 	margin-bottom: 6px;
     margin-top: 1px;
     padding-top: 5px;

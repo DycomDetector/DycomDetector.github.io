@@ -124,11 +124,11 @@ function drawHistograms(yStartHistogram) {
             .style("stroke", "#000")
             .style("stroke-width", 0.4)
             .style("stroke-opacity", function () {
-                return cut == selectedCut ? 1 : 0.3;
+                return cut == selectedCut ? 1 : 0.25;
             })
             .style("fill", getColor3(cut))
             .style("fill-opacity", function () {
-                return cut == selectedCut ? 1 : 0.15;
+                return cut == selectedCut ? 1 : 0.12;
             })
             .attr("x", function (d, i) {
                 var w = XGAP_ / (numCut + 4);

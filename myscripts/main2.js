@@ -22,13 +22,11 @@ var maxNodesInSnapshot =30; // *************************************************
 
 var nodeRadiusRange = [0.18, 0.7]; 
 var linkscaleForSnapshot = 0.15; 
-
    
 var maxHeightOfStreamGraph = 10;
 var yStepOfStreamGraph = 9;
-
-
 var maxRel = 15;   // for scaling, if count > 6 the link will looks similar to 6
+
 if (fileName.indexOf("VIS")>=0){
     maxRel=4;
 }    
@@ -66,10 +64,10 @@ function computeMonthlyGraphs() {
         arr.sort(function (a, b) {
             var var1 = a.net * 1000 + a.count;
             var var2 = b.net * 1000 + b.count;
-            //if (selectedSetNodeBy==1){
+            if (selectedSetNodeBy==1){
                 var1 = a.net + 1000*a.count;
                 var2 = b.net + 1000*b.count;
-            //}
+            }
             if (var1 < var2) {
                 return 1;
             }
@@ -172,7 +170,6 @@ function computeMonthlyGraphs() {
         
         // Draw network snapshot
         if (graphByMonths[m][selectedCut] != undefined) {
-            console.log("selectedCut="+selectedCut);
             updateSubLayout(graphByMonths[m][selectedCut].nodes, graphByMonths[m][selectedCut].links, m);
         }
     }

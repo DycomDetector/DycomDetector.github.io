@@ -539,6 +539,7 @@ function drawTimeBox() {
             isLensing = true;
             coordinate = d3.mouse(this);
             lMonth = Math.floor((coordinate[0] - xStep) / XGAP_);
+            console.log("lMonth="+lMonth);
             
             // Update layout
             updateTimeLegend();
@@ -590,7 +591,7 @@ var buttonColor = "#ddd";
 
 // Control panel on the left *********************
 function drawControlPanelBackground(){
-    var yControl = 160;
+    var yControl = 165;
     svg.append('rect').attr("class", "rect1").attr('x',5).attr('y',yControl).attr('width',150).attr('height',110).style("stroke","black").attr("stroke-width", 0.2).style('fill',"#eee").attr("rx", roundConner)
         .attr("ry", roundConner)
     

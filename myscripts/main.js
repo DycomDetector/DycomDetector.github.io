@@ -89,7 +89,7 @@ var getColor3;  // Colors of categories
 //*****************************************************************
 var isForFigure4 = false;
 
-var fileList = ["FactCheck","Huffington","CrooksAndLiars","EmptyWheel","Esquire","WikiNews"
+var fileList = ["WikiNews","FactCheck","CrooksAndLiars","EmptyWheel","Esquire","Huffington"
                 ,"VIS_papers","PopCha","IMDB","Cards_PC","Cards_Fries"]
 var fileName;
 
@@ -226,10 +226,47 @@ function loadData(){
 
             if (fileName.indexOf("FactCheck")>=0){
                 minYear = 2007;   
-                document.getElementById('edgeWeightDropdown').value = "2";      
+                document.getElementById('nodeDropdown').value = "1"; 
+                document.getElementById('edgeWeightDropdown').value = "2";  
+                maxNodesInSnapshot =30
+                maxRel = 12;
+                snapshotScale = 0.16;    
             }  
-            else if (fileName.indexOf("FactCheck")>=0){
-                minYear = 1975;   // PopCha first movie was in 1937
+            else if (fileName.indexOf("Esquire")>=0){
+                document.getElementById('nodeDropdown').value = "1";  
+                document.getElementById('edgeWeightDropdown').value = "1";  
+                maxNodesInSnapshot =15;
+                maxRel = 8;
+                snapshotScale = 0.16;   
+            }
+            else if (fileName.indexOf("EmptyWheel")>=0){
+                document.getElementById('nodeDropdown').value = "1";  
+                document.getElementById('edgeWeightDropdown').value = "2";  
+                maxNodesInSnapshot =15;
+                maxRel = 12;
+                snapshotScale = 0.16;   
+            }
+            else if (fileName.indexOf("CrooksAndLiars")>=0){
+                document.getElementById('nodeDropdown').value = "2";  
+                document.getElementById('edgeWeightDropdown').value = "2";  
+                maxNodesInSnapshot =25;
+                maxRel = 12;
+                snapshotScale = 0.16;   
+            }
+            else if (fileName.indexOf("Huffington")>=0){
+                document.getElementById('nodeDropdown').value = "4";  
+                document.getElementById('edgeWeightDropdown').value = "5";  
+                maxNodesInSnapshot =30;
+                maxRel = 40;
+                snapshotScale = 0.15;   
+            }
+            else if (fileName.indexOf("WikiNews")>=0){
+                minYear = 2005; 
+                document.getElementById('nodeDropdown').value = "4";  
+                document.getElementById('edgeWeightDropdown').value = "3";  
+                maxNodesInSnapshot =20;
+                maxRel = 25;
+                snapshotScale = 0.19;   
             }
             //************************* Figure4 **********************
             //if (isForFigure4)
@@ -336,7 +373,7 @@ function readTermsAndRelationships() {
     }
 
     var removeList = {};   // remove list **************
-    /*removeList["source"] = 1;
+    removeList["source"] = 1;
     removeList["person"] = 1;
     removeList["location"] = 1;
     removeList["organization"] = 1;
@@ -349,6 +386,7 @@ function readTermsAndRelationships() {
     removeList["dismantle roe"] = 1;
     removeList["huffington post"] = 1;
 
+    /*
     removeList["lanza"] = 1;
     removeList["giglio"] = 1;
     removeList["portman"] = 1;
@@ -369,7 +407,7 @@ function readTermsAndRelationships() {
     removeList["foreign intelligence surveillance court"] = 1;
     removeList["trayvon"] = 1;
     */
-
+    
     termArray = [];
     for (var att in terms) {
         var e = {};
@@ -412,7 +450,7 @@ function readTermsAndRelationships() {
                 termArray.push(e);
         }
         else{    
-            if (e.max > 1 && e.term.length>2)    // Only get terms with some increase ************** with TEXT
+            if (e.max > 2 && e.term.length>2)    // Only get terms with some increase ************** with TEXT
                 termArray.push(e);
         }
     }
@@ -518,9 +556,6 @@ $('#btnUpload').click(function () {
     }, 50);
 
 });
-
-
-
 
 // Stream graphs ***********************************************
 function chartStreamGraphs(color) {
@@ -646,8 +681,8 @@ function chartStreamGraphs(color) {
             .style("text-anchor", "end")
             .style("fill", "#000");
 
-      svg.selectAll(".layer")
-          .data(layers)
+    svg.selectAll(".layer")
+        .data(layers)
         .enter().append("path")
           .attr("class", "layer")
           .attr("d", function(d) { return area(d.values); })
@@ -659,14 +694,13 @@ function chartStreamGraphs(color) {
             var opac = Math.min(Math.sqrt(0.1+count/maxNet2),1);
             return opac;
           });
-      svg.append("g")
+    svg.append("g")
           .attr("class", "y axis")
           .attr("transform", "translate(" + xStep + ", 0)")
           .attr("stroke-width",1)
           .call(yAxis.orient("left"));
 
-      
-      svg.selectAll(".layer")
+    svg.selectAll(".layer")
         .attr("opacity", 1)
         .on("mouseover", function(d, i) {
           svg.selectAll(".layer").transition()
@@ -747,7 +781,6 @@ function recompute() {
             $('#progUpdate').empty().append("Complete");
         }
     };
-
 
     var beginLoad = setInterval(function () {
         load();
