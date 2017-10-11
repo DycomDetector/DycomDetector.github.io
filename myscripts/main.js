@@ -817,6 +817,8 @@ function addDatasetsOptions() {
         var el = document.createElement("option");
         el.textContent = opt;
         el.value = opt;
+        el["data-image"]="images/msdropdown/icons/Mastercard-56.png"
+
         select.appendChild(el);
     }        
     document.getElementById('datasetsSelect').value = initialDataset;  //************************************************

@@ -1,201 +1,15 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<style>
-.nodeText {
-  background: #91877b;
-  text-shadow: 0 11px 10 rgba(255, 255, 255, 1);
-}
-.node {
-    stroke: #fff;
-    stroke-width: 1px;
-    stroke-opacity: 0.6;
-}
-.link {
-    stroke: #555;
-    stroke-opacity: .9;
-}
-.linkArc {
-  fill: none;
-  stroke: #000;
-}
-.linkArc3 {
-    fill: none;
-    stroke: #000;
-}
 
-.node text {
-  font: 9px helvetica;
-}
-
-<!-- For the slider -->
-.axis {
-  font: 5 sans-serif;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-}
-
-.axis .domain {
-  fill: none;
-  stroke: #000;
-  stroke-opacity: .25;
-  stroke-width: 5px;
-  stroke-linecap: round;
-}
-
-.axis .halo {
-  fill: none;
-  stroke: #ddd;
-  stroke-width: 3px;
-  stroke-linecap: round;
-}
-
-.slider .handle {
-  fill: #666;
-  stroke: #000;
-  stroke-opacity: .5;
-  stroke-width: 1px;
-  cursor: crosshair;
-}
-
-
-h3 {
-    color: #1ABC9C;
-    text-align:center;
-    font-style: italic;
-    font-size: 14px;
-    font-family: "Helvetica";
-}
-
-#nodeDropdown{
-    position: absolute;
-    top: 285px;
-    left: 15px;
-    width: 125px;
-}
-
-#edgeWeightDropdown{
-    position: absolute;
-    top: 334px;
-    left: 18px;
-    width: 125px;
-}
-
-#holder1 {
-    position:absolute;
-    border-radius: 5px;
-    z-index: 0;
-    top: 96px;
-    left: 5px;
-    width: 200px;
-    height: 60px;
-    border: 0px solid rgba(0,0,0, 1);
-    font-family: "sans-serif";
-}
-label {
-    font: normal 13px sans-serif !important;
-}
-#holder2 {
-    position:absolute;
-    border-radius: 5px;
-    z-index: 0;
-    top: 372px;
-    left: 5px;
-    width: 200px;
-    height: 60px;
-    border: 0px solid rgba(0,0,0, 1);
-}
-
-input.search {
-    width: 90px;  
-}
-
-
-/* tooltip */
-.d3-tip {
-   position: relative;
-  line-height: 1;
-  padding: 10px;
-  font-size: 14px;
-  font-family: "sans-serif";
-  background: rgba(204, 204, 204, 0.96);
-  color: #000;
-  border-radius: 2px;
-  z-index: 1110;
-  box-shadow: 5px 5px 10px rgba(0,0,0,0.75);
-}
-
-/* Creates a small triangle extender for the tooltip */
-/*.d3-tip:after {
-  box-sizing: border-box;
-  display: inline;
-  font-size: 10px;
-  width: 100%;
-  line-height: 1;
-  color: rgba(200, 220, 245, 0.96);
-  content: "\25BC";
-  position: absolute;
-  text-align: center;
-}*/
-
-/* Style northward tooltips differently */
-.d3-tip.n:after {
-  margin: -1px 0 0 0;
-  top: 100%;
-  left: 0;
-}
-table, th, td {
-    border: 1px solid #ccc;
-    border-collapse: collapse;
-    padding: 2px;
-    background-color: #fff;
-}
-
-.styled-select {
-  font: normal 18px Impact, Charcoal, sans-serif !important;
-  overflow: hidden;
-  height: 28px;
-  width: 142px;
-  margin-right: 10px;
-  background: #eee;
-}
-
-
-/* Style Stream graphs in Figure 5 */
-.chart { 
-  background: #fff;
-  font-family: "sans-serif";
-}
-
-.axis path, .axis line {
-  fill: none;
-  stroke: #000;
-  stroke-width: 1px;
-  shape-rendering: crispEdges;
-  font-family: "sans-serif";
-}
-.axis .domain {
-    fill: none;
-    stroke: #000;
-    stroke-opacity: 1;
-    stroke-width: 1px;
-    stroke-linecap: round;
-    font-family: "sans-serif";
-}
-button {
-  position: absolute;
-  left: 100px;
-  top: 19px;
-}
-
-/* Spinner when loading*/
-
-
-</style>
-
-<link rel="stylesheet" type="text/css" href="styles/default.css" media="screen"/>
-<link rel="shortcut icon" href="styles/dycom.png">
-
+<head>
+  <link rel="shortcut icon" href="styles/dycom.png">
+  <script src="javascripts/jquery/jquery-1.9.0.min.js"></script>
+  <script src="javascripts/msdropdown/jquery.dd.js"></script>
+  <script src="javascripts/msdropdown/select.js"></script>
+  <link rel="stylesheet" type="text/css" href="styles/default.css" media="screen"/>
+  <link rel="stylesheet" type="text/css" href="styles/main.css" media="screen"/>
+  <link rel="stylesheet" type="text/css" href="styles/msdropdown/dd.css" />
+</head>
 <body>
   <div class="navigation">
     <h1>DycomDetector: Topic Modeling using Community Detection in Dynamic Networks </h1>
@@ -219,7 +33,18 @@ button {
 
 <!-- Select datasets -->
 <div id="holder1"  class="holder1">
-  <label for="datasetsSelect"> <i>Data:</i> </label>
+
+<!-- <select id="payments" name="payments" style="width:250px;">
+        <option value="" data-description="Choos your payment gateway">Payment Gateway</option>
+        <option value="amex" data-image="images/msdropdown/icons/Amex-56.png" data-description="My life. My card...">Amex</option>
+        <option value="Discover" data-image="images/msdropdown/icons/Discover-56.png" data-description="It pays to Discover...">Discover</option>
+        <option value="Mastercard" data-image="images/msdropdown/icons/Mastercard-56.png" data-title="For everything else..." data-description="For everything else...">Mastercard</option>
+        <option value="cash" data-image="images/msdropdown/icons/Cash-56.png" data-description="Sorry not available..." disabled="true">Cash on devlivery</option>
+        <option value="Visa" data-image="images/msdropdown/icons/Visa-56.png" data-description="All you need...">Visa</option>
+        <option value="Paypal" data-image="images/msdropdown/icons/Paypal-56.png" data-description="Pay and get paid...">Paypal</option>
+    </select> &nbsp; 
+
+  <label for="datasetsSelect"> <i>Data:</i> </label>-->
   <select id="datasetsSelect" class="styled-select" onchange="loadNewData.call(this, event)"></select>
 </div>
 
@@ -233,7 +58,6 @@ button {
     </progress>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="javascripts/d3.v3.min.js"></script>
 <script src="javascripts/fisheye.js"></script>
 <script src="javascripts/select2.min.js"></script>

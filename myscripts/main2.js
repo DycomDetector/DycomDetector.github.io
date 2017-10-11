@@ -406,6 +406,8 @@ function drawgraph2() {
             return linkScale3(d.count);
         })
         .style("stroke-opacity", 0.6)
+        .style("stroke", "#000")
+        .style("fill", "none")
         .attr("d", linkArc3);
 
     svg.selectAll(".nodeText3").remove();
