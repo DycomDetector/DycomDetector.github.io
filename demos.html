@@ -33,22 +33,17 @@
 
 <!-- Select datasets -->
 <div id="holder1"  class="holder1">
-
-<!-- <select id="payments" name="payments" style="width:250px;">
-        <option value="" data-description="Choos your payment gateway">Payment Gateway</option>
-        <option value="amex" data-image="images/msdropdown/icons/Amex-56.png" data-description="My life. My card...">Amex</option>
-        <option value="Discover" data-image="images/msdropdown/icons/Discover-56.png" data-description="It pays to Discover...">Discover</option>
-        <option value="Mastercard" data-image="images/msdropdown/icons/Mastercard-56.png" data-title="For everything else..." data-description="For everything else...">Mastercard</option>
-        <option value="cash" data-image="images/msdropdown/icons/Cash-56.png" data-description="Sorry not available..." disabled="true">Cash on devlivery</option>
-        <option value="Visa" data-image="images/msdropdown/icons/Visa-56.png" data-description="All you need...">Visa</option>
-        <option value="Paypal" data-image="images/msdropdown/icons/Paypal-56.png" data-description="Pay and get paid...">Paypal</option>
-    </select> &nbsp; 
-
-  <label for="datasetsSelect"> <i>Data:</i> </label>-->
   <select id="datasetsSelect" class="styled-select" onchange="loadNewData.call(this, event)"></select>
 </div>
 
 <div id="holder2"  class="holder2">
+  <label for="nodeDropdown"> <i>Select nodes by:</i> </label>
+  <select id="nodeDropdown" class="styled-select2"></select><br>
+  <label for="edgeWeightDropdown"> <i>Select edge weight:</i> </label>
+  <select id="edgeWeightDropdown" class="styled-select2"></select>
+</div>
+
+<div id="holder3"  class="holder3">
     <br>
     <input id="search" class="search">
     <button type="button" onclick="searchNode()">Search</button>

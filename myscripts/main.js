@@ -100,9 +100,6 @@ var fileName;
 addDatasetsOptions(); // Add these dataset to the select dropdown, at the end of this files
 drawControlPanel();
 
-//chartStreamGraphs("orange");
-
-
 function loadData(){
     searchTerm = "";
     isLensing = false;
@@ -342,8 +339,7 @@ function loadData(){
         
         // 2017. this function is main2.js
         computeMonthlyGraphs();
-        drawControlPanelBackground();
-
+       
         // Spinner Stop ********************************************************************
         spinner.stop();
 
@@ -358,7 +354,10 @@ function loadData(){
                 source: optArray
             });
         });
+            chartStreamGraphs("orange");
+
     });
+
 }    
 
 function readTermsAndRelationships() {
@@ -589,7 +588,7 @@ function chartStreamGraphs(color) {
     strokecolor = colorrange[0];
     var format = d3.time.format("%m/%d/%y");
     var width = document.body.clientWidth ;
-    var height = 700;
+    var height = 1000;
 
     var tooltip = d3.select("body")
         .append("div")
@@ -684,7 +683,7 @@ function chartStreamGraphs(color) {
       y.domain([0, d3.max(data, function(d) { return d.y0 + d.y; })]);
 
 
-      svg.append("text")
+     /* svg.append("text")
             .attr("class", "nodeLegend5")
             .attr("x", 0)
             .attr("y", 0)
@@ -694,7 +693,7 @@ function chartStreamGraphs(color) {
             .attr("font-size", "15px")
             .attr("transform", "translate("+(xStep+15)+",420) rotate(-90)")
             .style("text-anchor", "end")
-            .style("fill", "#000");
+            .style("fill", "#000");*/
 
     svg.selectAll(".layer")
         .data(layers)
@@ -709,11 +708,11 @@ function chartStreamGraphs(color) {
             var opac = Math.min(Math.sqrt(0.1+count/maxNet2),1);
             return opac;
           });
-    svg.append("g")
+    /*svg.append("g")
           .attr("class", "y axis")
           .attr("transform", "translate(" + xStep + ", 0)")
           .attr("stroke-width",1)
-          .call(yAxis.orient("left"));
+          .call(yAxis.orient("left"));*/
 
     svg.selectAll(".layer")
         .attr("opacity", 1)

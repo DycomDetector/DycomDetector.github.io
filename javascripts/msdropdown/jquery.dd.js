@@ -1,4 +1,4 @@
-// MSDropDown - jquery.dd.js
+ // MSDropDown - jquery.dd.js
 // author: Marghoob Suleman - http://www.marghoobsuleman.com/
 // Date: 10 Nov, 2012 
 // Version: 3.5.2
@@ -54,11 +54,10 @@ function dd(element, settings) {
 	var settings = $.extend(true,
 		{byJson: {data: null, selectedIndex: 0, name: null, size: 0, multiple: false, width: 250},
 		mainCSS: 'dd',
-		height: 120, //not using currently
-		visibleRows: 7,
+		visibleRows: 27,
 		rowHeight: 0,
 		showIcon: true,
-		zIndex: 9999,
+		zIndex: 9999, //********************************************************************
 		useSprite: false,
 		animStyle: 'slideDown',
 		event:'click',
@@ -80,7 +79,7 @@ function dd(element, settings) {
 	var $this = this; //this class	 
 	var holderId = {postElementHolder: '_msddHolder', postID: '_msdd', postTitleID: '_title',postTitleTextID: '_titleText', postChildID: '_child'};
 	var css = {dd:settings.mainCSS, ddTitle: 'ddTitle', arrow: 'ddArrow arrowoff', ddChild: 'ddChild', ddTitleText: 'ddTitleText',disabled: 'disabled', enabled: 'enabled', ddOutOfVision: 'ddOutOfVision', borderTop: 'borderTop', noBorderTop: 'noBorderTop', selected: 'selected', divider: 'divider', optgroup: "optgroup", optgroupTitle: "optgroupTitle", description: "description", label: "ddlabel",hover: 'hover',disabledAll: 'disabledAll'};
-	var css_i = {li: '_msddli_',borderRadiusTp: 'borderRadiusTp',ddChildMore: 'border shadow',fnone: "fnone"};
+	var css_i = {li: '_msddli_',borderRadiusTp: 'borderRadiusTp',ddChildMore: 'border',fnone: "fnone"};
 	var isList = false, isMultiple=false,isDisabled=false, cacheElement = {}, element, orginial = {}, isOpen=false;
 	var DOWN_ARROW = 40, UP_ARROW = 38, LEFT_ARROW=37, RIGHT_ARROW=39, ESCAPE = 27, ENTER = 13, ALPHABETS_START = 47, SHIFT=16, CONTROL = 17, BACKSPACE=8, DELETE=46;
 	var shiftHolded=false, controlHolded=false,lastTarget=null,forcedTrigger=false, oldSelected, isCreated = false;
@@ -478,7 +477,7 @@ function dd(element, settings) {
 		} else if (isList) {
 			iHeight = $("#" + element).height(); //get height from original element
 		};		
-		return iHeight;
+		return iHeight+150;  // Tommy modified
 	};
 	var applyChildEvents = function () {
 		var childid = getPostID("postChildID");

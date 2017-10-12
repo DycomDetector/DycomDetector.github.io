@@ -48,46 +48,47 @@
 }
 
 
-h3 {
-    color: #1ABC9C;
-    text-align:center;
-    font-style: italic;
-    font-size: 14px;
-    font-family: "Helvetica";
-}
-
 #nodeDropdown{
-    position: absolute;
-    top: 285px;
-    left: 15px;
-    width: 125px;
+    margin-left: 10px;
+    width: 120px;
+    background:#fff;
 }
 
 #edgeWeightDropdown{
-    position: absolute;
-    top: 334px;
-    left: 18px;
-    width: 125px;
+    margin-left: 10px;
+    width: 120px;
+    background:#fff;
 }
 
 #holder1 {
     position:absolute;
     border-radius: 5px;
-    z-index: 0;
-    top: 96px;
-    left: 5px;
+    z-index: 1110;
+    top: 94px;
+    left: 0px;
     width: 200px;
     height: 60px;
     border: 0px solid rgba(0,0,0, 1);
-    font-family: "sans-serif";
-}
-label {
-    font: normal 13px sans-serif !important;
-}
+    font: normal 18px Impact, Charcoal, sans-serif !important;
+}    
+
 #holder2 {
     position:absolute;
+    padding: 5px;
     border-radius: 5px;
-    z-index: 0;
+    z-index: 120;
+    top: 272px;
+    left: 5px;
+    width: 140px;
+    height: 82px;
+    background: rgba(224, 224, 224, 0.6);
+    border: 0.4px solid rgba(0,0,0, 0.1);
+}
+
+#holder3 {
+    position:absolute;
+    border-radius: 5px;
+    z-index: 110;
     top: 372px;
     left: 5px;
     width: 200px;
@@ -95,8 +96,27 @@ label {
     border: 0px solid rgba(0,0,0, 1);
 }
 
+label {
+    font: normal 12px sans-serif !important;
+}
 input.search {
     width: 90px;  
+}
+
+.styled-select {
+  overflow: hidden;
+  height: 28px;
+  width: 200px;
+  margin-right: 10px;
+  background: #eee;
+}
+
+.styled-select2 {
+  overflow: hidden;
+  height: 20px;
+  width: 200px;
+  margin-right: 10px;
+  background: #eee;
 }
 
 
@@ -140,14 +160,7 @@ table, th, td {
     background-color: #fff;
 }
 
-.styled-select {
-  font: normal 18px Impact, Charcoal, sans-serif !important;
-  overflow: hidden;
-  height: 28px;
-  width: 162px;
-  margin-right: 10px;
-  background: #eee;
-}
+
 
 /* Style Stream graphs in Figure 5 */
 .chart { 

@@ -9,7 +9,7 @@ var yTimeBox = 0;
 
 function drawColorLegend() {
     var xx = 15;
-    var yy = 70;
+    var yy = 80;
     var rr = 6;
     // number of input terms
     var text1 = "terms";
@@ -589,36 +589,12 @@ var colorHighlight = "#fc8";
 var buttonColor = "#ddd";
 
 // Control panel on the left *********************
-function drawControlPanelBackground(){
-    var yControl = 165;
-    svg.append('rect').attr("class", "rect1").attr('x',5).attr('y',yControl).attr('width',150).attr('height',110).style("stroke","black").attr("stroke-width", 0.2).style('fill',"#eee").attr("rx", roundConner)
-        .attr("ry", roundConner)
-    
-    svg.append('text')
-        .attr('class','textcutoff')
-        .style("font-style","italic")
-        .attr("font-family", "sans-serif")
-        .attr("font-size", "12px")
-        .attr('x',13)
-        .attr('y', yControl+22)
-        .text('Select nodes by');
-    svg.append('text')
-        .attr('class','textcutoff')
-        .style("font-style","italic")
-        .attr('x',13)
-        .attr('y', yControl+71)
-        .attr("font-family", "sans-serif")
-        .attr("font-size", "12px")
-        .text('Select edge weight');
-}    
-
 function drawControlPanel(){
-    
     //  node Dropdown *********************
     var nodedata = [{"id": 1, "value": "Frequency"}, {"id": 2, "value": "Net frequency"}, {"id": 3, "value": "Degree"},{
         "id": 4,"value": "Betweenness centrality"
     }];
-    var selectOrder = d3.select('body').append('select').attr('id', 'nodeDropdown').on('change',setNodesBy);
+    var selectOrder = d3.select('#nodeDropdown').on('change',setNodesBy);
     var Orderoptions = selectOrder.selectAll('option').data(nodedata).enter().append('option').attr('value', function (d) {
         return d.id;
     }).text(function (d) {
@@ -627,7 +603,7 @@ function drawControlPanel(){
 
     //  edge Weight Dropdown *********************
     var edgeData =[{"id":1, "value":">=1"},{"id":2, "value":">=2"},{"id":3, "value":">=3"},{"id":4, "value":">=4"},{"id":5, "value":">=5"},{"id":"optimized", "value":"Best Q modularity"}];
-    var select = d3.select('body').append('select').attr('id','edgeWeightDropdown').on('change',function () {
+    var select = d3.select('#edgeWeightDropdown').on('change',function () {
         selectValue = d3.select('#edgeWeightDropdown').property('value');
         setCut(selectValue);
 
