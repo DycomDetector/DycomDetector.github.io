@@ -3,10 +3,8 @@ var diameter = 1000,
     innerRadius = radius - 120;
 var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 // Add color legend
-
 var yTimeBox = 0;
     
-
 function drawColorLegend() {
     var xx = 15;
     var yy = 80;

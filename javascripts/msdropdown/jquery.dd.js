@@ -477,7 +477,7 @@ function dd(element, settings) {
 		} else if (isList) {
 			iHeight = $("#" + element).height(); //get height from original element
 		};		
-		return iHeight+150;  // Tommy modified
+		return iHeight+206;  // Tommy modified
 	};
 	var applyChildEvents = function () {
 		var childid = getPostID("postChildID");

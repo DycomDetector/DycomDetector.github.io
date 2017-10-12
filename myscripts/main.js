@@ -354,7 +354,7 @@ function loadData(){
                 source: optArray
             });
         });
-            chartStreamGraphs("orange");
+        //    chartStreamGraphs();  // Streamgraphs********************************************************************
 
     });
 
@@ -816,7 +816,7 @@ function addDatasetsOptions() {
         var el = document.createElement("option");
         el.textContent = opt;
         el.value = opt;
-        el["data-image"]="images/msdropdown/icons/Mastercard-56.png"
+        el["data-image"]="images2/datasetThumnails/"+fileList[i]+".png";
 
         select.appendChild(el);
     }        
