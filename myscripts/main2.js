@@ -32,7 +32,7 @@ if (fileName.indexOf("VIS")>=0){
 }    
 var linkScale3 = function (count) {
     var scale = d3.scale.linear()
-                    .range([0.1, 3])
+                    .range([0, 3])
                     .domain([0, maxRel]);
     var count2 = (count>maxRel) ? maxRel : count;  // for scaling, if count > maxRel the link will looks similar to 6                       
     return  scale(count2);   
@@ -289,7 +289,7 @@ function drawgraph2() {
 
 
     var max = 1;
-    var yStart = height + 270; // y starts drawing the stream graphs
+    var yStart = height + 260; // y starts drawing the stream graphs
     var yTemp = yStart;
     var numNodesInFirstMonth = 0;
     // Compute y position of small multiple *******

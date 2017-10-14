@@ -252,8 +252,10 @@ function loadData(){
                 snapshotScale = 0.16;   
             }
             else if (fileName.indexOf("EmptyWheel")>=0){
-                document.getElementById('nodeDropdown').value = "2";  
-                document.getElementById('edgeWeightDropdown').value = "2";  
+                minYear = 2012; 
+                maxYear = 2015; 
+                document.getElementById('nodeDropdown').value = "1";  
+                document.getElementById('edgeWeightDropdown').value = "3";  
                 maxNodesInSnapshot =20;
                 maxRel = 12;
                 snapshotScale = 0.16;   
@@ -454,7 +456,15 @@ function readTermsAndRelationships() {
     removeList["dea ’s facebook impersonato"] = 1;
     removeList["dismantle roe"] = 1;
     removeList["huffington post"] = 1;
-
+    
+   /* removeList["new york times"]=1;
+    removeList["tsarnaev"] = 1;
+    removeList["committee"] = 1;
+    removeList["yahoo"] = 1;
+     removeList["alexander"] = 1;
+      removeList["intelligence committee"] = 1;*/
+     
+    
     /*
     removeList["lanza"] = 1;
     removeList["giglio"] = 1;
