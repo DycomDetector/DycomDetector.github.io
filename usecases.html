@@ -40,17 +40,24 @@
 	<div class="holder">
   	
 
-<h3>Text analytics</i></h3>
-	<i>DycomDetector</i> is a novel approach for topic modeling in text corpora. Our algorithm extracts and classifies the keywords, calculates relationships based on keywork co-ocurrences, constructs the networks at different time points, applies a graph partitioning algorithm to extract latent communities. The intuitive interface of our system supports various interactive features, such as lensing and filerting by <i>sudden increase</i> in term ferequency, <i>vertex degree</i>, <i>betweenness centrality</i>, etc. It also allows the users to search for a topic of interest and visualize its temporal relations with other detected communities.
-	
-	<img src="images2/picUsecases2/EmptyWheel4.png" width="100%" alt="DycomDetector" />
+<h3>1. Text analytics</i></h3>
+	We have showed examples of <i>DycomDetector</i> on different text data: <i>Wikinews</i> (Figure 2), <i>Huffington Post</i> (Figure 5), <i>Crooks and Liars</i> (Figure 1), and <i>Esquire</i> (Figure 3) of our submitted manyscripts. The following figure shows another use case on the <i>EmptyWheel</i> blogs. In particular, terms (nodes) are scaled by their popularity and color-coded by category, links are filtered by coocurrence frequency, or edge weight &ge; 3. We lensed on April-October 2013. The modularity <i>Q</i> for each refined network snapshot is plotted in the pink bars of the histogram underneath. For example in May 2013, the pink bar (at the arrow) is tallest compared to other bars since the current filter (edge weight &ge; 3) clearly reveals two big communities in <b>Box B1</b> and <b>Box C1</b>.     
+	<ul>
+	  <li><b>Box A1</b> and <b>Box A2</b> highlight the <a href="https://en.wikipedia.org/wiki/Boston_Marathon_bombing">Boston Marathon bombing</a> occurred on April 15, 2013. Two homemade bombs detonated near the finish line of the annual <span style="color:#d52829">Boston Marathon</span>, killing three people and injuring several hundred others. FBI later identified the bombers: <span style="color:#2077b5"> Tsarnaev</span> bothers.  </li>
 
-	<img src="images2/CrooksAndLiars.png" width="100%" alt="DycomDetector" />
+	   <li><b>Box B1</b> and <b>Box B2</b> relate to <a href="https://en.wikipedia.org/wiki/Ibragim_Todashev">the triple homicide</a> that took place in <span style="color:#d52829">Waltham</span>, Massachusetts</a>. <span style="color:#2077b5">Todashev</span> is a friend of <span style="color:#2077b5">Tamerlan Tsarnaev</span>, the <span style="color:#d52829">Boston Marathon</span> bomber. The investigators said that <span style="color:#2077b5">Todashev</span> had implicated both himself and <span style="color:#2077b5">Tamerlan Tsarnaev</span> in the <span style="color:#d52829">Waltham</span> murders before he was killed on May 22, 2013.
+	   </li>
 
+	   <li><b>Box C1</b> and <b>Box C2</b> refer to the <a href="https://www.emptywheel.net/2013/05/14/if-undiebomb-2-0-is-one-of-the-worst-leaks-of-holders-career-why-is-john-brennan-cia-director/"><i>EmptyWheel</i> blogs</a>: If <span style="color:#d52829">UndieBomb</span> 2.0 is one of the worst leaks of holder's career, why is <span style="color:#2077b5">John Brennan</span> CIA director?
+		</li>
+	</ul>
 
-<h3></i></h3>
-	<img src="images2/VIS_DanielKeim.png" width="100%" alt="DycomDetector" />
-	
+	<center><img src="images2/picsUsecases2/EmptyWheel5.png" width="98%" alt="DycomDetector" /></center>
+
+<h3>2. Other applications</h3>
+Although originally motivated to analyze text documents, we soon realized that <i>DycomDetector</i> has more general implications to other domains as well. We are going to demonstrate <i>DycomDetector</i> on the two movie co-star networks (<i>IMDB</i> and <i>PopCha</i>)
+	<img src="images2/picsUsecases2/IMDB1.png" width="100%" alt="DycomDetector" />
+<h4>2.1 </h4>	
 
 
 </div>

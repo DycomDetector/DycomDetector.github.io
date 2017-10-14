@@ -51,6 +51,14 @@ h3 {
 	border-bottom: 1px dotted rgba(110, 110, 110, 0.9);
 }
 
+h4 {
+    font-size: 1.1em;
+    margin-bottom: 6px;
+    margin-top: 1px;
+    padding-top: 5px;
+    color: #888;
+}
+
 ol {
     margin-top: 5px;
     margin-bottom: 10px;

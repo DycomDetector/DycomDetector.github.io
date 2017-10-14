@@ -10,7 +10,7 @@
 var margin = {top: 0, right: 0, bottom: 0, left: 0};
 var width = document.body.clientWidth - margin.left - margin.right;
 var height = 50 - margin.top - margin.bottom;
-var heightSVG = 1200;
+var heightSVG = 799;
 
 //Append a SVG to the body of the html page. Assign this SVG as an object to svg
 var svg = d3.select("body").append("svg")
@@ -42,7 +42,7 @@ var selectedCut;
 
 
 var XGAP_; // gap between months on xAxis
-var numLens = 3;
+var numLens = 5;
 
 function xScale(m) {
     if (isLensing) {
@@ -92,7 +92,7 @@ var isForFigure4 = false;
 
 var fileList = ["WikiNews","Huffington","CrooksAndLiars","EmptyWheel","Esquire","FactCheck"
                 ,"VIS_papers","IMDB","PopCha","Cards_PC","Cards_Fries"]
-var initialDataset = "VIS_papers";
+var initialDataset = "IMDB";
 
 var fileName;
 
@@ -177,7 +177,9 @@ function loadData(){
                 snapshotScale = 0.18;   
             }
             else if (fileName.indexOf("IMDB")>=0){
-                minYear = 1975;   // IMDB first movie was in 1919
+               // minYear = 1975;   // IMDB first movie was in 1919
+                minYear = 2001;   // IMDB first movie was in 1919
+                snapshotScale = 0.15;   
             }  
             else if (fileName.indexOf("PopCha")>=0){
                 minYear = 1980;   // PopCha first movie was in 1937
@@ -189,7 +191,7 @@ function loadData(){
             //minYear = 2004;
             // Update months
             numMonth = maxYear - minYear +1;
-            XGAP_ = (width-xStep)/numMonth; // gap between months on xAxis
+            XGAP_ = (width-xStep-150)/numMonth; // gap between months on xAxis
 
             data.forEach(function (d) {    
                 d.m = d.m-minYear;
@@ -252,7 +254,7 @@ function loadData(){
                 snapshotScale = 0.16;   
             }
             else if (fileName.indexOf("EmptyWheel")>=0){
-                minYear = 2012; 
+                minYear = 2011; 
                 maxYear = 2015; 
                 document.getElementById('nodeDropdown').value = "1";  
                 document.getElementById('edgeWeightDropdown').value = "3";  
