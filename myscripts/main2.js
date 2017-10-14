@@ -222,7 +222,7 @@ function drawgraph2() {
     for (var i=0; i<lNodes.length; i++){
         var nod = lNodes[i];
         nod.frequency = 0;
-        if (terms[nod.name][nod.m])
+        if (terms[nod.name]!=undefined && terms[nod.name][nod.m])
             nod.frequency = terms[nod.name][nod.m];
     }
 

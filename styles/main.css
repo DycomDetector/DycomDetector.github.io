@@ -62,10 +62,10 @@
 
 #holder1 {
     position:absolute;
-    border-radius: 5px;
+    border-radius: 0px;
     z-index: 1110;
     top: 94px;
-    left: 0px;
+    left: 3px;
     width: 200px;
     height: 60px;
     border: 0px solid rgba(0,0,0, 1);
@@ -78,7 +78,7 @@
     border-radius: 5px;
     z-index: 120;
     top: 272px;
-    left: 5px;
+    left: 4px;
     width: 140px;
     height: 82px;
     background: rgba(224, 224, 224, 0.6);
@@ -90,7 +90,7 @@
     border-radius: 5px;
     z-index: 110;
     top: 372px;
-    left: 5px;
+    left: 4px;
     width: 200px;
     height: 60px;
     border: 0px solid rgba(0,0,0, 1);

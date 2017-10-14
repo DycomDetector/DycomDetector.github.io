@@ -4,21 +4,23 @@ var diameter = 1000,
 var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 // Add color legend
 var yTimeBox = 0;
-    
+
+// These texts are different upon input dataset   
+var text1 = "terms";
+var text2 = "blogs";
+var textFile = "";
+       
 function drawColorLegend() {
     var xx = 15;
     var yy = 80;
     var rr = 6;
     // number of input terms
-    var text1 = "terms";
-    var text2 = "blogs";
-    var textFile = "";
-    if (fileName.indexOf("CardsFries")>=0){
+    if (fileName.indexOf("Cards_Fries")>=0){
         text1 = "proteins";
         text2 = "index cards";
         textFile = "Fries Cards";
     }
-    else if (fileName.indexOf("CardsPC")>=0){
+    else if (fileName.indexOf("Cards_PC")>=0){
         text1 = "proteins";
         text2 = "publications";
         textFile = "Pathway Commons";
@@ -39,6 +41,8 @@ function drawColorLegend() {
         textFile = "VIS publications";
     }
     else{
+        text1 = "terms";
+        text2 = "blogs";
         textFile = fileName.split("/")[1].split(".tsv")[0];
     }
     /*
@@ -243,9 +247,7 @@ function drawColorLegend() {
             .attr("y2", function (d, i) {
                 return yy  + i * sy+25;
             });    
-
-            
-         
+    
         svg.append("text")
             .attr("class", "nodeLegend5")
             .attr("x", xx)
@@ -287,7 +289,7 @@ function drawTopEntities(text1){
     var y6 = 350;
 
     svg.append("text")
-        .attr("class", "legendText6")
+        .attr("class", "textTopEntities")
         .attr("x", x6)
         .attr("y", function (d, i) {
             return y6;
@@ -479,26 +481,7 @@ function updateTimeLegend() {
         });
     svg.selectAll(".timeLegendText").data(listX).transition().duration(500)
         .style("fill-opacity", function (d, i) {
-            if (fileName.indexOf("VIS")>=0 || fileName.indexOf("IMDB")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
-                if (i % 5 == 0)
-                    return 1;
-                else {
-                    if (isLensing && lMonth - numLens <= i && i <= lMonth + numLens)
-                        return 1;
-                    else
-                        return 0;
-                }
-            }    
-            else{
-                if (i % 12 == 0)
-                    return 1;
-                else {
-                    if (isLensing && lMonth - numLens <= i && i <= lMonth + numLens)
-                        return 1;
-                    else
-                        return 0;
-                }
-            }    
+            return getOpacity(d,i);
         })
         .attr("x", function (d, i) {
             return d.x;
@@ -516,8 +499,31 @@ function updateTimeLegend() {
                 .attr("viewBox", view);
         }
     }
-
 }
+// Used in util.js and main.js *****************
+function getOpacity(d,i) {
+    if (fileName.indexOf("VIS")>=0 || fileName.indexOf("IMDB")>=0 || fileName.indexOf("PopCha")>=0 || fileName.indexOf("Cards")>=0){
+        if (i % 5 == 0)
+            return 1;
+        else {
+            if (isLensing && lMonth - numLens <= i && i <= lMonth + numLens)
+                return 1;
+            else
+                return 0;
+        }
+    }    
+    else{
+        if (i % 12 == 0)
+            return 1;
+        else {
+            if (isLensing && lMonth - numLens <= i && i <= lMonth + numLens)
+                return 1;
+            else
+                return 0;
+        }
+    }        
+}
+
 
 function drawTimeBox() {
     svg.append("rect")
@@ -547,16 +553,6 @@ function drawTimeBox() {
 
 function updateTimeBox() {
     svg.selectAll(".timeLegendText")
-        /*.style("fill-opacity", function (d, i) {
-            if (i % 12 == 0)
-                return 1;
-            else {
-                if (isLensing && lMonth - numLens <= i && i <= lMonth + numLens)
-                    return 1;
-                else
-                    return 0;
-            }
-        })*/
         .attr("y", function (d, i) {
             // For figure 4
             if (isForFigure4) return (i==0) ? 0 : 548;

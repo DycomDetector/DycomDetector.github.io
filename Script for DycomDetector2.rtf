@@ -1,0 +1,94 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
+{\fonttbl\f0\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\margl1440\margr1440\vieww25880\viewh16580\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs48 \cf0 As the volume of data increases, finding interesting trends, patterns, and relationships within text corpora becomes more challenging to address some of the interesting questions such as: \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs24 \cf0 [[slnc 500]] \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs48 \cf0 What are the hottest political topics last month? \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
+
+\fs24 \cf0 [[slnc 500]] \
+
+\fs48 Are there any common viewpoints among different groups of people? \
+
+\fs24 [[slnc 500]] 
+\fs48 \
+And how does a particular topic and the wisdom of the crowd change over time?\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
+
+\fs24 \cf0 [[slnc 1000]] 
+\fs48 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 This video demonstrates DycomDetector, a novel approach for topic modeling using graph partitioning algorithm \cf2 \expnd0\expndtw0\kerning0
+to extract clusters of important terms that form latent communities\cf0 \kerning1\expnd0\expndtw0 . Demonstrated data for this visualization are collected from different sources such as Wikinews, Huffington post, Crooks and Liars, Empty Wheel, Esquire, and  FactCheck. In this video, we use data from Wikinews\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
+
+\fs24 \cf0 [[slnc 500]] 
+\fs48 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 The terms are then extracted, classified, and color-coded by categories, such as people, location, and organization. Nodes size as well as term sizes reflect their popularity.  At each time stamp, the network snapshot is then constructed where links are computed based on term cooccurrences in the same articles. Thicker link shows that these two terms more frequently appear together over the given period of time. \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
+
+\fs24 \cf0 [[slnc 1000]] 
+\fs48 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 Users can view and redefine the network from different perspectives through dropdown boxes. \
+DycomDetector will recalculate the networks and their communities accordingly. A histogram below each network displays modularity Q on different filtering settings, called relationship cut. \
+//This relationship cut can extend from 1 to the highest weight of vertices in all terms networks. \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs24 \cf0 [[slnc 500]] \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs48 \cf0 The first bar shows modularity Q of the original term networks, the second bar show modularity Q of the network where every link weights at least 2 and so on). \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs24 \cf0 [[slnc 500]] \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs48 \cf0 Below each histogram, DycomDetector displays the top 5 terms from the above network based on the user selected feature: term frequency, sudden increase in frequency, vertex degree, or betweenness centrality. \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \
+[[slnc 500]] 
+\fs48 \
+At the bottom, we show the evolution of terms over time in small multiples. \
+
+\fs24 [[slnc 500]] \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs48 \cf0 Terms often mentioned at multiple time points can be easily notice by longer arcs connecting a lower term group (later month) to an upper group (previous months). Terms in the same month are ordered by community to reduce edge-crossings since community detection groups highly connected nodes to loosely connected to nodes in other clusters. \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
+
+\fs24 \cf0 [[slnc 1000]] 
+\fs48 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 The DycomDector supports a range of interactions such as lensing or filtering that allow users to quickly drill down events of interest. \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
+\cf0 Moreover, user can input into the search box to provide topic of interest. \
+
+\fs24 [[slnc 500]] \
+
+\fs48 Through the support of the visualization tool, user can easily spot an interesting topic, for example \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+When users mouseover from year 2006 to 2007, it can be noticed that the term \'93Australian\'94 was mentioned in several months, followed by the word \'93World Cup\'94. We can infer that in this year, World Cup was held in Australia and a lot of people was talking about this event.\
+\
+Another similar pattern found in 2007 with the term \'93Canada\'94 which was the most mentioned keyword in five consecutive months. \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
+
+\fs24 \cf0 [[slnc 1000]] 
+\fs48 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 Thank you for watching.\
+ \
+}
