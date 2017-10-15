@@ -174,7 +174,7 @@ function loadData(){
             maxRel = 5;
             snapshotScale = 0.22; 
             if (fileName.indexOf("VIS")>=0){
-                minYear = 2000;
+               // minYear = 2000;
                 snapshotScale = 0.14;   
                 maxRel = 10;
             }
