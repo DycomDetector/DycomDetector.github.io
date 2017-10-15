@@ -42,7 +42,7 @@ var selectedCut;
 
 
 var XGAP_; // gap between months on xAxis
-var numLens = 7;
+var numLens = 3;
 
 function xScale(m) {
     if (isLensing) {
@@ -177,9 +177,10 @@ function loadData(){
                 snapshotScale = 0.16;   
             }
             else if (fileName.indexOf("IMDB")>=0){
-               // minYear = 1975;   // IMDB first movie was in 1919
-                minYear = 2001;   // IMDB first movie was in 1919
-                snapshotScale = 0.15;   
+                minYear = 1975;   // IMDB first movie was in 1919
+               // minYear = 2001;   // IMDB first movie was in 1919
+               // snapshotScale = 0.15;  
+               snapshotScale = 0.22;  
             }  
             else if (fileName.indexOf("PopCha")>=0){
                 minYear = 1980;   // PopCha first movie was in 1937
@@ -191,7 +192,7 @@ function loadData(){
             //minYear = 2004;
             // Update months
             numMonth = maxYear - minYear +1;
-            XGAP_ = (width-xStep-120)/numMonth; // gap between months on xAxis
+            XGAP_ = (width-xStep)/numMonth; // gap between months on xAxis
 
             data.forEach(function (d) {    
                 d.m = d.m-minYear;

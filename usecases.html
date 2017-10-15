@@ -56,15 +56,18 @@
 
 <h3>2. Other applications</h3>
 Although originally motivated to analyze text documents, we soon realized that <i>DycomDetector</i> has more general implications to other domains as well. We are going to demonstrate <i>DycomDetector</i> on the two movie co-star networks (<i>IMDB</i> and <i>PopCha</i>)
-<h4>2.1 IMDB co-star networks</h4>
-	On the bottom left panel, we provide the list of top actors based on their appearance frequency in the 
-	<center><img src="images2/picsUsecases2/IMDB1.png" width="92%" alt="DycomDetector" /></center>
-	<center><img src="images2/picsUsecases2/IMDB2.png" width="100%" alt="DycomDetector" /></center>
+<h4>2.1 IMDB co-star network</h4>
+	On the bottom left panel, we provide the list of top actors based on their appearance frequency in 9,964 movies rated 8 stars or higher from 1975 to 2015. This collection has 66,182 actors that are color-coded based on genre of his/her first movie: <span style="color:#2077b5">comedy</span>, <span style="color:#ff7f0f">drama</span>, and <span style="color:#2c9f2e">action</span>. Two actors relate as they act in the same movie. When users select an actor from the list (for example, <span style="color:#2077b5">Schmidt, Michael Q.</span>), the network on the right summarizes his acting career. In particular, each detected community on the top is associated to a highly rated movie. Larger clusters are movies with more actors/actresses.
+	<center><img src="images2/picsUsecases2/IMDB1.png" width="94%" alt="DycomDetector" /></center>
+In the second example of IMDB data, we selected <span style="color:#ff7f0f">Rosen, Larry (III)</span> (at the origin of the left arrow). As shown in the time series, he has many good movies in 2012. Four out of these movies, <span style="color:#ff7f0f">Rosen, Larry (III)</span> co-stars with <span style="color:#ff7f0f">Churchson, Scott</span> (at the second arrow) in <span style="color:#2077b5">Lola</span>, <span style="color:#ff7f0f">Nowhere to Hide</span>, <span style="color:#ff7f0f">Last Night</span>, and <span style="color:#ff7f0f">The Edge</span>. This is highlighted by the thickest arc connecting the two actors in 2012. Also notice that, the duo filmed <span style="color:#ff7f0f">Wrong Place, Wrong Time</span> (2013) and <span style="color:#2c9f2e">No One to Protect You</span> (2014). Movie details are displayed on mousing over links/arcs.
+	<center><img src="images2/picsUsecases2/IMDB2.png" width="87%" alt="DycomDetector" /></center>
+
+<h4>2.2 PopCha movie network</h4>
+The <a href="https://www.themoviedb.org/">PopCha database</a> has 172 movies and 1,201 actors. As depicted in the network snapshots, some actors involve multiple movies in the same year. When inspecting the time series and arc diagrams, we can see that some actors have the same co-actors over years, possibly in the same TV shows.
+
+	<center><img src="images2/picsUsecases2/PopCha1.png" width="92%" alt="DycomDetector" /></center>
+
 	<center><img src="images2/picsUsecases2/VIS_ChrisNorth.png" width="100%" alt="DycomDetector" /></center>
-
-	
-
-
 </div>
 
 <div class="footer">
