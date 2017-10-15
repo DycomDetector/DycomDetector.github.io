@@ -20,11 +20,11 @@ var cutOffvalue=[];
 var snapshotScale = 0.20; // Snapshiot Size******************************************************
 var maxNodesInSnapshot =30; // ******************************************************
 
-var nodeRadiusRange = [0.18, 0.7]; 
+var nodeRadiusRange = [0.09, 1.1]; 
 var linkscaleForSnapshot = 0.15; 
    
 var maxHeightOfStreamGraph = 9;
-var yStepOfStreamGraph = 9;
+var yStepOfStreamGraph = 6;
 var maxRel = 15;   // for scaling, if count > 6 the link will looks similar to 6
 
 if (fileName.indexOf("VIS")>=0){
@@ -32,7 +32,7 @@ if (fileName.indexOf("VIS")>=0){
 }    
 var linkScale3 = function (count) {
     var scale = d3.scale.linear()
-                    .range([0.1, 3])
+                    .range([0.1, 2])
                     .domain([0, maxRel]);
     var count2 = (count>maxRel) ? maxRel : count;  // for scaling, if count > maxRel the link will looks similar to 6                       
     return  scale(count2);   

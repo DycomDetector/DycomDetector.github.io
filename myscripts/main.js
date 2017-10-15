@@ -42,7 +42,7 @@ var selectedCut;
 
 
 var XGAP_; // gap between months on xAxis
-var numLens = 4;
+var numLens = 3;
 
 function xScale(m) {
     if (isLensing) {
@@ -92,7 +92,7 @@ var isForFigure4 = false;
 
 var fileList = ["WikiNews","Huffington","CrooksAndLiars","EmptyWheel","Esquire","FactCheck"
                 ,"VIS_papers","IMDB","PopCha","Cards_PC","Cards_Fries"]
-var initialDataset = "VIS_papers";
+var initialDataset = "Cards_Fries";
 
 var fileName;
 
@@ -175,8 +175,8 @@ function loadData(){
             snapshotScale = 0.22; 
             if (fileName.indexOf("VIS")>=0){
                // minYear = 2000;
-                snapshotScale = 0.14;   
-                maxRel = 10;
+               // snapshotScale = 0.14;   
+               // maxRel = 10;
             }
             else if (fileName.indexOf("IMDB")>=0){
                 minYear = 1975;   // IMDB first movie was in 1919
@@ -186,15 +186,22 @@ function loadData(){
             }  
             else if (fileName.indexOf("PopCha")>=0){
                 minYear = 1980;   // PopCha first movie was in 1937
+
             }  
             else if (fileName.indexOf("Cards_PC")>=0){
                 snapshotScale = 0.17;    // PopCha first movie was in 1937
+            }  
+            else if (fileName.indexOf("Cards_Fries")>=0){
+                minYear = 1995; 
+                maxNodesInSnapshot = 50;
+                maxRel = 5;
+                snapshotScale = 0.20;    // PopCha first movie was in 1937
             }   
 
             //minYear = 2004;
             // Update months
             numMonth = maxYear - minYear +1;
-            XGAP_ = (width-xStep-110)/numMonth; // gap between months on xAxis
+            XGAP_ = (width-xStep-10)/numMonth; // gap between months on xAxis
 
             data.forEach(function (d) {    
                 d.m = d.m-minYear;
