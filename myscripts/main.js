@@ -92,7 +92,7 @@ var isForFigure4 = false;
 
 var fileList = ["WikiNews","Huffington","CrooksAndLiars","EmptyWheel","Esquire","FactCheck"
                 ,"VIS_papers","IMDB","PopCha","Cards_PC","Cards_Fries"]
-var initialDataset = "Cards_Fries";
+var initialDataset = "EmptyWheel";
 
 var fileName;
 
