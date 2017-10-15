@@ -293,7 +293,7 @@ function drawgraph2() {
     var yTemp = yStart;
     var numNodesInFirstMonth = 0;
     // Compute y position of small multiple *******
-    var yStep1 = Math.min(11,(heightSVG-yStart-5)/lNodes.length)
+    var yStep1 = Math.min(11,(heightSVG-yStart-10)/lNodes.length)
     var yStep2 = Math.max(yStepOfStreamGraph,yStep1);
     for (var i=0;i<lNodes.length;i++){
         if (lNodes[i].measurement>max)
@@ -303,7 +303,7 @@ function drawgraph2() {
             numNodesInFirstMonth++;
         }
         else{
-            var yStep3= Math.min(yStep1,(heightSVG-yStart-numNodesInFirstMonth*yStep2-5)/(lNodes.length-numNodesInFirstMonth));
+            var yStep3= Math.min(yStep1,(heightSVG-yStart-numNodesInFirstMonth*yStep2-10)/(lNodes.length-numNodesInFirstMonth));
             yTemp += yStep3;
         }
         lNodes[i].yInMultiples =  yTemp;

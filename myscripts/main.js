@@ -42,7 +42,7 @@ var selectedCut;
 
 
 var XGAP_; // gap between months on xAxis
-var numLens = 5;
+var numLens = 7;
 
 function xScale(m) {
     if (isLensing) {
@@ -174,7 +174,7 @@ function loadData(){
             maxRel = 5;
             snapshotScale = 0.22; 
             if (fileName.indexOf("VIS")>=0){
-                snapshotScale = 0.18;   
+                snapshotScale = 0.16;   
             }
             else if (fileName.indexOf("IMDB")>=0){
                // minYear = 1975;   // IMDB first movie was in 1919
@@ -191,7 +191,7 @@ function loadData(){
             //minYear = 2004;
             // Update months
             numMonth = maxYear - minYear +1;
-            XGAP_ = (width-xStep-150)/numMonth; // gap between months on xAxis
+            XGAP_ = (width-xStep-120)/numMonth; // gap between months on xAxis
 
             data.forEach(function (d) {    
                 d.m = d.m-minYear;
