@@ -42,7 +42,7 @@ var selectedCut;
 
 
 var XGAP_; // gap between months on xAxis
-var numLens = 3;
+var numLens = 6;
 
 function xScale(m) {
     if (isLensing) {
@@ -264,12 +264,12 @@ function loadData(){
                 snapshotScale = 0.16;   
             }
             else if (fileName.indexOf("EmptyWheel")>=0){
-                minYear = 2011; 
+                minYear = 2012; 
                 maxYear = 2015; 
                 document.getElementById('nodeDropdown').value = "1";  
                 document.getElementById('edgeWeightDropdown').value = "3";  
                 maxNodesInSnapshot =20;
-                maxRel = 12;
+                maxRel = 17;
                 snapshotScale = 0.16;   
             }
             else if (fileName.indexOf("CrooksAndLiars")>=0){
@@ -287,11 +287,11 @@ function loadData(){
                 snapshotScale = 0.15;   
             }
             else if (fileName.indexOf("WikiNews")>=0){
-                minYear = 2005; 
-                document.getElementById('nodeDropdown').value = "4";  
+                minYear = 2010; 
+                document.getElementById('nodeDropdown').value = "1";  
                 document.getElementById('edgeWeightDropdown').value = "3";  
-                maxNodesInSnapshot =30;
-                maxRel = 25;
+                maxNodesInSnapshot =35;
+                maxRel = 10;
                 snapshotScale = 0.19;   
             }
             //************************* Figure4 **********************

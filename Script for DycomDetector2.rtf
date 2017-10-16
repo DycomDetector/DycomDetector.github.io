@@ -1,82 +1,98 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
 {\fonttbl\f0\froman\fcharset0 Times-Roman;}
-{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
-{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue0;\red255\green255\blue255;
+\red255\green255\blue255;\red0\green0\blue117;\red252\green105\blue16;\red27\green98\blue166;\red39\green145\blue35;
+\red0\green0\blue0;\red39\green145\blue35;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c0;\cssrgb\c100000\c100000\c100000;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c0\c0\c53333;\cssrgb\c100000\c49804\c5882;\cssrgb\c12549\c46667\c70980;\cssrgb\c17255\c62353\c18039;
+\csgenericrgb\c0\c0\c0;\cssrgb\c17255\c62353\c18039;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
 \margl1440\margr1440\vieww25880\viewh16580\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
-\f0\fs48 \cf0 Finding interesting trends, patterns, and relationships within text corpora is challenging to address some of interesting questions such as: \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-
-\fs24 \cf0 [[slnc 500]] \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-
-\fs48 \cf0 What are the hottest political topics last month? \
+\f0\fs48 \cf0 Finding interesting trends, patterns, and relationships within text corpora is challenging to address some of interesting questions such as: What are the hottest political topics last month? \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
 
-\fs24 \cf0 [[slnc 500]] \
+\fs24 \cf0 [[slnc 300]] \
 
 \fs48 Are there any common viewpoints among different groups of people? \
 
-\fs24 [[slnc 500]] 
+\fs24 [[slnc 300]] 
 \fs48 \
 And how does a particular topic and the wisdom of the crowd change over time?\
 
-\fs24 [[slnc 1000]] 
+\fs24 [[slnc 200]] \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs48 \cf0 This video demonstrates DycomDetector, a novel approach for topic modeling using graph partitioning algorithm \cf2 \expnd0\expndtw0\kerning0
+to extract clusters of important terms that form latent communities\cf0 \kerning1\expnd0\expndtw0 . We use data collected from different sources such as Wikinews, Huffington post, Crooks and Liars, and Esquire. \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs24 \cf0 [[slnc 300]] 
 \fs48 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 This video demonstrates DycomDetector, a novel approach for topic modeling using graph partitioning algorithm \cf2 \expnd0\expndtw0\kerning0
-to extract clusters of important terms that form latent communities\cf0 \kerning1\expnd0\expndtw0 . Demonstrated data for this visualization are collected from different sources such as Wikinews, Huffington post, Crooks and Liars, and Esquire. In this video, we use the Empty Wheel blogs.\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
-
-\fs24 \cf0 [[slnc 500]] 
-\fs48 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 The terms are extracted, classified, and color-coded by category, such as people, location, and organization. Node sizes reflect term popularity.  At each time stamp, the network snapshot is constructed where links are computed based on term cooccurrences in the same articles. Thicker link indicates that these two terms frequently appear together over the given period of time. \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
-
-\fs24 \cf0 [[slnc 1000]] 
-\fs48 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 Users can redefine the network using the dropdown boxes. DycomDetector will recalculate the networks and their communities accordingly. A histogram below each network displays modularity Q on different filtering settings, called relationship cut. The first bar shows modularity Q of the original term networks, the second bar show modularity Q of the network where every link weights at least 2 and so on. \
+The important terms are extracted, classified, and color-coded by category, such as blue for people, orange for location, and green for organization. Font sizes reflect term popularity.  At each time stamp, the network snapshot is constructed where links are computed based on term co-occurrences in the same articles. Thicker link indicates that two terms frequently appear together over the given period of time. Users can redefine the network based on different settings such as vertex degree, betweenness centrality, or collocation frequency. Communities become visible in the the refined networks. 
+\fs24 [[slnc 300]] \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
-\fs24 \cf0 [[slnc 500]] \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-
-\fs48 \cf0 Below each histogram, DycomDetector displays the top 5 terms from the above network based on the user selected feature: term frequency, sudden increase in frequency, vertex degree, or betweenness centrality. 
+\fs48 \cf0 A histogram below each network displays modularity Q on different filtering of collocation frequency. In particular The first bar shows modularity Q of the original term networks, the second bar show modularity Q of the network where every link weights at least 2 and so on. 
+\fs24  
+\fs48 Below each histogram, DycomDetector displays the top 5 terms from the above network based on the user selected feature. 
 \fs24 \
-[[slnc 500]] 
+[[slnc 300]] 
 \fs48 \
-At the bottom, we show the evolution of terms over time in small multiples. \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-
-\fs24 \cf0 [[slnc 500]] \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-
-\fs48 \cf0 Terms often mentioned at multiple time points can be easily notice by longer arcs connecting a lower term group (later month) to an upper group (previous months). Terms in the same month are ordered by community to reduce edge-crossings since community detection groups highly connected nodes to loosely connected to nodes in other clusters. \
+At the bottom, we show the evolution of terms over time in small multiples. Arc diagrams are overlaid on top to show term co-occurrences. Terms often mentioned at multiple time stamps can be easily notice by longer arcs connecting a lower term group (later month) to an upper group (previous months). Terms in the same month are ordered by community to reduce edge-crossings since community detection algorithm groups highly connected nodes while separate loosely connected nodes into different clusters. \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
 
-\fs24 \cf0 [[slnc 1000]] 
-\fs48 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 The DycomDector supports a range of interactions such as lensing or filtering that allow users to quickly drill down events of interest. \
+\fs24 \cf0 [[slnc 300]] \
+\
+\pard\pardeftab720\sl280\partightenfactor0
+
+\fs36 \cf3 \cb4 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec3 Here are some \cf2 \cb5 \outl0\strokewidth0 detected\cf3 \cb4 \outl0\strokewidth0 \strokec3  political events in this example:\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl280\partightenfactor0
+\ls1\ilvl0
+\b \cf3 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec3 Box A 
+\b0 contains\'a0the\'a0{\field{\*\fldinst{HYPERLINK "https://en.wikipedia.org/wiki/Sandy_Hook_Elementary_School_shooting"}}{\fldrslt \cf6 \strokec6 Sandy Hook Elementary School shooting}}\'a0occurred on December 14, 2012, in\'a0\cf7 \strokec7 Newtown\cf3 \strokec3 ,\'a0\cf7 \strokec7 Connecticut\cf3 \strokec3 , when 20-year-old\'a0\cf8 \strokec8 Adam Lanza\cf3 \strokec3 \'a0fatally shot 20 children. \
+\ls1\ilvl0
+\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec3 Box B 
+\b0 refer to The\'a0{\field{\*\fldinst{HYPERLINK "https://en.wikipedia.org/wiki/Boston_Marathon_bombing"}}{\fldrslt \cf6 \strokec6 Boston Marathon bombing}}\'a0occurred on April 15, 2013. We can see some arcs connect Boston Marathon and Sandy Hook since both of them involve human lives.\
+\ls1\ilvl0
+\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\'95	}
+\b0 The next event relates to\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec3  \cf8 \strokec8 Edward Snowden\cf3 \strokec3 , a former CIA employee who leaked \cf9 \outl0\strokewidth0 NSA \cf3 \outl0\strokewidth0 \strokec3 classified information.\'a0\cf10 \strokec11  As shown in box C, this is still a hot topic in the next few months.\cf3 \strokec3 \
+\ls1\ilvl0
+\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec3 Box D
+\b0  is the\'a0{\field{\*\fldinst{HYPERLINK "https://en.wikipedia.org/wiki/Shooting_of_Trayvon_Martin"}}{\fldrslt \cf6 \strokec6 Shooting of Trayvon Martin}}. On July 13, 2013, the jury found\'a0\cf8 \strokec8 George Zimmerman\cf3 \strokec3 \'a0not guilty for\'a0\cf8 \strokec8 Trayvon Martin's murder\cf3 \strokec3  which happened on the night of February 26, 2012, in\'a0\cf8 \strokec8 Sanford\cf3 \strokec3 , Florida.\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
-\cf0 Moreover, user can input into the search box to provide topic of interest. \
 
-\fs24 [[slnc 500]] \
+\fs28 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\
 
-\fs48 Through the support of the visualization tool, user can easily spot an interesting topic, for example \
+\fs48 The DycomDector supports a range of interactions such as lensing or filtering that allow users to quickly drill down events of interest. \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
+\cf0 User can input into the search box or click on the top term list to filter. . \
+Through the support of the visualization tool, user can easily spot an interesting topic, for example \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 \
 Empty Wheel stories here: The Boston marathon bombing, the Edward Snowden event, and the Middle East war.\
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
-\cf0 More use cases can be found in our paper and this project website: {\field{\*\fldinst{HYPERLINK "https://dycomdetector.github.io/"}}{\fldrslt https://dycomdetector.github.io/}}.
+\cf0 More case studies can be found in our paper and project website.
 \fs24 \
-[[slnc 1000]] 
+[[slnc 200]] 
 \fs48 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 Thank you for watching.\
- \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
+
+\fs24 \cf0 [[slnc 300]] 
+\fs48 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0  \
 }
