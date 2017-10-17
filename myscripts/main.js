@@ -10,7 +10,7 @@
 var margin = {top: 0, right: 0, bottom: 0, left: 0};
 var width = document.body.clientWidth - margin.left - margin.right;
 var height = 50 - margin.top - margin.bottom;
-var heightSVG = 799;
+var heightSVG = 859;
 
 //Append a SVG to the body of the html page. Assign this SVG as an object to svg
 var svg = d3.select("body").append("svg")
@@ -42,7 +42,7 @@ var selectedCut;
 
 
 var XGAP_; // gap between months on xAxis
-var numLens = 6;
+var numLens = 3;
 
 function xScale(m) {
     if (isLensing) {
@@ -92,7 +92,7 @@ var isForFigure4 = false;
 
 var fileList = ["WikiNews","Huffington","CrooksAndLiars","EmptyWheel","Esquire","FactCheck"
                 ,"VIS_papers","IMDB","PopCha","Cards_PC","Cards_Fries"]
-var initialDataset = "EmptyWheel";
+var initialDataset = "VIS_papers";
 
 var fileName;
 
@@ -175,8 +175,8 @@ function loadData(){
             snapshotScale = 0.22; 
             if (fileName.indexOf("VIS")>=0){
                // minYear = 2000;
-               // snapshotScale = 0.14;   
-               // maxRel = 10;
+                snapshotScale = 0.16;   
+               maxNodesInSnapshot = 30;
             }
             else if (fileName.indexOf("IMDB")>=0){
                 minYear = 1975;   // IMDB first movie was in 1919
@@ -270,7 +270,7 @@ function loadData(){
                 document.getElementById('edgeWeightDropdown').value = "3";  
                 maxNodesInSnapshot =20;
                 maxRel = 17;
-                snapshotScale = 0.16;   
+                snapshotScale = 0.13;   
             }
             else if (fileName.indexOf("CrooksAndLiars")>=0){
                 document.getElementById('nodeDropdown').value = "3";  

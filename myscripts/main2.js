@@ -20,7 +20,7 @@ var cutOffvalue=[];
 var snapshotScale = 0.20; // Snapshiot Size******************************************************
 var maxNodesInSnapshot =30; // ******************************************************
 
-var nodeRadiusRange = [0.18, 0.8]; 
+var nodeRadiusRange = [0.1, 0.8]; 
 var linkscaleForSnapshot = 0.15; 
    
 var maxHeightOfStreamGraph = 9;
@@ -32,7 +32,7 @@ if (fileName.indexOf("VIS")>=0){
 }    
 var linkScale3 = function (count) {
     var scale = d3.scale.linear()
-                    .range([0.1, 3])
+                    .range([0, 3])
                     .domain([0, maxRel]);
     var count2 = (count>maxRel) ? maxRel : count;  // for scaling, if count > maxRel the link will looks similar to 6                       
     return  scale(count2);   
@@ -287,7 +287,6 @@ function drawgraph2() {
         updateHistogramOptimized();   // Update histogram by
     }
 
-
     var max = 1;
     var yStart = height + 260; // y starts drawing the stream graphs
     var yTemp = yStart;
@@ -433,6 +432,12 @@ function drawgraph2() {
         .attr("font-size", "11px")
         .text(function (d) {
             return d.name
+        })
+        .on("mouseover", function(d){
+            showTip(d, this);
+        })
+        .on("mouseout", function(d){
+            hideTip(d);
         });
 }
 

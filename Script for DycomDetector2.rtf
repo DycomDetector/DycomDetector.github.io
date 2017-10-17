@@ -26,22 +26,24 @@ And how does a particular topic and the wisdom of the crowd change over time?\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
 \fs48 \cf0 This video demonstrates DycomDetector, a novel approach for topic modeling using graph partitioning algorithm \cf2 \expnd0\expndtw0\kerning0
-to extract clusters of important terms that form latent communities\cf0 \kerning1\expnd0\expndtw0 . We use data collected from different sources such as Huffington post, Crooks and Liars, and Esquire. \
+to extract clusters of important terms that form latent communities\cf0 \kerning1\expnd0\expndtw0 . We use data collected from different sources such as Huffington post, Empty Wheel, and Esquire. \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
 \fs24 \cf0 [[slnc 300]] 
 \fs48 \
-The important terms are extracted, classified, and color-coded by category, such as blue for people, orange for location, and green for organization.  At each time stamp, the network snapshot is constructed where links are computed based on term co-occurrences in the same articles. Thicker link indicates that two terms frequently appear together over the given period of time. Users can redefine the network based on different settings such as vertex degree, betweenness centrality, or collocation frequency. Communities become visible in the the refined networks. 
+The important terms are extracted, classified, and color-coded by category, such as blue for people, orange for location, and green for organization.  
+\fs24 [[slnc 300]] 
+\fs48 At each time stamp, the network snapshot is constructed where links are computed based on term co-occurrences in the same articles. 
+\fs24 [[slnc 400]] 
+\fs48 Users can redefine the network based on different settings such as vertex degree, betweenness centrality, or collocation frequency. Communities become visible in the the refined networks. 
 \fs24 [[slnc 300]] \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
-\fs48 \cf0 A histogram below each network displays modularity Q on different filtering of collocation frequency. In particular The first bar shows modularity Q of the original term networks, the second bar show modularity Q of the network where every link weights at least 2 and so on. 
-\fs24  
-\fs48 Below each histogram, DycomDetector displays the top 5 terms from the above network based on the user selected feature. 
+\fs48 \cf0 A histogram below each network displays modularity Q on different filtering of collocation frequency. Below each histogram, DycomDetector displays the top 5 terms from the above network based on the user selected feature. 
 \fs24 \
 [[slnc 300]] 
 \fs48 \
-At the bottom, we show the evolution of terms over time in small multiples. Arc diagrams are overlaid on top to show term co-occurrences. Terms in the same month are ordered by community to reduce edge-crossings since community detection algorithm groups highly connected nodes while separate loosely connected nodes into different clusters. \
+At the bottom, we show the evolution of terms over time in small multiples. Arc diagrams are overlaid on top to show term co-occurrences. Terms in the same month are ordered by community to reduce edge-crossings. \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
 
 \fs24 \cf0 [[slnc 300]] \
@@ -54,7 +56,7 @@ Here are some detected political events in this example:\
 \ls1\ilvl0
 \b \cf2 \cb1 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
 Box A 
-\b0 contains\'a0the\'a0{\field{\*\fldinst{HYPERLINK "https://en.wikipedia.org/wiki/Sandy_Hook_Elementary_School_shooting"}}{\fldrslt \cf4 Sandy Hook Elementary School shooting}}\'a0occurred on December 14, 2012, in\'a0\cf5 Newtown\cf2 ,\'a0\cf5 Connecticut\cf2 , when 20-year-old\'a0\cf6 Adam Lanza\cf2 \'a0shot 20 children. \
+\b0 contains\'a0the\'a0{\field{\*\fldinst{HYPERLINK "https://en.wikipedia.org/wiki/Sandy_Hook_Elementary_School_shooting"}}{\fldrslt \cf4 Sandy Hook Elementary School shooting}}\'a0occurred on December 14, 2012, in\'a0\cf5 Newtown\cf2 ,\'a0\cf5 Connecticut\cf2 . \
 \ls1\ilvl0
 \b \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
 Box B 
@@ -66,45 +68,86 @@ Box B
 \ls1\ilvl0
 \b \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
 Box D
-\b0  is the\'a0{\field{\*\fldinst{HYPERLINK "https://en.wikipedia.org/wiki/Shooting_of_Trayvon_Martin"}}{\fldrslt \cf4 Shooting of Trayvon Martin}}. On July 13, 2013, the jury found\'a0\cf6 George Zimmerman\cf2 \'a0not guilty for\'a0\cf6 Trayvon Martin's murder\cf2  in\'a0\cf6 Sanford\cf2 , Florida.\
+\b0  is the\'a0{\field{\*\fldinst{HYPERLINK "https://en.wikipedia.org/wiki/Shooting_of_Trayvon_Martin"}}{\fldrslt \cf4 Shooting of Trayvon Martin}}. The jury found\'a0\cf6 Zimmerman\cf2 \'a0not guilty for\'a0\cf6 Martin's murder\cf2  in\'a0\cf6 Sanford\cf2 , Florida.
+\fs48 \cf0 \kerning1\expnd0\expndtw0 \
+\pard\pardeftab720\sl280\partightenfactor0
+
+\fs28 \cf0 [[slnc 1000]]\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
-\fs48 \cf0 \kerning1\expnd0\expndtw0 \
-[[slnc 2500]] 
-\fs28 \
+\fs48 \cf0 DycomDetector supports a range of interactions such as lensing 
+\fs28 [[slnc 500]]
+\fs48  or filtering.  For example, users can refine the networks by sudden increase in term frequency 
+\fs28 [[slnc 500]]
+\fs48 , vertex degree
+\fs28 [[slnc 800]]
+\fs48 , betweenness centrality
+\fs28 [[slnc 800]]
+\fs48 , or collocation frequency
+\fs28 [[slnc 1000]]
+\fs48 . \
+Node sizes reflect the selected feature. 
+\fs28 [[slnc 1500]]
+\fs48  \
+User can also input into the search box to narrow down the topic of interest, for example NSA.\
+\pard\pardeftab720\sl280\partightenfactor0
 
-\fs48 The DycomDetector supports a range of interactions such as lensing [[slnc 1000]]  or filtering.  For example, users can refine the networks by sudden increase in term frequency, vertex degree, betweenness centrality, [[slnc 900]]  or collocation frequency. \
-[[slnc 1000]] Node sizes reflect the selected feature. [[slnc 1000]]  \
-User can also input into the search box to narrow down the topic of interest, for example NSA, \
-[[slnc 2000]] \
+\fs28 \cf0 [[slnc 2200]]
+\fs48 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
 \cf0 Through the support of DycomDetector, we can visually detect term communities associated to interesting political events, such as \
 \pard\pardeftab720\sl280\partightenfactor0
-\cf0 the triple homicide that took place in Waltham, Massachusetts. Todashev is the murder and also a friend of Tsarnaev, the Boston Marathon bomber.\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
-\cf0 [[slnc 1000]]\
-\pard\pardeftab720\sl280\partightenfactor0
-\cf0 The second cluster contains undie bomb, Al-Qaeda organization, and people such as John Brennan, CIA director and Fahd al-Quso, a terrorist. Topics in other months relate to Edward Snowden \cf2 \expnd0\expndtw0\kerning0
-who leaked \cf7 NSA\cf2  information\cf0 \kerning1\expnd0\expndtw0 , James Clapper, the former director of National Intelligence, and the argument between John Kerry and Assad, the \cf9 \cb3 \expnd0\expndtw0\kerning0
-President of Syria\cf0 \cb1 \kerning1\expnd0\expndtw0 .\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
-\cf0 [[slnc 1000]]\
+\cf0 the triple homicide that took place in Waltham, Massachusetts 
+\fs28 [[slnc 500]]
+\fs48 . Todashev is the murder and also a friend of Tsarnaev, the Boston Marathon bomber.\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \
-\
+
+\fs28 \cf0 [[slnc 1000]]
+\fs48 \
+\pard\pardeftab720\sl280\partightenfactor0
+\cf0 The second cluster contains undie bomb, Al-Qaeda organization, and people such as John Brennan, CIA director and Fahd al-Quso, a terrorist. 
+\fs28 [[slnc 1000]]\
+
+\fs48 Topics in other months relate to Edward Snowden \cf2 \expnd0\expndtw0\kerning0
+who leaked \cf7 NSA\cf2  information 
+\fs28 \cf0 \kerning1\expnd0\expndtw0 [[slnc 500]]
+\fs48 , James Clapper, the former director of National Intelligence 
+\fs28 [[slnc 500]]
+\fs48 , and the argument between John Kerry
+\fs28 [[slnc 500]]
+\fs48  and Assad
+\fs28 [[slnc 100]]
+\fs48 , the \cf9 \cb3 \expnd0\expndtw0\kerning0
+President of Syria\cf0 \cb1 \kerning1\expnd0\expndtw0 .\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\fs28 \cf0 [[slnc 500]]
+\fs48 \
+In the last case study, we demonstrate DycomDetector on the I triple E Vis publication dataset. The top left panel shows statistics of this data such as number of papers in each visualization venue:
+\fs28  
+\fs48 orange for Vast, Green for InfoVis, 
+\fs28  
+\fs48 and red for Sci Vis. The top thumbnail summarize publications from 1990 to 2016 in these venues. 
+\fs28 [[slnc 1000]] 
+\fs48 Now, we focus on Eduard Groller\'92s who publish the most papers in Vis conferences. 
+\fs28 [[slnc 1500]] 
+\fs48  Groller\'92s is in the center of each network snapshot. 
+\fs28 [[slnc 1000]] 
+\fs48  The detected communities associate to Groller\'92s publications. 
+\fs28 [[slnc 500]]
+\fs48 \
+In the time series, we can easily spot researchers who has strong collaborations with Groller over years, such as Jurgen Waser 
+\fs28 [[slnc 700]]
+\fs48  and Stefan Bruckner 
+\fs28 [[slnc 700]]
+\fs48 . The popup window display researcher profile on mouse over. \
+We can notice by the colors that he had papers accepted in all visualization venues.\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
-\cf0 or click on the top term list to filter. \
-\
+
+\fs24 \cf0 [[slnc 200]] 
+\fs48 \
 More case studies can be found in our paper and project website.
 \fs24 \
 [[slnc 200]] 
 \fs48 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 Thank you for watching.\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
-
-\fs24 \cf0 [[slnc 300]] 
-\fs48 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0  \
 }

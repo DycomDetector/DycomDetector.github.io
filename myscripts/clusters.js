@@ -127,12 +127,17 @@ function updateSubLayout(nodes, links, m) {
     force.on("tick", function () {
         node.attr("cx", function (d) { return d.x; })
             .attr("cy", function (d) { return d.y; });   
-       
+        
+        link.attr("x1", function (d) { return d.source.x;})
+            .attr("y1", function (d) { return d.source.y;})
+            .attr("x2", function (d) { return d.target.x; })
+            .attr("y2", function (d) { return d.target.y; });
+        group.attr("d", groupPath);   
         
     });
 
     force.on("end", function () {
-             link.attr("x1", function (d) { return d.source.x;})
+        link.attr("x1", function (d) { return d.source.x;})
             .attr("y1", function (d) { return d.source.y;})
             .attr("x2", function (d) { return d.target.x; })
             .attr("y2", function (d) { return d.target.y; });

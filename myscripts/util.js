@@ -552,6 +552,7 @@ function drawTimeBox() {
 }
 
 function updateTimeBox() {
+    debugger;
     svg.selectAll(".timeLegendText")
         .attr("y", function (d, i) {
             // For figure 4
@@ -600,7 +601,6 @@ function drawControlPanel(){
     var select = d3.select('#edgeWeightDropdown').on('change',function () {
         selectValue = d3.select('#edgeWeightDropdown').property('value');
         setCut(selectValue);
-
     })
     var options = select.selectAll('option').data(edgeData).enter().append('option').attr('value', function (d) {
         return d.id;
