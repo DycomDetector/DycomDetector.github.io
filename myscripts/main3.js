@@ -42,6 +42,8 @@ function setNodesBy(){
         //Check if cutoff is calculated, if yes then skip
         if(cutoff_Check.indexOf(+cut_value)===-1){
             graphInsertBetweeness(graphByMonths, +cut_value);
+            debugger;
+            
             cutoff_Check.push(+cut_value);
         }
     }

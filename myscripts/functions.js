@@ -50,8 +50,7 @@ function getGraphbyCutoffvalue(graph, cutoff) {
     return cutoffgraph;
 }
 
-function graphInsertBetweeness(graph, cutoff) {
-    
+function graphInsertBetweeness(graph, cutoff) {    
     graph.forEach(function (graphlist) {
         graphlist.forEach(function (subgraph) {
             if(subgraph.cutoff==cutoff){

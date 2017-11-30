@@ -7,7 +7,7 @@
  */
 
 
-var topNumber = 100;
+var topNumber = 500;
 var top200terms = {}; // top terms from input data
 var top100termsArray = []; // for user selection
 var termList = {}; // List of term to feed to TimeArcs in main.js
@@ -109,7 +109,7 @@ function computeMonthlyGraphs() {
                 var term1 = nodes5[i].name;
                 for (var j = i + 1; j < nodes5.length; j++) {
                     var term2 = nodes5[j].name;
-                    if (relationship[term1 + "__" + term2] && relationship[term1 + "__" + term2][m] >= cut) {
+                    if (relationship[term1 + "__" + term2] && relationship[term1 + "__" + term2][m] >= cut+4) {
                         var l = new Object();
                         l.source = nodes5[i];
                         nodes5[i].isConnected = true;
@@ -226,10 +226,12 @@ function drawgraph2() {
             nod.frequency = terms[nod.name][nod.m];
     }
 
-    // Now compute the node size based on a selected measure
+
+    // Now compute the node size based on a selected measure        
     for (var i=0; i<lNodes.length; i++){
         var nod = lNodes[i];
         nod.measurement = 0;
+        
         if (selectedSetNodeBy==1) {
             nod.measurement = 100*nod.frequency+nod.net+nod.weight;
         }

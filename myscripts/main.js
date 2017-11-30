@@ -1,6 +1,5 @@
 /* September 2017 
  * Tommy Dang, Assistant professor, iDVL@TTU
- * Long Nguyen, PhD student, iDVL@TTU
  *
  * THIS SOFTWARE IS BEING PROVIDED "AS IS", WITHOUT ANY EXPRESS OR IMPLIED
  * WARRANTY.  IN PARTICULAR, THE AUTHORS MAKE NO REPRESENTATION OR WARRANTY OF ANY KIND CONCERNING THE MERCHANTABILITY
@@ -42,7 +41,7 @@ var selectedCut;
 
 
 var XGAP_; // gap between months on xAxis
-var numLens = 3;
+var numLens = 4;
 
 function xScale(m) {
     if (isLensing) {
@@ -92,7 +91,8 @@ var isForFigure4 = false;
 
 var fileList = ["WikiNews","Huffington","CrooksAndLiars","EmptyWheel","Esquire","FactCheck"
                 ,"VIS_papers","IMDB","PopCha","Cards_PC","Cards_Fries"]
-var initialDataset = "VIS_papers";
+//var initialDataset = "HuffingtonFrom2009";
+var initialDataset = "Huffington";
 
 var fileName;
 
@@ -176,7 +176,7 @@ function loadData(){
             if (fileName.indexOf("VIS")>=0){
                // minYear = 2000;
                 snapshotScale = 0.16;   
-               maxNodesInSnapshot = 30;
+               maxNodesInSnapshot = 500;
             }
             else if (fileName.indexOf("IMDB")>=0){
                 minYear = 1975;   // IMDB first movie was in 1919
@@ -280,7 +280,7 @@ function loadData(){
                 snapshotScale = 0.16;   
             }
             else if (fileName.indexOf("Huffington")>=0){
-                document.getElementById('nodeDropdown').value = "4";  
+                document.getElementById('nodeDropdown').value = "1";  
                 document.getElementById('edgeWeightDropdown').value = "5";  
                 maxNodesInSnapshot =20;
                 maxRel = 50;
@@ -300,7 +300,7 @@ function loadData(){
             //    maxYear = 2009;
             // Update months
             numMonth = 12*(maxYear - minYear);
-            XGAP_ = (width-xStep)/numMonth; // gap between months on xAxis
+            XGAP_ = (width-xStep-100)/numMonth; // gap between months on xAxis
             
             data.forEach(function (d) { // Update month
                 d.m = d.m-12*minYear;
@@ -469,6 +469,53 @@ function readTermsAndRelationships() {
     removeList["dismantle roe"] = 1;
     removeList["huffington post"] = 1;
     
+
+    removeList["tsarnaev"] = 3;
+    removeList["biden"] = 3;
+    removeList["hagel"] = 3;
+    removeList["martin"] = 3;
+    removeList["trayvon"] = 3;
+    removeList["zimmerman"] = 3;
+    
+    
+    // This is for outlianostics
+    /*removeList["barack obama"] = 2;
+    removeList["new york times"] = 2;
+    removeList["new york"] = 2;
+    removeList["john mccain"] = 2;
+    removeList["george w. bush"] = 2;
+    removeList["hillary clinton"] = 2;
+    removeList["bill clinton"] = 2;
+    removeList["sarah palin"] = 2;
+    removeList["washington post"] = 2;
+    removeList["george bush"] = 2;
+    removeList["kennedy"] = 2;
+    removeList["john kerry"] = 2;
+    removeList["paul ryan"] = 2;
+    removeList["president bush"] = 2;
+    removeList["sotomayor"] = 2;
+    removeList["lanza"] = 2;
+    removeList["california"] = 2;
+    removeList["chinese"] = 2;
+    removeList["state"] = 2;
+    removeList["senator"] = 2;
+    removeList["iraq"] = 2;
+    removeList["mandela"] = 2;
+    removeList["trayvon"] = 2;
+    removeList["loughner"] = 2;
+    removeList["tsarnaev"] = 2;
+    removeList["president-elect obama"] = 2;
+    removeList["new yorker"] = 2;
+    removeList["administration"] = 2;
+    removeList["jesus"] = 2;
+    removeList["fox news"] = 2;
+    removeList["wall street"] = 2;
+    removeList["afghanistan"] = 2;*/
+
+
+            
+
+
    /* removeList["new york times"]=1;
     removeList["tsarnaev"] = 1;
     removeList["committee"] = 1;
@@ -511,9 +558,13 @@ function readTermsAndRelationships() {
         var count = 0;
         for (var m = 0; m < numMonth; m++) {
             if (terms[att][m]) {
-                var previous = 0;
+                var previous = 1;
                 if (terms[att][m - 1])
                     previous = terms[att][m - 1];
+                else if (m==0)
+                    previous = terms[att][m];
+                else
+                    previous = 1;
                 var net = (terms[att][m] + 1) / (previous + 1);
                 if (net > maxNet) {
                     maxNet = net;
@@ -567,7 +618,7 @@ function readTermsAndRelationships() {
     top100termsArray = [];
     for (var i=0; i<numNode;i++){
        top200terms[termArray[i].term] = termArray[i];  // top200terms is defined in main2.js
-       if (top100termsArray.length<30)
+       //if (top100termsArray.length<200)
              top100termsArray.push(termArray[i]);
        /*  // Sentiment request to server
        var query =  "http://127.0.0.1:1337/status?userID="+termArray[i].term;

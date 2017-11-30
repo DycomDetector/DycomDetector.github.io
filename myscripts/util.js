@@ -552,7 +552,6 @@ function drawTimeBox() {
 }
 
 function updateTimeBox() {
-    debugger;
     svg.selectAll(".timeLegendText")
         .attr("y", function (d, i) {
             // For figure 4
