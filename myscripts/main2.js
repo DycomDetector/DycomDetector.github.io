@@ -32,7 +32,7 @@ if (fileName.indexOf("VIS")>=0){
 }    
 var linkScale3 = function (count) {
     var scale = d3.scale.linear()
-                    .range([0, 3])
+                    .range([0.2, 3])
                     .domain([0, maxRel]);
     var count2 = (count>maxRel) ? maxRel : count;  // for scaling, if count > maxRel the link will looks similar to 6                       
     return  scale(count2);   
@@ -124,8 +124,6 @@ function computeMonthlyGraphs() {
                 }
             }
 
-
-
             var tempnodes = nodes5.filter(function (d, i) {
                 return d.isConnected;
             });
@@ -171,10 +169,6 @@ function computeMonthlyGraphs() {
         // Draw network snapshot
         if (graphByMonths[m][selectedCut] != undefined) {
             updateSubLayout(graphByMonths[m][selectedCut].nodes, graphByMonths[m][selectedCut].links, m);
-        }
-        else{
-           // debugger;
-           // setCut("optimized");
         }
     }
     // Update the layout

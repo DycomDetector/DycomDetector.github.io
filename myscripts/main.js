@@ -9,7 +9,7 @@
 var margin = {top: 0, right: 0, bottom: 0, left: 0};
 var width = document.body.clientWidth - margin.left - margin.right;
 var height = 50 - margin.top - margin.bottom;
-var heightSVG = 859;
+var heightSVG = 800;
 
 //Append a SVG to the body of the html page. Assign this SVG as an object to svg
 var svg = d3.select("body").append("svg")
@@ -41,7 +41,7 @@ var selectedCut;
 
 
 var XGAP_; // gap between months on xAxis
-var numLens = 4;
+var numLens = 3;
 
 function xScale(m) {
     if (isLensing) {
@@ -92,7 +92,7 @@ var isForFigure4 = false;
 var fileList = ["WikiNews","Huffington","CrooksAndLiars","EmptyWheel","Esquire","FactCheck"
                 ,"VIS_papers","IMDB","PopCha","Cards_PC","Cards_Fries"]
 //var initialDataset = "HuffingtonFrom2009";
-var initialDataset = "Huffington";
+var initialDataset = "EmptyWheel";
 
 var fileName;
 
@@ -257,7 +257,7 @@ function loadData(){
                 snapshotScale = 0.16;    
             }  
             else if (fileName.indexOf("Esquire")>=0){
-                document.getElementById('nodeDropdown').value = "1";  
+                document.getElementById('nodeDropdown').value = "4";  
                 document.getElementById('edgeWeightDropdown').value = "1";  
                 maxNodesInSnapshot =15;
                 maxRel = 8;
@@ -268,7 +268,7 @@ function loadData(){
                 maxYear = 2015; 
                 document.getElementById('nodeDropdown').value = "1";  
                 document.getElementById('edgeWeightDropdown').value = "3";  
-                maxNodesInSnapshot =20;
+                maxNodesInSnapshot =18;
                 maxRel = 17;
                 snapshotScale = 0.13;   
             }
@@ -592,7 +592,7 @@ function readTermsAndRelationships() {
                 termArray.push(e);
         }
         else{    
-            if (e.max > 2 && e.term.length>2)    // Only get terms with some increase ************** with TEXT
+            if (e.max >= 1.5 && e.term.length>2)    // Only get terms with some increase ************** with TEXT
                 termArray.push(e);
         }
     }
