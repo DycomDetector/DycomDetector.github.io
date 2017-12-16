@@ -272,7 +272,7 @@ function drawTextClouds(yTextClouds) {
             var s;
             if (lMonth-numLens<=d.m && d.m<=lMonth+numLens){
                 var sizeScale = d3.scale.linear()
-                    .range([10, 17])
+                    .range([10, 15])
                     .domain([min, max]);
                 s = sizeScale(d.measurement);
             }

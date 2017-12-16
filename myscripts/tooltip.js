@@ -69,19 +69,23 @@ function showTip(d,tipItem) {
       str+="<table border='0.5px'  style='width:100%'>"
       for (key in d) {
         if (key== "net"){     
-          str+=  "<tr><td>frequency net</td> <td align='right'>  <span style='color:black'>" +Math.round(d[key])+ "</span> </td></tr>";
+          str+=  "<tr><td>Frequency net</td> <td align='right'>  <span style='color:black'>" +Math.round(d[key])+ "</span> </td></tr>";
         }
-        else if (key== "measurement"){     
-          str+=  "<tr><td>Measurement</td> <td align='right'>  <span style='color:black'>" +Math.round(d[key])+ "</span> </td></tr>";
+        //else if (key== "measurement"){     
+        //  str+=  "<tr><td>Measurement</td> <td align='right'>  <span style='color:black'>" +Math.round(d[key])+ "</span> </td></tr>";
+        //}
+        else if (key== "count"){     
+          str+=  "<tr><td>Frequency</td> <td align='right'>  <span style='color:black'>" +d[key]+ "</span> </td></tr>";
         }
         else if (key== "weight"){     
-          str+=  "<tr><td>Degree</td> <td align='right'>  <span style='color:black'>" +d[key]+ "</span> </td></tr>";
+          str+=  "<tr><td>Node degree</td> <td align='right'>  <span style='color:black'>" +d[key]+ "</span> </td></tr>";
         }
         else if (key== "name"){
             str+=  "<tr><td>"+key+"</td> <td>  <span style='color:"+ getColor3(d.category)+";text-shadow: 0px 0px 0px #000;'>" + d[key] + "</span> </td></tr>"; 
         }
         else if (key== "x" || key== "y" || key== "px" || key== "py" || key== "category"|| key== "index" || 
-          key== "isConnected" || key=="indexForTextClouds" || key=="monthly"|| key=="frequency" || key=="m")
+          key== "isConnected" || key=="indexForTextClouds" || key=="monthly"|| key=="frequency" || key=="m"
+          || key=="yInMultiples" || key=="community" || key=="measurement" || key=="id")
             ;// Do nothing
         else{
           var value = d[key];
@@ -115,9 +119,9 @@ function showTip(d,tipItem) {
                time =  months[monthly[key].monthId%12] +" "+(minYear+Math.round(monthly[key].monthId/12)); 
             }
             if (d.m==monthly[key].monthId)
-              str+=  "<tr><td  align='right'><b>"+time+"</b></td> <td align='right'>  <span style='color:black'><b>" + value + "</b></span> </td></tr>";
-            else
               str+=  "<tr><td  align='right'>"+time+"</td> <td align='right'>  <span style='color:black'>" + value + "</span> </td></tr>";
+            //else
+            //  str+=  "<tr><td  align='right'>"+time+"</td> <td align='right'>  <span style='color:black'>" + value + "</span> </td></tr>";
           }   
         } 
         str+="</table>"
@@ -129,7 +133,7 @@ function showTip(d,tipItem) {
   tip.direction('se');
   //tip.direction('n') 
 
-  tip.offset([-d3.event.pageY+380,-d3.event.pageX]) // d3.event.pageX is the mouse position in the main windown
+  tip.offset([-d3.event.pageY+580,-d3.event.pageX+230]) // d3.event.pageX is the mouse position in the main windown
       
   tip.show(d);   
 }    

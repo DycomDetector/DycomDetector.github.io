@@ -1,5 +1,6 @@
 /* September 2017 
  * Tommy Dang, Assistant professor, iDVL@TTU
+ * Long Nguyen, PhD student, iDVL@TTU
  *
  * THIS SOFTWARE IS BEING PROVIDED "AS IS", WITHOUT ANY EXPRESS OR IMPLIED
  * WARRANTY.  IN PARTICULAR, THE AUTHORS MAKE NO REPRESENTATION OR WARRANTY OF ANY KIND CONCERNING THE MERCHANTABILITY
@@ -9,7 +10,7 @@
 var margin = {top: 0, right: 0, bottom: 0, left: 0};
 var width = document.body.clientWidth - margin.left - margin.right;
 var height = 50 - margin.top - margin.bottom;
-var heightSVG = 800;
+var heightSVG = 799;
 
 //Append a SVG to the body of the html page. Assign this SVG as an object to svg
 var svg = d3.select("body").append("svg")
@@ -41,7 +42,7 @@ var selectedCut;
 
 
 var XGAP_; // gap between months on xAxis
-var numLens = 3;
+var numLens = 4;
 
 function xScale(m) {
     if (isLensing) {
@@ -91,8 +92,7 @@ var isForFigure4 = false;
 
 var fileList = ["WikiNews","Huffington","CrooksAndLiars","EmptyWheel","Esquire","FactCheck"
                 ,"VIS_papers","IMDB","PopCha","Cards_PC","Cards_Fries"]
-//var initialDataset = "HuffingtonFrom2009";
-var initialDataset = "EmptyWheel";
+var initialDataset = "VIS_papers";
 
 var fileName;
 
@@ -175,8 +175,8 @@ function loadData(){
             snapshotScale = 0.22; 
             if (fileName.indexOf("VIS")>=0){
                // minYear = 2000;
-                snapshotScale = 0.16;   
-               maxNodesInSnapshot = 500;
+                snapshotScale = 0.11;   
+                maxRel = 7;
             }
             else if (fileName.indexOf("IMDB")>=0){
                 minYear = 1975;   // IMDB first movie was in 1919
@@ -201,7 +201,7 @@ function loadData(){
             //minYear = 2004;
             // Update months
             numMonth = maxYear - minYear +1;
-            XGAP_ = (width-xStep-10)/numMonth; // gap between months on xAxis
+            XGAP_ = (width-xStep-100)/numMonth; // gap between months on xAxis
 
             data.forEach(function (d) {    
                 d.m = d.m-minYear;
@@ -257,7 +257,7 @@ function loadData(){
                 snapshotScale = 0.16;    
             }  
             else if (fileName.indexOf("Esquire")>=0){
-                document.getElementById('nodeDropdown').value = "4";  
+                document.getElementById('nodeDropdown').value = "1";  
                 document.getElementById('edgeWeightDropdown').value = "1";  
                 maxNodesInSnapshot =15;
                 maxRel = 8;
@@ -268,9 +268,9 @@ function loadData(){
                 maxYear = 2015; 
                 document.getElementById('nodeDropdown').value = "1";  
                 document.getElementById('edgeWeightDropdown').value = "3";  
-                maxNodesInSnapshot =18;
+                maxNodesInSnapshot =20;
                 maxRel = 17;
-                snapshotScale = 0.13;   
+                snapshotScale = 0.15;   
             }
             else if (fileName.indexOf("CrooksAndLiars")>=0){
                 document.getElementById('nodeDropdown').value = "3";  
@@ -280,11 +280,13 @@ function loadData(){
                 snapshotScale = 0.16;   
             }
             else if (fileName.indexOf("Huffington")>=0){
-                document.getElementById('nodeDropdown').value = "1";  
-                document.getElementById('edgeWeightDropdown').value = "5";  
-                maxNodesInSnapshot =20;
-                maxRel = 50;
-                snapshotScale = 0.15;   
+                minYear = 2012; 
+                maxYear = 2015; 
+                document.getElementById('nodeDropdown').value = "4";  
+                document.getElementById('edgeWeightDropdown').value = "4";  
+                maxNodesInSnapshot =150;
+                maxRel = 30;
+                snapshotScale = 0.13;   
             }
             else if (fileName.indexOf("WikiNews")>=0){
                 minYear = 2010; 
@@ -300,7 +302,7 @@ function loadData(){
             //    maxYear = 2009;
             // Update months
             numMonth = 12*(maxYear - minYear);
-            XGAP_ = (width-xStep-100)/numMonth; // gap between months on xAxis
+            XGAP_ = (width-xStep)/numMonth; // gap between months on xAxis
             
             data.forEach(function (d) { // Update month
                 d.m = d.m-12*minYear;
@@ -469,52 +471,48 @@ function readTermsAndRelationships() {
     removeList["dismantle roe"] = 1;
     removeList["huffington post"] = 1;
     
-
-    removeList["tsarnaev"] = 3;
-    removeList["biden"] = 3;
-    removeList["hagel"] = 3;
-    removeList["martin"] = 3;
-    removeList["trayvon"] = 3;
-    removeList["zimmerman"] = 3;
+    // For EmptyWheel data, Figure 5 in EuroVis 2018 paper, to fix the Entity resolution problem
+    removeList["tsarnaev"] = 5;
+    removeList["fbi"] = 5;
+    removeList["tamerlan"] = 5;
+    removeList["abc news"] = 5;
+    removeList["todashev"] = 5;
+    removeList["afghans"] = 5;
+    removeList["administration"] = 5;
+    removeList["state department"] = 5;
+    removeList["senate intelligence committee"] = 5;
+    removeList["emptywheel"] = 5;
+    removeList["nyt"] = 5;
+    removeList["google"] = 5;
+    removeList["walton"] = 5;
+    removeList["benghazi"] = 5;
+    removeList["section"] = 5;
+    removeList["brennan"] = 5;
+    removeList["al-qaeda"] = 5;
+    removeList["saudis"] = 5;
+    removeList["clapper"] = 5;
+    removeList["hamid karzai"] = 5;
+    removeList["dzhokhar"] = 5;
+    removeList["committee"] = 5;
     
+    //terms["dzhokhar tsarnaev"].category = "person";
+    //terms["tamerlan tsarnaev"].category = "person";
+    //terms["ibragim todashev"].category = "person";
+    //terms["waltham"].category = "location";
+    //terms["verizon"].category = "organization";
     
-    // This is for outlianostics
-    /*removeList["barack obama"] = 2;
-    removeList["new york times"] = 2;
-    removeList["new york"] = 2;
-    removeList["john mccain"] = 2;
-    removeList["george w. bush"] = 2;
-    removeList["hillary clinton"] = 2;
-    removeList["bill clinton"] = 2;
-    removeList["sarah palin"] = 2;
-    removeList["washington post"] = 2;
-    removeList["george bush"] = 2;
-    removeList["kennedy"] = 2;
-    removeList["john kerry"] = 2;
-    removeList["paul ryan"] = 2;
-    removeList["president bush"] = 2;
-    removeList["sotomayor"] = 2;
-    removeList["lanza"] = 2;
-    removeList["california"] = 2;
-    removeList["chinese"] = 2;
-    removeList["state"] = 2;
-    removeList["senator"] = 2;
-    removeList["iraq"] = 2;
-    removeList["mandela"] = 2;
-    removeList["trayvon"] = 2;
-    removeList["loughner"] = 2;
-    removeList["tsarnaev"] = 2;
-    removeList["president-elect obama"] = 2;
-    removeList["new yorker"] = 2;
-    removeList["administration"] = 2;
-    removeList["jesus"] = 2;
-    removeList["fox news"] = 2;
-    removeList["wall street"] = 2;
-    removeList["afghanistan"] = 2;*/
-
-
-            
-
+    // For Huffington data, Figure 1 in EuroVis 2018 paper, to fix the Entity resolution problem
+    removeList["hagel"] = 6;
+    removeList["giglio"] = 6;
+    removeList["thatcher"] = 6;
+    removeList["trayvon"] = 6;
+    removeList["zimmerman"] = 6;
+    removeList["mandela"] = 6;
+    removeList["marathon"] = 6;
+    removeList["lapierre"] = 6;
+    removeList["lanza"] = 6;
+    removeList["occupy"] = 6;
+    removeList["todd akin"] = 6;
 
    /* removeList["new york times"]=1;
     removeList["tsarnaev"] = 1;
@@ -558,13 +556,9 @@ function readTermsAndRelationships() {
         var count = 0;
         for (var m = 0; m < numMonth; m++) {
             if (terms[att][m]) {
-                var previous = 1;
+                var previous = 0;
                 if (terms[att][m - 1])
                     previous = terms[att][m - 1];
-                else if (m==0)
-                    previous = terms[att][m];
-                else
-                    previous = 1;
                 var net = (terms[att][m] + 1) / (previous + 1);
                 if (net > maxNet) {
                     maxNet = net;
@@ -592,7 +586,7 @@ function readTermsAndRelationships() {
                 termArray.push(e);
         }
         else{    
-            if (e.max >= 1.5 && e.term.length>2)    // Only get terms with some increase ************** with TEXT
+            if (e.max > 1.5 && e.term.length>2)    // Only get terms with some increase ************** with TEXT
                 termArray.push(e);
         }
     }
@@ -618,7 +612,7 @@ function readTermsAndRelationships() {
     top100termsArray = [];
     for (var i=0; i<numNode;i++){
        top200terms[termArray[i].term] = termArray[i];  // top200terms is defined in main2.js
-       //if (top100termsArray.length<200)
+       if (top100termsArray.length<30)
              top100termsArray.push(termArray[i]);
        /*  // Sentiment request to server
        var query =  "http://127.0.0.1:1337/status?userID="+termArray[i].term;

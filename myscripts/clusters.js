@@ -114,8 +114,13 @@ function updateSubLayout(nodes, links, m) {
         .style("stroke", "#000")
         .style("stroke-width", 0.02)
         .style("stroke-opacity", 1)
-        .style("fill", function (d) {
-            return getColor3(d.category);
+        .style("fill",function(d){
+            if (d.name=="Kwan-Liu Ma")
+                return "#444";
+            else if (d.name=="Carlos D. Correa")
+                return "#888";
+            else
+                return getColor3(d.category);
         })
         .on("mouseover", function(d){
             showTip(d, this);
