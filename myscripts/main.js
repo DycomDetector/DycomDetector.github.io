@@ -42,7 +42,7 @@ var selectedCut;
 
 
 var XGAP_; // gap between months on xAxis
-var numLens = 4;
+var numLens = 2;
 
 function xScale(m) {
     if (isLensing) {
@@ -175,7 +175,7 @@ function loadData(){
             snapshotScale = 0.22; 
             if (fileName.indexOf("VIS")>=0){
                // minYear = 2000;
-                snapshotScale = 0.11;   
+                snapshotScale = 0.14;   
                 maxRel = 7;
             }
             else if (fileName.indexOf("IMDB")>=0){
@@ -201,7 +201,7 @@ function loadData(){
             //minYear = 2004;
             // Update months
             numMonth = maxYear - minYear +1;
-            XGAP_ = (width-xStep-100)/numMonth; // gap between months on xAxis
+            XGAP_ = (width-xStep-1)/numMonth; // gap between months on xAxis
 
             data.forEach(function (d) {    
                 d.m = d.m-minYear;

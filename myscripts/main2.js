@@ -385,17 +385,17 @@ function drawgraph2() {
 
         //.style("fill-opacity", 0.3)
         .style("fill-opacity",function(d){
-            if (d.name=="Kwan-Liu Ma" || d.name=="Carlos D. Correa")
-                return 0.95;
-            else
+           // if (d.name=="Kwan-Liu Ma" || d.name=="Carlos D. Correa")
+           //     return 0.95;
+           // else
                 return 0.3;
         })
         .style("fill",function(d){
-            if (d.name=="Kwan-Liu Ma")
-                return "#444";
-            else if (d.name=="Carlos D. Correa")
-                return "#aaa";
-            else
+           // if (d.name=="Kwan-Liu Ma")
+           //     return "#444";
+           // else if (d.name=="Carlos D. Correa")
+           //     return "#aaa";
+           // else
                 return getColor3(d.category);
         })
         .attr("d", function (d, index) {
@@ -459,9 +459,9 @@ function drawgraph2() {
         .attr("font-family", "sans-serif")
         .attr("font-size", "11px")
         .attr("font-weight", function(d){
-            if (d.name=="Kwan-Liu Ma" || d.name=="Carlos D. Correa")
-                return "bold";
-            else
+            //if (d.name=="Kwan-Liu Ma" || d.name=="Carlos D. Correa")
+            //    return "bold";
+            //else
                 return "normal";
         })
         
