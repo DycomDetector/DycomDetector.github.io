@@ -6,7 +6,6 @@ Online demo:  https://dycomdetector.github.io
 
 ![ScreenShot](https://github.com/DycomDetector/DycomDetector.github.io/blob/master/images2/schema2.png)
 
-More details about *ComModeler* layout can be found here: https://dycomdetector.github.io/layout.html 
 
 
 
